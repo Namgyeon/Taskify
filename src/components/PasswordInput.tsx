@@ -1,0 +1,61 @@
+import { InputHTMLAttributes, forwardRef, ForwardedRef, useState } from "react";
+import clsx from "clsx";
+import Image from "next/image";
+
+interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  error?: boolean;
+  errorMessage?: string;
+}
+
+const PasswordInput = forwardRef(
+  (
+    { error, className, errorMessage, ...props }: PasswordInputProps,
+    ref: ForwardedRef<HTMLInputElement>
+  ) => {
+    const [isPasswordVisibility, setIsPasswordVisibility] = useState(false);
+
+    const togglePasswordVisibility = () => {
+      setIsPasswordVisibility(!isPasswordVisibility);
+    };
+
+    return (
+      <div className="w-full flex flex-col gap-2">
+        <label className="text-lg font-normal text-[var(--black-333236)]">
+          비밀번호
+        </label>
+        <div className="flex relative">
+          <input
+            ref={ref}
+            className={clsx(
+              "w-full px-4 py-3.5 border rounded-md outline-none focus:ring-2",
+              error
+                ? "border-[var(--red-D6173A)] focus:ring-[var(--red-D6173A)]"
+                : "border-[var(--gray-D9D9D9)] focus:ring-[var(--violet-5534DA)]"
+            )}
+            type={isPasswordVisibility ? "text" : "password"}
+            placeholder="비밀번호를 입력하세요."
+            {...props}
+          />
+          <Image
+            className="absolute right-3.5 top-1/2 transform -translate-y-1/2 cursor-pointer"
+            onClick={togglePasswordVisibility}
+            src={"./images/unVisibility-icon.svg"}
+            alt="비밀번호 보이지 않음 아이콘"
+            width={24}
+            height={24}
+          />
+        </div>
+        {errorMessage && (
+          <p className="text-sm font-normal text-[var(--red-D6173A)]">
+            {errorMessage}
+          </p>
+        )}
+      </div>
+    );
+  }
+);
+
+PasswordInput.displayName = "PasswordInput";
+
+export default PasswordInput;
