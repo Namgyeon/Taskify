@@ -1,5 +1,11 @@
+import SignUpForm from "@/features/auth/components/SignUpForm";
+
 const SignUpPage = () => {
-  return <div>회원가입 페이지</div>;
+  return (
+    <div>
+      <SignUpForm />
+    </div>
+  );
 };
 
 export default SignUpPage;

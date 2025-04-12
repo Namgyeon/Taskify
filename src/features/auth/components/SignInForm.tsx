@@ -2,23 +2,29 @@
 
 import { useForm } from "react-hook-form";
 import Input from "@/components/Input";
-import { SignInData } from "@/lib/auth-types";
+import { SignInData } from "@/lib/types/auth-types";
 import PasswordInput from "@/components/PasswordInput";
+import Button from "@/components/Button";
+import { signInUser } from "@/lib/api/auth-api";
 
 const SignInForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting, isValid },
   } = useForm<SignInData>({
     mode: "onChange",
   });
 
-  const onSubmit = (data: SignInData) => {
-    console.log("제출한 폼 데이터 : ", data);
+  const onSubmit = async (data: SignInData) => {
+    await signInUser(data);
   };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full flex flex-col gap-4"
+    >
       <Input
         {...register("email", {
           required: "이메일은 필수입니다.",
@@ -33,6 +39,7 @@ const SignInForm = () => {
         errorMessage={errors.email?.message}
       />
       <PasswordInput
+        label="비밀번호"
         {...register("password", {
           required: "비밀번호는 필수입니다.",
           minLength: {
@@ -43,6 +50,7 @@ const SignInForm = () => {
         error={!!errors.password}
         errorMessage={errors.password?.message}
       />
+      <Button type="submit" text="로그인" disabled={!isValid || isSubmitting} />
     </form>
   );
 };

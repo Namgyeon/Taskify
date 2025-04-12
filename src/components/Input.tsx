@@ -32,7 +32,8 @@ const Input = forwardRef(
             "w-full px-4 py-3.5 border rounded-md outline-none focus:ring-2",
             error
               ? "border-[var(--red-D6173A)] focus:ring-[var(--red-D6173A)]"
-              : "border-[var(--gray-D9D9D9)] focus:ring-[var(--violet-5534DA)]"
+              : "border-[var(--gray-D9D9D9)] focus:ring-[var(--violet-5534DA)]",
+            className
           )}
           placeholder={placeholder}
           {...props}

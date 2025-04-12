@@ -10,7 +10,7 @@ interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const PasswordInput = forwardRef(
   (
-    { error, className, errorMessage, ...props }: PasswordInputProps,
+    { error, label, className, errorMessage, ...props }: PasswordInputProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     const [isPasswordVisibility, setIsPasswordVisibility] = useState(false);
@@ -22,7 +22,7 @@ const PasswordInput = forwardRef(
     return (
       <div className="w-full flex flex-col gap-2">
         <label className="text-lg font-normal text-[var(--black-333236)]">
-          비밀번호
+          {label}
         </label>
         <div className="flex relative">
           <input
@@ -37,14 +37,27 @@ const PasswordInput = forwardRef(
             placeholder="비밀번호를 입력하세요."
             {...props}
           />
-          <Image
-            className="absolute right-3.5 top-1/2 transform -translate-y-1/2 cursor-pointer"
-            onClick={togglePasswordVisibility}
-            src={"./images/unVisibility-icon.svg"}
-            alt="비밀번호 보이지 않음 아이콘"
-            width={24}
-            height={24}
-          />
+          <button>
+            {!isPasswordVisibility ? (
+              <Image
+                className="absolute right-3.5 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                onClick={togglePasswordVisibility}
+                src={"./images/unVisibility-icon.svg"}
+                alt="비밀번호 보기 아이콘"
+                width={24}
+                height={24}
+              />
+            ) : (
+              <Image
+                className="absolute right-3.5 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                onClick={togglePasswordVisibility}
+                src={"./images/visibility-icon.svg"}
+                alt="비밀번호 안보기 아이콘"
+                width={24}
+                height={24}
+              />
+            )}
+          </button>
         </div>
         {errorMessage && (
           <p className="text-sm font-normal text-[var(--red-D6173A)]">
