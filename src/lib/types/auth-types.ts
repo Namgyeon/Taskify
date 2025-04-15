@@ -21,7 +21,7 @@ export interface SignUpData {
   passwordConfirmation: string;
 }
 
-export interface SignUpData {
+export interface SignUpResponse {
   id: number;
   email: string;
   profileImageUrl: string;

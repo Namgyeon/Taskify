@@ -3,7 +3,7 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import PasswordInput from "@/components/PasswordInput";
-import { signUpUser } from "@/lib/api/auth-api";
+import { useSignUp } from "@/hooks/useAuth";
 import { SignUpData } from "@/lib/types/auth-types";
 import { useForm } from "react-hook-form";
 
@@ -18,10 +18,10 @@ const SignUpForm = () => {
   });
 
   const password = watch("password");
+  const signUpMutation = useSignUp();
 
-  const onSubmit = async (data: SignUpData) => {
-    console.log("제출한 폼 데이터:", data);
-    await signUpUser(data);
+  const onSubmit = (data: SignUpData) => {
+    signUpMutation.mutate(data);
   };
 
   return (

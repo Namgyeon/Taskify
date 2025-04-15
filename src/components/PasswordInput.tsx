@@ -37,7 +37,7 @@ const PasswordInput = forwardRef(
             placeholder="비밀번호를 입력하세요."
             {...props}
           />
-          <button>
+          <button type="button">
             {!isPasswordVisibility ? (
               <Image
                 className="absolute right-3.5 top-1/2 transform -translate-y-1/2 cursor-pointer"

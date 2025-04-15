@@ -1,6 +1,6 @@
 import apiClient from "./apiClient";
-import axios from "axios";
-import { SignInData, SignUpData } from "../types/auth-types";
+import axios, { AxiosError } from "axios";
+import { SignInData, SignInResponse, SignUpData } from "../types/auth-types";
 
 export const signUpUser = async (signUpData: SignUpData) => {
   const { email, nickname, password } = signUpData;
@@ -12,28 +12,27 @@ export const signUpUser = async (signUpData: SignUpData) => {
     });
 
     return response.data;
-  } catch (error: any) {
-    if (axios.isAxiosError(error)) {
-      console.error("회원가입 에러:", error.response?.data || error.message);
-      throw new Error(JSON.stringify(error.response?.data) || error.message);
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      const errorMessage =
+        error.response?.data?.message || "회원 가입에 실패했습니다.";
+      throw new Error(errorMessage);
     } else {
-      console.error("회원가입 에러:", error);
       throw error;
     }
   }
 };
 
-export const signInUser = async (signInData: SignInData) => {
+export const signInUser = async (formData: SignInData) => {
   try {
-    const response = await apiClient.post("/auth/login", signInData);
-    console.log("로그인 반환값:", response.data);
+    const response = await apiClient.post("/auth/login", formData);
     return response.data;
-  } catch (error: any) {
-    if (axios.isAxiosError(error)) {
-      console.error("로그인 에러:", error.response?.data || error.message);
-      throw new Error(JSON.stringify(error.response?.data) || error.message);
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      const errorMessage =
+        error.response?.data?.message || "로그인에 실패했습니다.";
+      throw new Error(errorMessage);
     } else {
-      console.error("로그인 에러:", error);
       throw error;
     }
   }
