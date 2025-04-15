@@ -1,6 +1,6 @@
 import apiClient from "./apiClient";
-import axios, { AxiosError } from "axios";
-import { SignInData, SignInResponse, SignUpData } from "../types/auth-types";
+import { AxiosError } from "axios";
+import { SignInData, SignUpData } from "../types/auth-types";
 
 export const signUpUser = async (signUpData: SignUpData) => {
   const { email, nickname, password } = signUpData;

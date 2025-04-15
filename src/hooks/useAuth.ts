@@ -1,12 +1,7 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import {
-  SignInData,
-  SignInResponse,
-  SignUpData,
-  SignUpResponse,
-} from "@/lib/types/auth-types";
+import { SignInData, SignInResponse, SignUpData } from "@/lib/types/auth-types";
 import { signInUser, signUpUser } from "@/lib/api/auth-api";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -35,7 +30,7 @@ export const useSignUp = () => {
   const router = useRouter();
   return useMutation({
     mutationFn: (signUpData: SignUpData) => signUpUser(signUpData),
-    onSuccess: (signInResponse: SignUpResponse) => {
+    onSuccess: () => {
       toast.success("회원가입 성공! \n로그인페이지로 이동합니다.");
       router.push("/signin");
     },
