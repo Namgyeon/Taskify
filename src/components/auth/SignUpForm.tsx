@@ -1,8 +1,8 @@
 "use client";
 
-import Button from "@/components/Button";
-import Input from "@/components/Input";
-import PasswordInput from "@/components/PasswordInput";
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
+import PasswordInput from "@/components/ui/PasswordInput";
 import { useSignUp } from "@/hooks/useAuth";
 import { SignUpData } from "@/lib/types/auth-types";
 import { useForm } from "react-hook-form";

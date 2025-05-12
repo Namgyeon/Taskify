@@ -1,4 +1,4 @@
-import SignInForm from "@/features/auth/components/SignInForm";
+import SignInForm from "@/components/auth/SignInForm";
 import Link from "next/link";
 
 const SignInPage = () => {

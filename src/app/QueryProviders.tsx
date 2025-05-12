@@ -1,6 +1,6 @@
 "use client";
 
-import Nav from "@/components/Nav";
+import Header from "@/components/ui/Header";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
@@ -13,7 +13,7 @@ export default function QueryProviders({ children }: { children: ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {!signHideLayout && <Nav />}
+      {!signHideLayout && <Header />}
       {children}
     </QueryClientProvider>
   );

@@ -1,10 +1,10 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import Input from "@/components/Input";
+import Input from "@/components/ui/Input";
 import { SignInData } from "@/lib/types/auth-types";
-import PasswordInput from "@/components/PasswordInput";
-import Button from "@/components/Button";
+import PasswordInput from "@/components/ui/PasswordInput";
+import Button from "@/components/ui/Button";
 import { useSignIn } from "@/hooks/useAuth";
 
 const SignInForm = () => {

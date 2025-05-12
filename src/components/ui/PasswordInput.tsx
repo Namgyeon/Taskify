@@ -1,6 +1,8 @@
 import { InputHTMLAttributes, forwardRef, ForwardedRef, useState } from "react";
 import clsx from "clsx";
 import Image from "next/image";
+import VisibilityIcon from "@/assets/icons/visibility-icon.svg";
+import UnVisibilityIcon from "@/assets/icons/unVisibility-icon.svg";
 
 interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -43,7 +45,7 @@ const PasswordInput = forwardRef(
               <Image
                 className="absolute right-3.5 top-1/2 transform -translate-y-1/2 cursor-pointer"
                 onClick={togglePasswordVisibility}
-                src={"./images/unVisibility-icon.svg"}
+                src={UnVisibilityIcon}
                 alt="비밀번호 보기 아이콘"
                 width={24}
                 height={24}
@@ -52,7 +54,7 @@ const PasswordInput = forwardRef(
               <Image
                 className="absolute right-3.5 top-1/2 transform -translate-y-1/2 cursor-pointer"
                 onClick={togglePasswordVisibility}
-                src={"./images/visibility-icon.svg"}
+                src={VisibilityIcon}
                 alt="비밀번호 안보기 아이콘"
                 width={24}
                 height={24}
