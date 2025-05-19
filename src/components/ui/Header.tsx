@@ -20,7 +20,7 @@ const Header = () => {
           <li>
             <a
               href="/signin"
-              className="text-md text-white hover:text-violet-600 md:text-lg"
+              className="text-md md:text-lg text-white hover:text-violet-600"
             >
               로그인
             </a>
@@ -28,7 +28,7 @@ const Header = () => {
           <li>
             <a
               href="/signup"
-              className="text-md text-white hover:text-violet-600 md:text-lg "
+              className="text-md md:text-lg text-white hover:text-violet-600"
             >
               회원가입
             </a>
