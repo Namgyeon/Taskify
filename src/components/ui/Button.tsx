@@ -3,8 +3,9 @@ import { ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
-  disabled: boolean;
+  disabled?: boolean;
 }
+// 다른 버튼 컴포넌트들도 고려해야함 수락,거절 확인,취소
 
 const Button = ({ text, disabled }: ButtonProps) => {
   return (
