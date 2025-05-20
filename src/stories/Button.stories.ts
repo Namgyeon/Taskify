@@ -5,7 +5,7 @@ export default {
   component: Button,
 };
 
-export const Text = {
+export const Basic = {
   args: {
     text: "realButton",
   },
