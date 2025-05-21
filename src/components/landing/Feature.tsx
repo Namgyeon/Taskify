@@ -30,8 +30,8 @@ const FeatureCard = ({
       <Image
         src={imgSrc}
         alt={`기능이미지${point}`}
-        width={600}
-        height={500}
+        width={500}
+        height={400}
         className="w-full h-auto"
       />
     </div>
