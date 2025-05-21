@@ -16,10 +16,10 @@ const Hero = () => {
           />
         </div>
         <span className="flex flex-col md:flex-row items-center md:items-baseline">
-          <span className="flex text-[40px] md:text-[56px] lg:text-[76px] font-bold">
+          <span className="flex text-[40px] md:text-[40px] lg:text-[76px] font-bold">
             새로운 일정 관리
           </span>
-          <span className="mt-2 md:mt-0 md:ml-4 text-[42px] md:text-[70px] lg:text-[90px] text-[#5534DA] font-bold">
+          <span className="mt-2 md:mt-0 md:ml-4 text-[42px] md:text-[64px] lg:text-[90px] text-[#5534DA] font-bold">
             Taskify
           </span>
         </span>
