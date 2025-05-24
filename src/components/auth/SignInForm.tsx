@@ -5,7 +5,7 @@ import Input from "@/components/ui/Input";
 import { SignInData } from "@/lib/types/auth-types";
 import PasswordInput from "@/components/ui/PasswordInput";
 import Button from "@/components/ui/Button";
-import { useSignIn } from "@/hooks/useAuth";
+import { useSignIn } from "@/hooks/auth/useAuth";
 
 const SignInForm = () => {
   const {
