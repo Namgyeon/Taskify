@@ -6,7 +6,7 @@ import axiosClientHelper from "@/utils/network/axiosClientHelper";
  * login
  * https://sp-taskify-api.vercel.app/docs/#/Auth/Login
  */
-export const signIn = async (signInFormData: SignInFormData) => {
+export const login = async (signInFormData: SignInFormData) => {
   const response = await axiosClientHelper.post<SignInResponse>(
     "/auth/login",
     signInFormData
