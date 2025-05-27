@@ -1,20 +1,20 @@
 "use client";
 
-import Header from "@/components/ui/Header";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
+import { PropsWithChildren } from "react";
+import {
+  QueryClientProvider as Provider,
+  QueryClient,
+} from "@tanstack/react-query";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000, // 1분
+      retry: false,
+    },
+  },
+});
 
-export default function QueryProviders({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
-  const signHideLayout = pathname === "/signin" || pathname === "/signup";
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      {!signHideLayout && <Header />}
-      {children}
-    </QueryClientProvider>
-  );
+export default function QueryClientProvider({ children }: PropsWithChildren) {
+  return <Provider client={queryClient}>{children}</Provider>;
 }

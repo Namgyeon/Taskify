@@ -1,5 +1,5 @@
 import Feature from "@/components/landing/Feature";
-import Hero from "../components/landing/Hero";
+import Hero from "../../../components/landing/Hero";
 import Setting from "@/components/landing/Setting";
 import Footer from "@/components/landing/layout/footer";
 

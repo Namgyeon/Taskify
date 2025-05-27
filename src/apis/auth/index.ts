@@ -13,3 +13,7 @@ export const login = async (signInFormData: SignInFormData) => {
   );
   return safeResponse(response.data, signInResponseSchema);
 };
+
+export const logout = async () => {
+  await axiosClientHelper.post<void>("/auth/logout");
+};

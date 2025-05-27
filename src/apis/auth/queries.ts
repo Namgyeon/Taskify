@@ -1,6 +1,6 @@
-import { useMutation } from "@tanstack/react-query";
-import { SignInFormData, SignInResponse } from "./types";
-import { login } from "./index";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { SignInFormData, SignInResponse } from "@/apis/auth/types";
+import { login, logout } from "@/apis/auth";
 
 export const useSignIn = () => {
   return useMutation({
@@ -12,6 +12,18 @@ export const useSignIn = () => {
       if (error instanceof Error) {
         console.error(error.message);
       }
+    },
+  });
+};
+
+export const useLogout = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: () => {
+      return logout();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries();
     },
   });
 };
