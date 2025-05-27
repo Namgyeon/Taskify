@@ -1,13 +1,18 @@
 "use client";
 
 import { useLogout } from "@/apis/auth/queries";
+import { useRouter } from "next/navigation";
 
 const MyDashBoard = () => {
   const logoutMutation = useLogout();
+  const router = useRouter();
 
   const handleLogout = async () => {
-    logoutMutation.mutate();
-    window.location.reload();
+    logoutMutation.mutate(undefined, {
+      onSuccess: () => {
+        router.replace("/signin");
+      },
+    });
   };
 
   return (
