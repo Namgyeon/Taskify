@@ -2,24 +2,39 @@
 
 import { useForm } from "react-hook-form";
 import Input from "@/components/ui/Input";
-import { SignInData } from "@/lib/types/auth-types";
+import { SignInFormData, signInFormSchema } from "@/apis/auth/types";
 import PasswordInput from "@/components/ui/PasswordInput";
 import Button from "@/components/ui/Button";
-import { useSignIn } from "@/hooks/useAuth";
+import { useSignIn } from "@/apis/auth/queries";
+import { zodResolver } from "@hookform/resolvers/zod";
+import toast from "react-hot-toast";
 
-const SignInForm = () => {
+const SigninForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isValid },
-  } = useForm<SignInData>({
+  } = useForm<SignInFormData>({
+    resolver: zodResolver(signInFormSchema),
     mode: "onChange",
   });
 
   const signInMutation = useSignIn();
 
-  const onSubmit = (data: SignInData) => {
-    signInMutation.mutate(data);
+  const onSubmit = (data: SignInFormData) => {
+    signInMutation.mutate(data, {
+      onSuccess: () => {
+        toast.success("로그인 했습니다.");
+        window.location.reload();
+      },
+      onError: (error: unknown) => {
+        const message =
+          error instanceof Error
+            ? error.message
+            : "로그인 중 알 수 없는 오류가 발생했습니다.";
+        toast.error(message);
+      },
+    });
   };
 
   return (
@@ -28,13 +43,7 @@ const SignInForm = () => {
       className="w-full flex flex-col gap-4"
     >
       <Input
-        {...register("email", {
-          required: "이메일은 필수입니다.",
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: "유효한 이메일 주소를 입력해주세요.",
-          },
-        })}
+        {...register("email")}
         label="이메일"
         placeholder="이메일을 입력하세요."
         error={!!errors.email}
@@ -42,13 +51,7 @@ const SignInForm = () => {
       />
       <PasswordInput
         label="비밀번호"
-        {...register("password", {
-          required: "비밀번호는 필수입니다.",
-          minLength: {
-            value: 8,
-            message: "8자 이상 입력해주세요.",
-          },
-        })}
+        {...register("password")}
         error={!!errors.password}
         errorMessage={errors.password?.message}
       />
@@ -57,4 +60,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default SigninForm;

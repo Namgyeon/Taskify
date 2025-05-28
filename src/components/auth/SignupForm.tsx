@@ -3,25 +3,38 @@
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import PasswordInput from "@/components/ui/PasswordInput";
-import { useSignUp } from "@/hooks/useAuth";
-import { SignUpData } from "@/lib/types/auth-types";
+import { useSignup } from "@/apis/users/queries";
+import { SignupFormData } from "@/apis/users/types";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { getErrorMessage } from "@/utils/network/errorMessage";
 
-const SignUpForm = () => {
+const SignupForm = () => {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors, isSubmitting, isValid },
-  } = useForm<SignUpData>({
+  } = useForm<SignupFormData>({
     mode: "onChange",
   });
 
   const password = watch("password");
-  const signUpMutation = useSignUp();
+  const signUpMutation = useSignup();
+  const router = useRouter();
 
-  const onSubmit = (data: SignUpData) => {
-    signUpMutation.mutate(data);
+  const onSubmit = (data: SignupFormData) => {
+    signUpMutation.mutate(data, {
+      onSuccess: () => {
+        toast.success(`회원가입 성공했습니다.\n 로그인페이지로 이동합니다.`);
+        router.push("/signin");
+      },
+      onError: (error) => {
+        const message = getErrorMessage(error);
+        toast.error(message);
+      },
+    });
   };
 
   return (
@@ -86,4 +99,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default SignupForm;
