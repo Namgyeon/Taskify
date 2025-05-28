@@ -1,10 +1,26 @@
-import SignInForm from "@/components/auth/SignInForm";
+import SigninForm from "@/components/auth/SigninForm";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Taskify - 로그인",
+  description:
+    "Taskify에 로그인하고, 함께 일정을 공유하며 생산적인 하루를 시작해 보세요,",
+  keywords: ["일정", "공유", "커뮤니티", "할 일", "Taskify"],
+  openGraph: {
+    title: "Taskify - 로그인",
+    description:
+      "Taskify에 로그인하고, 함께 일정을 공유하며 생산적인 하루를 시작해 보세요,",
+    url: "https://taskify-3ypqbp4os-namgyeons-projects.vercel.app/signin",
+    type: "website",
+    //이미지 추가
+  },
+};
 
 const SignInPage = () => {
   return (
     <div className="flex flex-col gap-6 items-center">
-      <SignInForm />
+      <SigninForm />
       <p className="text-[16px] text-[var(--black-333236)] font-[400]">
         회원이 아니신가요?{" "}
         <Link

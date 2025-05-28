@@ -8,10 +8,9 @@ import { SignupFormData } from "@/apis/users/types";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { isAxiosError } from "axios";
 import { getErrorMessage } from "@/utils/network/errorMessage";
 
-const SignUpForm = () => {
+const SignupForm = () => {
   const {
     register,
     handleSubmit,
@@ -100,4 +99,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default SignupForm;

@@ -9,7 +9,7 @@ import { useSignIn } from "@/apis/auth/queries";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 
-const SignInForm = () => {
+const SigninForm = () => {
   const {
     register,
     handleSubmit,
@@ -60,4 +60,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default SigninForm;
