@@ -28,3 +28,9 @@ export const signInFailSchema = z.object({
   message: z.string(),
 });
 export type SignInFailSchema = z.infer<typeof signInFailSchema>;
+
+export const putPasswordFormSchema = z.object({
+  password: z.string(),
+  newPassword: z.string().min(8, "비밀번호는 최소 8자 이상이어야 합니다"),
+});
+export type PutPasswordFormData = z.infer<typeof putPasswordFormSchema>;
