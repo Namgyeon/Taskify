@@ -1,11 +1,18 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { SignupFormData } from "./types";
-import { singup } from ".";
+import { getUser, signup } from ".";
 
 export const useSignup = () => {
   return useMutation({
     mutationFn: (signupFormData: SignupFormData) => {
-      return singup(signupFormData);
+      return signup(signupFormData);
     },
+  });
+};
+
+export const useGetUser = () => {
+  return useQuery({
+    queryKey: ["user"],
+    queryFn: () => getUser(),
   });
 };

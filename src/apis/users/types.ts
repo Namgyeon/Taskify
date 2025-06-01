@@ -19,8 +19,11 @@ export type SignupFormData = z.infer<typeof signupFormSchema>;
 export const userSchema = z.object({
   id: z.number(),
   email: z.string().email(),
+  nickname: z.string(),
   profileImageUrl: z.union([z.string().url(), z.null()]),
   createdAt: z.union([z.string(), z.date()]),
   updatedAt: z.union([z.string(), z.date()]),
 });
 export type SignupResponse = z.infer<typeof userSchema>;
+
+export type User = z.infer<typeof userSchema>;
