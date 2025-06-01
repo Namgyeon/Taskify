@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useMemo } from "react";
+import getRandomColor from "../../../utils/getRandomColor";
 
 type AvatarProps = {
   profileImageUrl?: string | null;
@@ -16,12 +17,7 @@ const Avatar = ({
   const userName = email || nickname || "user";
   const firstChar = userName.charAt(0);
 
-  const bgColor = useMemo(() => {
-    const randomHex = Math.floor(Math.random() * 0xffffff)
-      .toString(16)
-      .padStart(6, "0");
-    return `#${randomHex}`;
-  }, []);
+  const bgColor = useMemo(() => getRandomColor(userName), [userName]);
 
   return (
     <figure
