@@ -1,4 +1,4 @@
-import Header from "@/components/mydashboard/header/DashHeader";
+import Header from "@/components/mydashboard/header/Header";
 
 export default function layout({
   children,
