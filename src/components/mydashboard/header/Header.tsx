@@ -3,7 +3,7 @@
 import DashBoardInfo from "./DashBoardInfo";
 import Profile from "./Profile";
 
-const DashHeader = () => {
+const Header = () => {
   return (
     <div className="flex justify-between items-center px-3 md:px-8 lg:px-10 py-4">
       <p className="text-lg md:text-xl text-[#333236] font-bold">내 대시보드</p>
@@ -19,4 +19,4 @@ const DashHeader = () => {
   );
 };
 
-export default DashHeader;
+export default Header;
