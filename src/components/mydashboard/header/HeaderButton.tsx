@@ -5,7 +5,7 @@ interface HeaderButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 // 대쉬보드 생성기능 완료 후 작업
-const HeaderButton = ({ children, href }: HeaderButtonProps) => {
+const HeaderButton = ({ children }: HeaderButtonProps) => {
   return <button className="">{children}</button>;
 };
 
