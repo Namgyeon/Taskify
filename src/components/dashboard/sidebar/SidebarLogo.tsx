@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const SidebarHeader = () => {
+const SidebarLogo = () => {
   return (
     <header>
       <Link href={"/"}>
@@ -23,4 +23,4 @@ const SidebarHeader = () => {
   );
 };
 
-export default SidebarHeader;
+export default SidebarLogo;
