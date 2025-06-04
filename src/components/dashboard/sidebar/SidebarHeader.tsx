@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const SidebarHeader = () => {
   return (
-    <div className="w-full flex justify-between px-2">
+    <div className="w-full flex justify-center md:justify-between">
       <div className="hidden md:block text-sm lg:text-lg text-[#787486] font-semibold">
         Dash Boards
       </div>

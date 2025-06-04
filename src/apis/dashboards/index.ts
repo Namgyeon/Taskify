@@ -11,7 +11,7 @@ import {
  * https://sp-taskify-api.vercel.app/docs/#/dashboards
  */
 export const getDashboards = async (params: GetDashboardsRequest) => {
-  const { cursorId, page, size, navigationMethod } = params;
+  const { cursorId, page = 1, size = 10, navigationMethod } = params;
   const response = await axiosClientHelper.get<Dashboards>("/dashboards", {
     params: {
       cursorId,
