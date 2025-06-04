@@ -1,3 +1,4 @@
+import Pagination from "@/components/pagination/Pagination";
 import SidebarBoardLists from "./SidebarBoardList";
 import SidebarHeader from "./SidebarHeader";
 import SidebarLogo from "./SidebarLogo";
@@ -8,6 +9,7 @@ const DashBoardSideBar = () => {
       <SidebarLogo />
       <SidebarHeader />
       <SidebarBoardLists />
+      <Pagination />
     </div>
   );
 };
