@@ -9,7 +9,6 @@ const DashBoardSideBar = () => {
       <SidebarLogo />
       <SidebarHeader />
       <SidebarBoardLists />
-      <Pagination />
     </div>
   );
 };

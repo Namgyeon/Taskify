@@ -1,6 +1,7 @@
 "use client";
 
 import { useGetDashboardsQuery } from "@/apis/dashboards/queries";
+import Pagination from "@/components/pagination/Pagination";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -8,7 +9,7 @@ const ITEMS_PER_PAGE = 10;
 const SKELETON_COUNT = 5;
 
 const SidebarBoardList = () => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
   const { data, isFetching, isLoading } = useGetDashboardsQuery({
     page,
     size: ITEMS_PER_PAGE,
@@ -30,9 +31,12 @@ const SidebarBoardList = () => {
     );
   }
 
+  const totalCount = data?.totalCount || 0;
+  const totalPage = Math.ceil(totalCount / ITEMS_PER_PAGE);
+
   if (data && data.dashboards.length > 0) {
     return (
-      <div className="flex flex-col gap-4 p-2">
+      <div className="flex flex-col h-full gap-4 p-2">
         {data.dashboards.map((dashboard) => (
           <div
             key={dashboard.id}
@@ -57,6 +61,10 @@ const SidebarBoardList = () => {
             )}
           </div>
         ))}
+        {/* 페이지네이션 */}
+        <div className="mt-auto mb-10">
+          <Pagination page={page} totalPage={totalPage} setPage={setPage} />
+        </div>
       </div>
     );
   }
