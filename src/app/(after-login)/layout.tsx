@@ -1,4 +1,5 @@
-import Header from "@/components/mydashboard/header/Header";
+import Header from "@/components/dashboard/header/Header";
+import DashBoardSideBar from "@/components/dashboard/sidebar/Sidebar";
 
 export default function layout({
   children,
@@ -6,9 +7,11 @@ export default function layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="w-full min-h-full">
-      {/* 사이드 */}
-      <main>
+    <div className="w-full min-h-full flex">
+      <div className="w-[67px] md:w-[160px] lg:w-[300px]">
+        <DashBoardSideBar />
+      </div>
+      <main className="w-full">
         <Header />
         {children}
       </main>
