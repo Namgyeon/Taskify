@@ -13,7 +13,7 @@ type ArrowProps = {
 };
 
 const ArrowButton = ({ direction, disabled, onClick }: ArrowProps) => {
-  let dValue = direction === "right" ? ARROW_PATH_RIGHT : ARROW_PATH_LEFT;
+  const dValue = direction === "right" ? ARROW_PATH_RIGHT : ARROW_PATH_LEFT;
   return (
     <button
       onClick={onClick}

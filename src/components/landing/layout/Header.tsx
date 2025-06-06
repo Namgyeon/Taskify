@@ -1,18 +1,20 @@
 import Image from "next/image";
-import mobileLogo from "@/assets/images/main-mobile-logo.svg";
-import logo from "@/assets/images/main-logo.svg";
 
 const Header = () => {
   return (
     <header className="flex items-center justify-between px-6 py-4 md:px-10 xl:px-[70px] bg-black">
       <Image
-        src={mobileLogo}
+        src="/logo/main-mobile-logo.svg"
         alt="메인 페이지 모바일 로고 이미지"
+        width={30}
+        height={30}
         className="block md:hidden"
       />
       <Image
-        src={logo}
+        src="logo/main-logo.svg"
         alt="메인페이지 로고 이미지"
+        width={100}
+        height={50}
         className="hidden md:block"
       />
       <nav>
