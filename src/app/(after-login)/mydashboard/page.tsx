@@ -1,6 +1,6 @@
 "use client";
 
-import CreateDashboard from "@/components/dashboard/createDashboard";
+import CreateDashboard from "@/components/dashboard/CareateDashboard";
 
 const MyDashBoard = () => {
   return (

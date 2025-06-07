@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { Modal, ModalHandle } from "../ui/Modal";
+import DashboardModal from "./modal/DashboardModal";
 
 const CreateDashboard = () => {
   const modalRef = useRef<ModalHandle>(null);
@@ -21,7 +22,7 @@ const CreateDashboard = () => {
         </button>
       </div>
       <Modal ref={modalRef}>
-        <h2 onClick={() => modalRef.current?.close()}>모달 내용</h2>
+        <DashboardModal close={() => modalRef.current?.close()} />
       </Modal>
     </>
   );

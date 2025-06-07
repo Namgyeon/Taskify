@@ -30,8 +30,18 @@ export const Modal = forwardRef<ModalHandle, ModalProps>(
   }
 );
 
-export const ModalHeader = ({ children }: { children: ReactNode }) => {
-  return <div className="">{children}</div>;
+export const ModalHeader = ({
+  children,
+  close,
+}: {
+  children: ReactNode;
+  close: () => void;
+}) => {
+  return (
+    <div className="" onClick={close}>
+      {children}
+    </div>
+  );
 };
 
 export const ModalBody = ({ children }: { children: ReactNode }) => {
