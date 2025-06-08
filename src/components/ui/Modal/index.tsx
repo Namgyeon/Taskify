@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { forwardRef, ReactNode, useImperativeHandle, useState } from "react";
 import { createPortal } from "react-dom";
 
@@ -8,10 +9,11 @@ export interface ModalHandle {
 
 interface ModalProps {
   children: ReactNode;
+  className?: string;
 }
 
 export const Modal = forwardRef<ModalHandle, ModalProps>(
-  ({ children }, ref) => {
+  ({ children, className }, ref) => {
     const [isOpen, setIsOpen] = useState(false);
 
     useImperativeHandle(ref, () => ({
@@ -23,7 +25,14 @@ export const Modal = forwardRef<ModalHandle, ModalProps>(
 
     return createPortal(
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-        <div className="bg-white rounded-xl p-4 shadow-lg">{children}</div>
+        <div
+          className={clsx(
+            "min-w-[320px] bg-white rounded-xl p-5 md:p-8 shadow-lg",
+            className
+          )}
+        >
+          {children}
+        </div>
       </div>,
       document.body
     );
@@ -35,10 +44,10 @@ export const ModalHeader = ({
   close,
 }: {
   children: ReactNode;
-  close: () => void;
+  close?: () => void;
 }) => {
   return (
-    <div className="" onClick={close}>
+    <div className="flex items-center justify-between" onClick={close}>
       {children}
     </div>
   );

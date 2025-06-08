@@ -23,3 +23,12 @@ export type GetDashboardsRequest = Partial<BasePagination> & {
   cursorId?: number;
   navigationMethod: NavigationMethod;
 };
+
+export const postDashboardsFormSchema = z.object({
+  title: z
+    .string()
+    .nonempty("제목을 입력해주세요")
+    .min(1, "1글자이상 작성해주세요"),
+  color: z.string(),
+});
+export type postDashboardsFormData = z.infer<typeof postDashboardsFormSchema>;
