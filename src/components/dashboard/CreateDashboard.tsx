@@ -21,7 +21,7 @@ const CreateDashboard = () => {
           />
         </button>
       </div>
-      <Modal ref={modalRef}>
+      <Modal ref={modalRef} className="min-w-[320px] md:min-w-[580px]">
         <DashboardModal close={() => modalRef.current?.close()} />
       </Modal>
     </>

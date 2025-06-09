@@ -1,4 +1,3 @@
-import { useCreateDashboard } from "@/apis/dashboards/queries";
 import {
   postDashboardsFormData,
   postDashboardsFormSchema,
@@ -9,48 +8,48 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 
 const PALETTE = ["#7AC555", "#760DDE", "#FFA500", "#76A5EA", "#E876EA"];
 
-const DashboardModalBody = () => {
-  const [selectedColor, setSelectedColor] = useState(PALETTE[0]);
+interface DashboardModalBodyProps {
+  onSubmit: (data: postDashboardsFormData) => void;
+}
 
-  const createDashboard = useCreateDashboard();
+const DashboardModalBody = ({ onSubmit }: DashboardModalBodyProps) => {
+  const [selectedColor, setSelectedColor] = useState(PALETTE[0]);
 
   const {
     register,
     handleSubmit,
     setValue,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors },
   } = useForm<postDashboardsFormData>({
     resolver: zodResolver(postDashboardsFormSchema),
+    defaultValues: {
+      color: PALETTE[0], // 기본 색상 설정
+    },
   });
-
-  const onSubmit = async (data: postDashboardsFormData) => {
-    try {
-      await createDashboard.mutateAsync(data);
-      toast.success("대시보드 생성 완료");
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error
-          ? error.message
-          : "대시보드 생성 중 알 수 없는 오류가 발생했습니다.";
-      toast.error(errorMessage);
-    }
-  };
 
   const handleColorSelect = (color: string) => {
     setSelectedColor(color);
     setValue("color", color, { shouldValidate: true });
   };
 
+  const handleFormSubmit = (data: postDashboardsFormData) => {
+    onSubmit(data);
+  };
+
   return (
     <ModalBody>
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <form
+        id="dashboard-form"
+        onSubmit={handleSubmit(handleFormSubmit)}
+        className="flex flex-col gap-4"
+      >
         <Input
           {...register("title")}
           label="대시보드 이름"
+          placeholder="대시보드 이름을 입력하세요"
           error={!!errors.title}
           errorMessage={errors.title?.message}
         />

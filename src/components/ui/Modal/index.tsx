@@ -38,6 +38,7 @@ export const Modal = forwardRef<ModalHandle, ModalProps>(
     );
   }
 );
+Modal.displayName = "Modal";
 
 export const ModalHeader = ({
   children,
