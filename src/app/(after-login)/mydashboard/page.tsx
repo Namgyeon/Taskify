@@ -1,9 +1,13 @@
 "use client";
 
+import CreateDashboard from "@/components/dashboard/CreateDashboard";
+
 const MyDashBoard = () => {
   return (
     <>
-      <div className="flex flex-col gap-6 items-center">대쉬보드</div>
+      <div className="w-full h-screen p-6 md:p-10 flex flex-col gap-6 bg-[#FAFAFA]">
+        <CreateDashboard />
+      </div>
     </>
   );
 };

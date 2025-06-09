@@ -2,8 +2,10 @@ import axiosClientHelper from "@/utils/network/axiosClientHelper";
 import { safeResponse } from "@/utils/network/safeResponse";
 import {
   Dashboards,
+  dashboardSchema,
   GetDashboardsRequest,
   getDashboardsResponseSchema,
+  postDashboardsFormData,
 } from "./types";
 
 /**
@@ -21,4 +23,13 @@ export const getDashboards = async (params: GetDashboardsRequest) => {
     },
   });
   return safeResponse(response.data, getDashboardsResponseSchema);
+};
+
+/**
+ * 대시보드 생성
+ * https://sp-taskify-api.vercel.app/docs/#/dashboards
+ */
+export const postDashboards = async (data: postDashboardsFormData) => {
+  const response = await axiosClientHelper.post("/dashboards", data);
+  return safeResponse(response.data, dashboardSchema);
 };
