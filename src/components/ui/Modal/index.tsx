@@ -24,7 +24,10 @@ export const Modal = forwardRef<ModalHandle, ModalProps>(
     if (!isOpen) return null;
 
     return createPortal(
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+      <div
+        role="dialog"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      >
         <div
           className={clsx(
             "min-w-[320px] bg-white rounded-xl p-5 md:p-8 shadow-lg",
