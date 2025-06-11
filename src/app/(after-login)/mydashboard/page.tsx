@@ -1,6 +1,8 @@
 import CreateDashboard from "@/components/dashboard/CreateDashboard";
+import MyInvitedDashboardList from "@/components/dashboard/MyInvitedDashboardList";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Taskify - 내 대시보드",
   description: "Taskify 내 대시보드에서 개인 일정을 쉽고 편하게 관리해 보세요.",
   keywords: ["일정", "공유", "커뮤니티", "할 일", "Taskify"],
@@ -19,6 +21,7 @@ const MyDashBoard = () => {
     <>
       <div className="w-full h-screen p-6 md:p-10 flex flex-col gap-6 bg-[#FAFAFA]">
         <CreateDashboard />
+        <MyInvitedDashboardList />
       </div>
     </>
   );

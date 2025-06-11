@@ -1,3 +1,5 @@
+"use client";
+
 import clsx from "clsx";
 import { forwardRef, ReactNode, useImperativeHandle, useState } from "react";
 import { createPortal } from "react-dom";

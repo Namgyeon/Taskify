@@ -33,3 +33,7 @@ export const postDashboards = async (data: postDashboardsFormData) => {
   const response = await axiosClientHelper.post("/dashboards", data);
   return safeResponse(response.data, dashboardSchema);
 };
+
+/**
+ * 대시보드 초대 불러오기
+ */
