@@ -1,4 +1,4 @@
-import { BasePagination, NavigationMethod } from "@/types/common";
+import { BaseCursor, BasePagination, NavigationMethod } from "@/types/common";
 import { z } from "zod";
 
 export const dashboardSchema = z.object({
@@ -16,7 +16,7 @@ export const getDashboardsResponseSchema = z.object({
   totalCount: z.number(),
   cursorId: z.null(),
 });
-export type getDashboardsResponse = z.infer<typeof getDashboardsResponseSchema>;
+export type GetDashboardsResponse = z.infer<typeof getDashboardsResponseSchema>;
 export type Dashboards = z.infer<typeof getDashboardsResponseSchema>;
 
 export type GetDashboardsRequest = Partial<BasePagination> & {
@@ -31,4 +31,21 @@ export const postDashboardsFormSchema = z.object({
     .min(1, "1글자이상 작성해주세요"),
   color: z.string(),
 });
-export type postDashboardsFormData = z.infer<typeof postDashboardsFormSchema>;
+export type PostDashboardsFormData = z.infer<typeof postDashboardsFormSchema>;
+
+export const dashboardInviterSchema = z.object({
+  nickname: z.string(),
+  email: z.string(),
+  id: z.number(),
+});
+
+export const dashboardInvitationSchema = z.object({
+  id: z.number(),
+  inviter: dashboardInviterSchema,
+  teamId: z.string(),
+  dashboard: dashboardSchema.pick({ id: true, title: true }),
+  invitee: dashboardInviterSchema,
+  inviteAccepted: z.boolean(),
+  createdAt: z.string(),
+  updatedAt: z.string(),
+});
