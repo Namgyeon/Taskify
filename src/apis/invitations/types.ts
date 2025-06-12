@@ -10,3 +10,4 @@ export const myInvitationsSchema = z.object({
   cursorId: z.number(),
   invitations: z.array(dashboardInvitationSchema),
 });
+export type MyInvitations = z.infer<typeof myInvitationsSchema>;
