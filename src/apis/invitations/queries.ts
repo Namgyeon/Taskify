@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { getInvitations } from ".";
-import { GetInvitationsRequest } from "./types";
+import { GetMyInvitationsRequest } from "./types";
 
-export const useGetDashboardInvitations = (params: GetInvitationsRequest) => {
+export const useGetDashboardInvitations = (params: GetMyInvitationsRequest) => {
   return useQuery({
-    queryKey: ["invitations", params],
+    queryKey: ["myInvitations", params],
     queryFn: () => getInvitations(params),
   });
 };

@@ -45,7 +45,7 @@ export const dashboardInvitationSchema = z.object({
   teamId: z.string(),
   dashboard: dashboardSchema.pick({ id: true, title: true }),
   invitee: dashboardInviterSchema,
-  inviteAccepted: z.boolean(),
+  inviteAccepted: z.boolean().nullable(),
   createdAt: z.string(),
   updatedAt: z.string(),
 });

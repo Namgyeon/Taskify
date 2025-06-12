@@ -1,4 +1,4 @@
-import { postDashboardsFormData } from "@/apis/dashboards/types";
+import { PostDashboardsFormData } from "@/apis/dashboards/types";
 import { useCreateDashboard } from "@/apis/dashboards/queries";
 import DashboardModalBody from "./DashboardModalBody";
 import DashboardModalFooter from "./DashboardModalFooter";
@@ -12,7 +12,7 @@ interface DashboardModalProps {
 const DashboardModal = ({ close }: DashboardModalProps) => {
   const createDashboard = useCreateDashboard();
 
-  const handleSubmit = async (data: postDashboardsFormData) => {
+  const handleSubmit = async (data: PostDashboardsFormData) => {
     try {
       await createDashboard.mutateAsync(data);
       toast.success("대시보드가 생성되었습니다");

@@ -2,12 +2,12 @@ import { BaseCursor } from "@/types/common";
 import { z } from "zod";
 import { dashboardInvitationSchema } from "../dashboards/types";
 
-export type GetInvitationsRequest = Partial<BaseCursor> & {
+export type GetMyInvitationsRequest = Partial<BaseCursor> & {
   title?: string;
 };
 
 export const myInvitationsSchema = z.object({
-  cursorId: z.number(),
+  cursorId: z.number().nullable(),
   invitations: z.array(dashboardInvitationSchema),
 });
 export type MyInvitations = z.infer<typeof myInvitationsSchema>;
