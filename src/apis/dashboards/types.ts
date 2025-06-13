@@ -49,3 +49,4 @@ export const dashboardInvitationSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
 });
+export type DashboardInvitation = z.infer<typeof dashboardInvitationSchema>;

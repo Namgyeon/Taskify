@@ -11,3 +11,11 @@ export const myInvitationsSchema = z.object({
   invitations: z.array(dashboardInvitationSchema),
 });
 export type MyInvitations = z.infer<typeof myInvitationsSchema>;
+
+export const respondToInvitationRequest = z.object({
+  invitationId: z.number(),
+  inviteAccepted: z.boolean(),
+});
+export type RespondToInvitationRequest = z.infer<
+  typeof respondToInvitationRequest
+>;
