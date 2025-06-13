@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { ButtonHTMLAttributes } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "success" | "danger" | "cancel";
+type ButtonVariant = "primary" | "secondary";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -10,8 +10,26 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSize;
   disabled?: boolean;
   className?: string;
+  fullWidth?: boolean;
 }
-// 다른 버튼 컴포넌트들도 고려해야함 수락,거절 확인,취소
+
+const baseStyles =
+  "rounded-md font-medium transition-all duration-200 border-2 focus:outline-none focus:ring-2 focus:ring-offset-2";
+
+const variantStyles = {
+  primary:
+    "bg-[var(--violet-5534DA)] text-white border-transparent hover:bg-[var(--violet-5534DA)]/90 focus:ring-[var(--violet-5534DA)]/50",
+  secondary:
+    "bg-white text-[var(--violet-5534DA)] border-[var(--violet-5534DA)] hover:bg-[var(--violet-5534DA)]/10 focus:ring-[var(--violet-5534DA)]/50",
+};
+
+const sizeStyles = {
+  sm: "py-2 px-4 text-sm md:text-base",
+  md: "py-2.5 px-5 text-base md:text-lg",
+  lg: "py-3 px-6 text-lg md:text-xl",
+};
+
+const disabledStyles = "opacity-50 cursor-not-allowed hover:bg-opacity-100";
 
 const Button = ({
   text,
@@ -19,35 +37,19 @@ const Button = ({
   size = "md",
   disabled,
   className,
+  fullWidth,
   onClick,
   ...props
 }: ButtonProps) => {
-  const variantStyles = {
-    primary:
-      "bg-[var(--violet-5534DA)] text-white hover:bg-[var(--violet-5534DA)]/90",
-    secondary:
-      "bg-white text-[var(--violet-5534DA)] border-[var(--violet-5534DA)] hover:bg-[var(--violet-5534DA)]/10",
-    success:
-      "bg-[var(--green-20D26C)] text-white hover:bg-[var(--green-20D26C)]/90",
-    danger: "bg-[var(--red-FF4B4B)] text-white hover:bg-[var(--red-FF4B4B)]/90",
-    cancel:
-      "bg-[var(--gray-9FA6B2)] text-white hover:bg-[var(--gray-9FA6B2)]/90",
-  };
-
-  const sizeStyles = {
-    sm: "py-2 px-4 text-[14px]",
-    md: "py-3 px-6 text-[16px]",
-    lg: "py-4 px-8 text-[18px]",
-  };
-
   return (
     <button
       className={clsx(
-        "rounded-md font-medium cursor-pointer border-2 transition-colors duration-200",
+        baseStyles,
         variantStyles[variant],
         sizeStyles[size],
-        className,
-        disabled && "opacity-50 cursor-not-allowed hover:bg-opacity-100"
+        fullWidth && "w-full",
+        disabled && disabledStyles,
+        className
       )}
       disabled={disabled}
       onClick={onClick}

@@ -29,7 +29,7 @@ const MyInvitedDashboardList = () => {
                   </p>
                 </header>
 
-                <div className="flex flex-col md:flex-row  md:items-center ">
+                <div className="flex flex-col gap-3 md:flex-row  md:items-center ">
                   <div className="md:w-1/3 flex items-center gap-6">
                     <p className="md:hidden w-10 text-sm text-[#9FA6B2]">
                       이름
@@ -43,8 +43,18 @@ const MyInvitedDashboardList = () => {
                     <p>{invitation.inviter.nickname}</p>
                   </div>
                   <div className="md:w-1/3 flex gap-3 md:justify-center">
-                    <Button text="수락" className=" text-white" />
-                    <Button text="거절" className="bg-white text-[#5534DA]" />
+                    <Button
+                      text="수락"
+                      variant="primary"
+                      size="sm"
+                      className="px-11 md:px-6 lg:px-7.5"
+                    />
+                    <Button
+                      text="거절"
+                      variant="secondary"
+                      size="sm"
+                      className="px-11 md:px-6 lg:px-7.5"
+                    />
                   </div>
                 </div>
               </div>
