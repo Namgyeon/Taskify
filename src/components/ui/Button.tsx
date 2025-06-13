@@ -14,7 +14,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const baseStyles =
-  "rounded-md font-medium transition-all duration-200 border-2 focus:outline-none focus:ring-2 focus:ring-offset-2";
+  "rounded-md font-medium cursor-pointer transition-all duration-200 border-2 focus:outline-none focus:ring-2 focus:ring-offset-2";
 
 const variantStyles = {
   primary:

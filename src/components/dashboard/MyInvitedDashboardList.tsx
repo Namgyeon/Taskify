@@ -1,13 +1,23 @@
 "use client";
 
-import { useGetDashboardInvitations } from "@/apis/invitations/queries";
+import {
+  useGetDashboardInvitations,
+  useRespondToInvitation,
+} from "@/apis/invitations/queries";
 import MyInvitedEmptyCard from "./MyInvitedEmptyCard";
 import Button from "../ui/Button";
 
 const MyInvitedDashboardList = () => {
   const { data, isLoading, error } = useGetDashboardInvitations({ size: 10 });
+  const { mutate: respondToInvitation } = useRespondToInvitation();
 
-  console.log("초대받은 목록데이터:", data);
+  const handleAccept = (invitationId: number) => {
+    respondToInvitation({ invitationId, inviteAccepted: true });
+  };
+
+  const handleReject = (invitationId: number) => {
+    respondToInvitation({ invitationId, inviteAccepted: false });
+  };
 
   return (
     <div>
@@ -48,12 +58,14 @@ const MyInvitedDashboardList = () => {
                       variant="primary"
                       size="sm"
                       className="px-11 md:px-6 lg:px-7.5"
+                      onClick={() => handleAccept(invitation.id)}
                     />
                     <Button
                       text="거절"
                       variant="secondary"
                       size="sm"
                       className="px-11 md:px-6 lg:px-7.5"
+                      onClick={() => handleReject(invitation.id)}
                     />
                   </div>
                 </div>
