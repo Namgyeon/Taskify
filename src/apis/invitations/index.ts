@@ -36,7 +36,7 @@ export const respondToInvitation = async (
 ) => {
   const { invitationId, inviteAccepted } = params;
   const response = await axiosClientHelper.put<DashboardInvitation>(
-    `/invitations/{invitationId}`,
+    `/invitations/${invitationId}`,
     { inviteAccepted }
   );
   return safeResponse(response.data, dashboardInvitationSchema);

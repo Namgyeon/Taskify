@@ -15,7 +15,6 @@ export const useRespondToInvitation = () => {
   return useMutation({
     mutationFn: (data: RespondToInvitationRequest) => respondToInvitation(data),
     onSuccess: () => {
-      // 초대 목록을 다시 불러옵니다
       queryClient.invalidateQueries({ queryKey: ["myInvitations"] });
     },
   });
