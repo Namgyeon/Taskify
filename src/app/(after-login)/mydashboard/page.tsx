@@ -1,4 +1,3 @@
-import CreateDashboard from "@/components/dashboard/CreateDashboard";
 import InvitedDashboardSection from "@/components/dashboard/InvitedDashboardSection";
 import MyDashboard from "@/components/dashboard/MyDashboard";
 import { Metadata } from "next";

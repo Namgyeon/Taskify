@@ -7,7 +7,7 @@ import Pagination from "../pagination/Pagination";
 import { useState } from "react";
 
 const ITEMS_PER_PAGE = 5;
-// const SKELETON_COUNT = 5;
+const SKELETON_COUNT = 5;
 
 const MyDashboardList = () => {
   const [page, setPage] = useState<number>(1);
@@ -22,7 +22,22 @@ const MyDashboardList = () => {
   const totalPage = Math.ceil(totalCount / ITEMS_PER_PAGE);
 
   if (isLoading) {
-    return <div>로딩중</div>;
+    return (
+      <div className="flex flex-wrap gap-2 w-full">
+        {Array.from({ length: SKELETON_COUNT }).map((_, idx) => (
+          <div
+            key={idx}
+            className="w-65 md:w-62 lg:w-83 h-15 flex justify-between items-center py-4 px-5 border border-gray-300 rounded-lg bg-white animate-pulse"
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-gray-300 flex-shrink-0" />
+              <div className="w-16 h-4 rounded bg-gray-300" />
+              <span className="w-4 h-4 rounded bg-gray-300" />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
   }
 
   return (

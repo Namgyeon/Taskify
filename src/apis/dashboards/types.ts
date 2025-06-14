@@ -1,4 +1,4 @@
-import { BaseCursor, BasePagination, NavigationMethod } from "@/types/common";
+import { BasePagination, NavigationMethod } from "@/types/common";
 import { z } from "zod";
 
 export const dashboardSchema = z.object({

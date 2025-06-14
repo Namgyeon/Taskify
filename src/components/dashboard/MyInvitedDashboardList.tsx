@@ -8,7 +8,7 @@ import MyInvitedEmptyCard from "./MyInvitedEmptyCard";
 import Button from "../ui/Button";
 
 const MyInvitedDashboardList = () => {
-  const { data, isLoading, error } = useGetDashboardInvitations({ size: 10 });
+  const { data, isLoading } = useGetDashboardInvitations({ size: 10 });
   const { mutate: respondToInvitation } = useRespondToInvitation();
 
   const handleAccept = (invitationId: number) => {
@@ -18,6 +18,26 @@ const MyInvitedDashboardList = () => {
   const handleReject = (invitationId: number) => {
     respondToInvitation({ invitationId, inviteAccepted: false });
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col gap-2 w-full">
+        {Array.from({ length: 3 }).map((_, idx) => (
+          <div
+            key={idx}
+            className="flex items-center gap-4 px-4 py-3 border-b border-gray-200 animate-pulse"
+          >
+            <div className="w-32 h-4 bg-gray-300 rounded" />
+            <div className="w-24 h-4 bg-gray-300 rounded" />
+            <div className="flex gap-2 ml-auto">
+              <div className="w-16 h-8 bg-gray-300 rounded" />
+              <div className="w-16 h-8 bg-gray-300 rounded" />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -39,7 +59,7 @@ const MyInvitedDashboardList = () => {
                   </p>
                 </header>
 
-                <div className="flex flex-col gap-3 md:flex-row  md:items-center ">
+                <div className="flex flex-col gap-3 md:flex-row  md:items-center">
                   <div className="md:w-1/3 flex items-center gap-6">
                     <p className="md:hidden w-10 text-sm text-[#9FA6B2]">
                       이름
