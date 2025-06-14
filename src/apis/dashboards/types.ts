@@ -10,6 +10,7 @@ export const dashboardSchema = z.object({
   updatedAt: z.string(),
   createdByMe: z.boolean(),
 });
+export type Dashboard = z.infer<typeof dashboardSchema>;
 
 export const getDashboardsResponseSchema = z.object({
   dashboards: z.array(dashboardSchema),

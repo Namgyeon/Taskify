@@ -1,5 +1,6 @@
 import CreateDashboard from "@/components/dashboard/CreateDashboard";
 import InvitedDashboardSection from "@/components/dashboard/InvitedDashboardSection";
+import MyDashboard from "@/components/dashboard/MyDashboard";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -20,7 +21,7 @@ const MyDashBoard = () => {
   return (
     <>
       <div className="w-full h-screen p-6 md:p-10 flex flex-col gap-6 bg-[#FAFAFA]">
-        <CreateDashboard />
+        <MyDashboard />
         <InvitedDashboardSection />
       </div>
     </>

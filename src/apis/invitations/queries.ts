@@ -16,6 +16,7 @@ export const useRespondToInvitation = () => {
     mutationFn: (data: RespondToInvitationRequest) => respondToInvitation(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["myInvitations"] });
+      queryClient.invalidateQueries({ queryKey: ["dashboards"] });
     },
   });
 };
