@@ -5,7 +5,7 @@ import {
   dashboardSchema,
   GetDashboardsRequest,
   getDashboardsResponseSchema,
-  postDashboardsFormData,
+  PostDashboardsFormData,
 } from "./types";
 
 /**
@@ -29,7 +29,7 @@ export const getDashboards = async (params: GetDashboardsRequest) => {
  * 대시보드 생성
  * https://sp-taskify-api.vercel.app/docs/#/dashboards
  */
-export const postDashboards = async (data: postDashboardsFormData) => {
+export const postDashboards = async (data: PostDashboardsFormData) => {
   const response = await axiosClientHelper.post("/dashboards", data);
   return safeResponse(response.data, dashboardSchema);
 };

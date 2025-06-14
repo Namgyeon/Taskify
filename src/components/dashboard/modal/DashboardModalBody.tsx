@@ -1,5 +1,7 @@
+"use client";
+
 import {
-  postDashboardsFormData,
+  PostDashboardsFormData,
   postDashboardsFormSchema,
 } from "@/apis/dashboards/types";
 import Input from "@/components/ui/Input";
@@ -12,7 +14,7 @@ import { useForm } from "react-hook-form";
 const PALETTE = ["#7AC555", "#760DDE", "#FFA500", "#76A5EA", "#E876EA"];
 
 interface DashboardModalBodyProps {
-  onSubmit: (data: postDashboardsFormData) => void;
+  onSubmit: (data: PostDashboardsFormData) => void;
 }
 
 const DashboardModalBody = ({ onSubmit }: DashboardModalBodyProps) => {
@@ -23,7 +25,7 @@ const DashboardModalBody = ({ onSubmit }: DashboardModalBodyProps) => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<postDashboardsFormData>({
+  } = useForm<PostDashboardsFormData>({
     resolver: zodResolver(postDashboardsFormSchema),
     defaultValues: {
       color: PALETTE[0], // 기본 색상 설정
@@ -35,7 +37,7 @@ const DashboardModalBody = ({ onSubmit }: DashboardModalBodyProps) => {
     setValue("color", color, { shouldValidate: true });
   };
 
-  const handleFormSubmit = (data: postDashboardsFormData) => {
+  const handleFormSubmit = (data: PostDashboardsFormData) => {
     onSubmit(data);
   };
 

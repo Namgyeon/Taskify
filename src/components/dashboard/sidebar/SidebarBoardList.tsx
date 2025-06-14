@@ -15,7 +15,6 @@ const SidebarBoardList = () => {
     size: ITEMS_PER_PAGE,
     navigationMethod: "pagination",
   });
-  console.log("리스트 데이터:", data);
 
   if (isFetching || isLoading) {
     return (

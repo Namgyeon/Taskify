@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { GetDashboardsRequest, postDashboardsFormData } from "./types";
+import { GetDashboardsRequest, PostDashboardsFormData } from "./types";
 import { getDashboards, postDashboards } from ".";
 
 export const useGetDashboardsQuery = (params: GetDashboardsRequest) => {
@@ -12,7 +12,7 @@ export const useGetDashboardsQuery = (params: GetDashboardsRequest) => {
 export const useCreateDashboard = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (data: postDashboardsFormData) => postDashboards(data),
+    mutationFn: (data: PostDashboardsFormData) => postDashboards(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["dashboards"] });
     },
