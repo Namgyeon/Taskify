@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://taskify-lab.vercel.app/meta.png",
+        url: "https://taskify-3ypqbp4os-namgyeons-projects.vercel.app/meta.png",
         width: 1200,
         height: 630,
         alt: "Taskify 대시보드 페이지 이미지",

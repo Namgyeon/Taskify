@@ -20,7 +20,14 @@ export async function generateMetaData({
       description: "Taskify 대시보드에서 커뮤니티 일정을 한눈에 관리해 보세요.",
       url: `https://taskify-3ypqbp4os-namgyeons-projects.vercel.app/dashboard/${id}`,
       type: "website",
-      //이미지
+      images: [
+        {
+          url: "https://taskify-3ypqbp4os-namgyeons-projects.vercel.app/meta.png",
+          width: 1200,
+          height: 630,
+          alt: "Taskify 대시보드 페이지 이미지",
+        },
+      ],
     },
   };
 }
