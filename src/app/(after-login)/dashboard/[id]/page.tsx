@@ -1,0 +1,36 @@
+import { Dashboard, dashboardSchema } from "@/apis/dashboards/types";
+import ColumnList from "@/components/columns/ColumnList";
+import axiosServerHelper from "@/utils/network/axiosServerHelper";
+import { safeResponse } from "@/utils/network/safeResponse";
+import { Metadata } from "next";
+
+export async function generateMetaData({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const id = params.id;
+  const response = await axiosServerHelper<Dashboard>(`/dashboards/${id}`);
+  const dashboardDetail = safeResponse(response.data, dashboardSchema);
+  return {
+    title: `Taskify - ${dashboardDetail.title}`,
+    description: "Taskify 대시보드에서 커뮤니티 일정을 한눈에 관리해 보세요.",
+    openGraph: {
+      title: `Taskify - ${dashboardDetail.title}`,
+      description: "Taskify 대시보드에서 커뮤니티 일정을 한눈에 관리해 보세요.",
+      url: `https://taskify-3ypqbp4os-namgyeons-projects.vercel.app/dashboard/${id}`,
+      type: "website",
+      //이미지
+    },
+  };
+}
+
+const DashboardDetailPage = () => {
+  return (
+    <div>
+      <ColumnList />
+    </div>
+  );
+};
+
+export default DashboardDetailPage;

@@ -12,7 +12,14 @@ export const metadata: Metadata = {
       "Taskify 내 대시보드에서 개인 일정을 쉽고 편하게 관리해 보세요.",
     url: "https://taskify-3ypqbp4os-namgyeons-projects.vercel.app/mydashboard",
     type: "website",
-    //이미지 추가
+    images: [
+      {
+        url: "https://taskify-lab.vercel.app/meta.png",
+        width: 1200,
+        height: 630,
+        alt: "Taskify 대시보드 페이지 이미지",
+      },
+    ],
   },
 };
 
