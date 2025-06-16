@@ -4,12 +4,13 @@ import axiosServerHelper from "@/utils/network/axiosServerHelper";
 import { safeResponse } from "@/utils/network/safeResponse";
 import { Metadata } from "next";
 
-export async function generateMetaData({
+export async function generateMetadata({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }): Promise<Metadata> {
-  const id = params.id;
+  const resolvedParams = await params;
+  const id = resolvedParams.id;
   const response = await axiosServerHelper<Dashboard>(`/dashboards/${id}`);
   const dashboardDetail = safeResponse(response.data, dashboardSchema);
   return {
