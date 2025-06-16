@@ -11,7 +11,7 @@ const SKELETON_COUNT = 5;
 
 const SidebarBoardList = () => {
   const [page, setPage] = useState<number>(1);
-  const { data, isFetching, isLoading, error } = useGetDashboardsQuery({
+  const { data, isFetching, isLoading } = useGetDashboardsQuery({
     page,
     size: ITEMS_PER_PAGE,
     navigationMethod: "pagination",
