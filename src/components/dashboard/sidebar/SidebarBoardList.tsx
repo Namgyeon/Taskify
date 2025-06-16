@@ -3,6 +3,7 @@
 import { useGetDashboardsQuery } from "@/apis/dashboards/queries";
 import Pagination from "@/components/pagination/Pagination";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const ITEMS_PER_PAGE = 10;
@@ -10,11 +11,18 @@ const SKELETON_COUNT = 5;
 
 const SidebarBoardList = () => {
   const [page, setPage] = useState<number>(1);
-  const { data, isFetching, isLoading } = useGetDashboardsQuery({
+  const { data, isFetching, isLoading, error } = useGetDashboardsQuery({
     page,
     size: ITEMS_PER_PAGE,
     navigationMethod: "pagination",
   });
+  const router = useRouter();
+
+  const handleDashboardClick = (dashboardId: number) => {
+    router.push(`dashboard/${dashboardId}`);
+  };
+
+  console.log("사이드바 목록:", data, error);
 
   if (isFetching || isLoading) {
     return (
@@ -39,7 +47,8 @@ const SidebarBoardList = () => {
         {data.dashboards.map((dashboard) => (
           <div
             key={dashboard.id}
-            className="flex items-center justify-center md:justify-start gap-2"
+            className="flex items-center justify-center md:justify-start gap-2 cursor-pointer hover:bg-gray-200 rounded-md transition-colors ease-in-out"
+            onClick={() => handleDashboardClick(dashboard.id)}
           >
             <div
               className="w-2 h-2 rounded-full flex-shrink-0"

@@ -9,7 +9,6 @@ export const dashboardSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
   createdByMe: z.boolean(),
-  result: z.literal("SUCCESS"),
 });
 export type Dashboard = z.infer<typeof dashboardSchema>;
 
