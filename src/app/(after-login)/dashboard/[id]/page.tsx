@@ -34,7 +34,7 @@ export async function generateMetaData({
 
 const DashboardDetailPage = () => {
   return (
-    <div>
+    <div className="w-full h-full  bg-[#FAFAFA]">
       <ColumnList />
     </div>
   );
