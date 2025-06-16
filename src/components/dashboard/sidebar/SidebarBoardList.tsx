@@ -19,10 +19,8 @@ const SidebarBoardList = () => {
   const router = useRouter();
 
   const handleDashboardClick = (dashboardId: number) => {
-    router.push(`dashboard/${dashboardId}`);
+    router.push(`/dashboard/${dashboardId}`);
   };
-
-  console.log("사이드바 목록:", data, error);
 
   if (isFetching || isLoading) {
     return (

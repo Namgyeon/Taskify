@@ -10,7 +10,7 @@ const MyDashboardCard = ({ dashboard }: MyDashboardCardProps) => {
   const router = useRouter();
 
   const handleDashboardClick = (dashboardId: number) => {
-    router.push(`dashboard/${dashboardId}`);
+    router.push(`/dashboard/${dashboardId}`);
   };
 
   return (
