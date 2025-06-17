@@ -19,3 +19,11 @@ export const getColumnsRequestSchema = z.object({
   dashboardId: z.number(),
 });
 export type GetColumnsRequest = z.infer<typeof getColumnsRequestSchema>;
+
+export const createColumnRequestSchema = z.object({
+  title: z
+    .string()
+    .trim()
+    .min(2, { message: "컬럼 이름은 최소 2글자 이상이어야 합니다." }),
+});
+export type CreateColumnRequest = z.infer<typeof createColumnRequestSchema>;
