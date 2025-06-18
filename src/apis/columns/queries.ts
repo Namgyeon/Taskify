@@ -4,7 +4,7 @@ import { getColumns, postColumn } from ".";
 
 export const useGetColumnsQuery = (params: GetColumnsRequest) => {
   return useQuery({
-    queryKey: ["columns", params],
+    queryKey: ["columns", params.dashboardId],
     queryFn: () => getColumns(params),
   });
 };
