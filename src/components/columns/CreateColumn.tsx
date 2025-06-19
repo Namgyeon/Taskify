@@ -10,7 +10,7 @@ const CreateColumn = () => {
   return (
     <>
       <div
-        className="lg:w-88 lg:h-15 flex items-center justify-center gap-3 py-5 border border-gray-300 rounded-lg bg-white cursor-pointer hover:bg-gray-300
+        className="lg:min-w-88 lg:h-15 flex items-center justify-center gap-3 py-5 border border-gray-300 rounded-lg bg-white cursor-pointer hover:bg-gray-300
     transition-colors duration-200"
         onClick={() => modalRef.current?.open()}
       >

@@ -7,7 +7,7 @@ interface ColumnProps {
 
 const Column = ({ column }: ColumnProps) => {
   return (
-    <div className="lg:w-88 lg:h-screen pb-6 border-b lg:border-b-0 lg:border-r border-gray-300">
+    <div className="min-w-88 pt-4 md:pt-6 border-b lg:border-b-0 lg:border-r border-gray-300">
       <ColumnTitle title={column.title} />
     </div>
   );

@@ -10,13 +10,14 @@ const ColumnList = () => {
   const id = params?.id;
   const { data } = useGetColumnsQuery({ dashboardId: Number(id) });
 
-  console.log("컬럼데이터", data);
   return (
-    <div className="flex flex-col lg:flex-row gap-4 py-4 md:py-6 px-3 md:px-5">
+    <div className="h-full flex flex-row gap-4 px-3 md:px-5 overflow-x-auto">
       {data?.data.map((column) => (
         <Column key={column.id} column={column} />
       ))}
-      <CreateColumn />
+      <div className="pt-4 md:pt-6">
+        <CreateColumn />
+      </div>
     </div>
   );
 };
