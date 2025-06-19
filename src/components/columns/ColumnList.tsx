@@ -11,7 +11,7 @@ const ColumnList = () => {
   const { data } = useGetColumnsQuery({ dashboardId: Number(id) });
 
   return (
-    <div className="h-full flex flex-row gap-4 px-3 md:px-5 overflow-x-auto">
+    <div className="h-full flex flex-col lg:flex-row gap-4 overflow-y-auto lg:overflow-x-auto">
       {data?.data.map((column) => (
         <Column key={column.id} column={column} />
       ))}
