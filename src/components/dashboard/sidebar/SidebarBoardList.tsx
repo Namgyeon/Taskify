@@ -45,7 +45,7 @@ const SidebarBoardList = () => {
         {data.dashboards.map((dashboard) => (
           <div
             key={dashboard.id}
-            className="flex items-center justify-center md:justify-start gap-2 cursor-pointer hover:bg-gray-200 rounded-md transition-colors ease-in-out"
+            className="h-10 flex items-center justify-center md:justify-start gap-2 cursor-pointer hover:bg-gray-200 rounded-md transition-colors ease-in-out"
             onClick={() => handleDashboardClick(dashboard.id)}
           >
             <div

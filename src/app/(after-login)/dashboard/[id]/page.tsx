@@ -34,11 +34,7 @@ export async function generateMetadata({
 }
 
 const DashboardDetailPage = () => {
-  return (
-    <div className="w-full h-full  bg-[#FAFAFA]">
-      <ColumnList />
-    </div>
-  );
+  return <ColumnList />;
 };
 
 export default DashboardDetailPage;

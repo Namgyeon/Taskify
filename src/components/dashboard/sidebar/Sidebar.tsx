@@ -4,7 +4,7 @@ import SidebarLogo from "./SidebarLogo";
 
 const DashBoardSideBar = () => {
   return (
-    <div className="h-screen flex flex-col gap-10 px-3 border-r border-r-gray-300 ">
+    <div className="h-screen min-w-[75px] flex flex-col gap-10 px-3 border-r border-r-gray-300 ">
       <SidebarLogo />
       <SidebarHeader />
       <SidebarBoardLists />

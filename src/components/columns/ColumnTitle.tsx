@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const ColumnTitle = ({ title }: { title: string }) => {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between pr-3">
       <div className="flex items-center gap-2">
         <div className="w-2 h-2 rounded-full bg-[#5534DA]" />
         <p className="mr-3 md:text-lg font-bold text-[#333236]">{title}</p>
