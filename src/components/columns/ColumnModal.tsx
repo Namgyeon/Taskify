@@ -21,7 +21,7 @@ const ColumnModal = ({ onClose }: { onClose: () => void }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isSubmitting },
   } = useForm<CreateColumnRequest>({
     resolver: zodResolver(createColumnRequestSchema),
     mode: "onChange",
