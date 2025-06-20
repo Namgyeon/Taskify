@@ -3,6 +3,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import VisibilityIcon from "@/assets/icons/visibility-icon.svg";
 import UnVisibilityIcon from "@/assets/icons/unVisibility-icon.svg";
+import BaseLabel from "./BaseLabel";
 
 interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -23,9 +24,7 @@ const PasswordInput = forwardRef(
 
     return (
       <div className="w-full flex flex-col gap-2">
-        <label className="text-lg font-normal text-[var(--black-333236)]">
-          {label}
-        </label>
+        <BaseLabel>{label}</BaseLabel>
         <div className="flex relative">
           <input
             ref={ref}

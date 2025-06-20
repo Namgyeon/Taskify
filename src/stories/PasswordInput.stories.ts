@@ -1,4 +1,4 @@
-import PasswordInput from "@/components/ui/PasswordInput";
+import PasswordInput from "@/components/ui/Field/PasswordInput";
 
 export default {
   title: "Test/PasswordInput",

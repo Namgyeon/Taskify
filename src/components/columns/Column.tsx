@@ -1,5 +1,6 @@
 import ColumnTitle from "./ColumnTitle";
 import { Column as ColumnType } from "@/apis/columns/types";
+import CreateCard from "./CreateCard";
 
 interface ColumnProps {
   column: ColumnType;
@@ -7,8 +8,9 @@ interface ColumnProps {
 
 const Column = ({ column }: ColumnProps) => {
   return (
-    <div className="min-w-88 px-3 md:px-5 py-4 md:py-6 border-b lg:border-b-0 lg:border-r border-gray-300">
+    <div className="flex flex-col gap-6 min-w-88 px-3 md:px-5 py-4 md:py-6 border-b lg:border-b-0 lg:border-r border-gray-300">
       <ColumnTitle title={column.title} />
+      <CreateCard />
     </div>
   );
 };

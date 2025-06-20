@@ -1,5 +1,6 @@
 import { InputHTMLAttributes, forwardRef, ForwardedRef } from "react";
 import clsx from "clsx";
+import BaseLabel from "./BaseLabel";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -21,11 +22,7 @@ const Input = forwardRef(
   ) => {
     return (
       <div className="w-full flex flex-col gap-2">
-        {label && (
-          <label className="text-lg font-normal text-[var(--black-333236)]">
-            {label}
-          </label>
-        )}
+        {label && <BaseLabel>{label}</BaseLabel>}
         <input
           ref={ref}
           className={clsx(

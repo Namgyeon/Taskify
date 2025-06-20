@@ -1,9 +1,9 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import Input from "@/components/ui/Input";
+import Input from "@/components/ui/Field/Input";
 import { SignInFormData, signInFormSchema } from "@/apis/auth/types";
-import PasswordInput from "@/components/ui/PasswordInput";
+import PasswordInput from "@/components/ui/Field/PasswordInput";
 import Button from "@/components/ui/Button";
 import { useSignIn } from "@/apis/auth/queries";
 import { zodResolver } from "@hookform/resolvers/zod";

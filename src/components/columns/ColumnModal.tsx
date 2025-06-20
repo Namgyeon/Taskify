@@ -2,7 +2,7 @@
 
 import { useColumnMutation } from "@/apis/columns/queries";
 import { ModalHeader, ModalBody, ModalFooter } from "@/components/ui/Modal";
-import Input from "@/components/ui/Input";
+import Input from "@/components/ui/Field/Input";
 import Button from "@/components/ui/Button";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
