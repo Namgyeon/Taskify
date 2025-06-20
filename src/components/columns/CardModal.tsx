@@ -1,4 +1,5 @@
 import Button from "../ui/Button";
+import AssignInput from "../ui/Field/AssignInput";
 import { ModalBody, ModalFooter, ModalHeader } from "../ui/Modal";
 
 interface CardModalProps {
@@ -6,14 +7,16 @@ interface CardModalProps {
 }
 const CardModal = ({ onClose }: CardModalProps) => {
   return (
-    <div>
+    <div className="flex flex-col gap-6 md:gap-8">
       <ModalHeader>
         <h2 className="text-xl md:text-2xl font-bold text-[#333236]">
           할 일 생성
         </h2>
       </ModalHeader>
       <ModalBody>
-        <form></form>
+        <form>
+          <AssignInput label="담당자*" />
+        </form>
       </ModalBody>
       <ModalFooter>
         {/* <div className="flex justify-end gap-2">
