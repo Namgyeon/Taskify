@@ -2,14 +2,18 @@ import { useEffect, useRef, useState } from "react";
 import BaseLabel from "./BaseLabel";
 import Input from "./Input";
 import Image from "next/image";
+import { Member } from "@/apis/members/types";
 
 interface AssignInputProps {
   label: string;
+  members?: Member[];
 }
 
-const AssignInput = ({ label }: AssignInputProps) => {
+const AssignInput = ({ label, members }: AssignInputProps) => {
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
+
+  console.log("멤버", members);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {

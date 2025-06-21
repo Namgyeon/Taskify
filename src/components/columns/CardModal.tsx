@@ -1,11 +1,26 @@
+import { useGetMembers } from "@/apis/members/queries";
 import Button from "../ui/Button";
 import AssignInput from "../ui/Field/AssignInput";
 import { ModalBody, ModalFooter, ModalHeader } from "../ui/Modal";
+import { useParams } from "next/navigation";
 
 interface CardModalProps {
   onClose: () => void;
 }
 const CardModal = ({ onClose }: CardModalProps) => {
+  const params = useParams();
+  const dashboardId = Number(params.id);
+
+  const { data, isLoading, error } = useGetMembers({
+    dashboardId,
+    page: 1,
+    size: 20,
+  });
+
+  console.log("data:", data); // data 확인
+  console.log("isLoading:", isLoading); // 로딩 상태 확인
+  console.log("error:", error); // 에러 확인
+
   return (
     <div className="flex flex-col gap-6 md:gap-8">
       <ModalHeader>
@@ -15,7 +30,7 @@ const CardModal = ({ onClose }: CardModalProps) => {
       </ModalHeader>
       <ModalBody>
         <form>
-          <AssignInput label="담당자*" />
+          <AssignInput label="담당자*" members={data?.members} />
         </form>
       </ModalBody>
       <ModalFooter>

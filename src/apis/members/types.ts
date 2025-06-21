@@ -5,9 +5,9 @@ export const memberSchema = z.object({
   userId: z.number(),
   email: z.string().email(),
   nickname: z.string(),
-  profileImageUrl: z.string().url(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
+  profileImageUrl: z.union([z.string().url(), z.null()]),
+  createdAt: z.union([z.string(), z.date()]),
+  updatedAt: z.union([z.string(), z.date()]),
   isOwner: z.boolean(),
 });
 export type Member = z.infer<typeof memberSchema>;
