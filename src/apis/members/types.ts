@@ -20,4 +20,7 @@ export type Members = z.infer<typeof membersSchema>;
 
 export const getMembersRequestSchema = z.object({
   dashboardId: z.number(),
+  page: z.number(),
+  size: z.number(),
 });
+export type GetMembersRequest = z.infer<typeof getMembersRequestSchema>;
