@@ -7,6 +7,8 @@ import { useForm } from "react-hook-form";
 import { CreateCardRequest, createCardRequestSchema } from "@/apis/cards/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Member } from "@/apis/members/types";
+import Input from "../ui/Field/Input";
+import Textarea from "../ui/Field/Textarea";
 
 interface CardModalProps {
   onClose: () => void;
@@ -46,7 +48,11 @@ const CardModal = ({ onClose }: CardModalProps) => {
         </h2>
       </ModalHeader>
       <ModalBody>
-        <form id="card-form" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          id="card-form"
+          onSubmit={handleSubmit(onSubmit)}
+          className="flex flex-col gap-4"
+        >
           <AssignInput
             label="담당자*"
             members={data?.members}
@@ -57,6 +63,20 @@ const CardModal = ({ onClose }: CardModalProps) => {
               })
             }
             error={errors.assigneeUserId?.message}
+          />
+          <Input
+            label="제목*"
+            placeholder="제목을 입력해주세요"
+            {...register("title")}
+            errorMessage={errors.title?.message}
+          />
+          <Textarea
+            label="설명*"
+            placeholder="설명을 입력해주세요"
+            rows={3}
+            {...register("description")}
+            error={!!errors.description}
+            errorMessage={errors.description?.message}
           />
         </form>
       </ModalBody>
