@@ -33,8 +33,13 @@ const Textarea = forwardRef(
             className
           )}
           placeholder={placeholder}
+          {...props}
         />
-        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+        {errorMessage && (
+          <p className="text-sm font-normal text-[var(--red-D6173A)]">
+            {errorMessage}
+          </p>
+        )}
       </div>
     );
   }

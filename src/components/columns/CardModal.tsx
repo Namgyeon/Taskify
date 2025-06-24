@@ -3,12 +3,13 @@ import Button from "../ui/Button";
 import AssignInput from "../ui/Field/AssignInput";
 import { ModalBody, ModalFooter, ModalHeader } from "../ui/Modal";
 import { useParams } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { CreateCardRequest, createCardRequestSchema } from "@/apis/cards/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Member } from "@/apis/members/types";
 import Input from "../ui/Field/Input";
 import Textarea from "../ui/Field/Textarea";
+import DateInput from "../ui/Field/DateInput";
 
 interface CardModalProps {
   onClose: () => void;
@@ -28,9 +29,11 @@ const CardModal = ({ onClose }: CardModalProps) => {
     handleSubmit,
     setValue,
     watch,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<CreateCardRequest>({
     resolver: zodResolver(createCardRequestSchema),
+    mode: "onChange",
   });
 
   const assigneeUserId = watch("assigneeUserId");
@@ -53,21 +56,29 @@ const CardModal = ({ onClose }: CardModalProps) => {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-4"
         >
-          <AssignInput
-            label="담당자*"
-            members={data?.members}
-            value={selectedMember}
-            onChange={(member: Member | null) =>
-              setValue("assigneeUserId", member?.userId ?? 0, {
-                shouldValidate: true,
-              })
-            }
-            error={errors.assigneeUserId?.message}
+          <Controller
+            name="assigneeUserId"
+            control={control}
+            render={({ field, fieldState }) => (
+              <AssignInput
+                label="담당자*"
+                members={data?.members}
+                value={selectedMember}
+                onChange={(member: Member | null) =>
+                  setValue("assigneeUserId", member?.userId ?? 0, {
+                    shouldValidate: true,
+                  })
+                }
+                error={!!errors.assigneeUserId}
+                errorMessage={errors.assigneeUserId?.message}
+              />
+            )}
           />
           <Input
             label="제목*"
             placeholder="제목을 입력해주세요"
             {...register("title")}
+            error={!!errors.title}
             errorMessage={errors.title?.message}
           />
           <Textarea
@@ -77,6 +88,18 @@ const CardModal = ({ onClose }: CardModalProps) => {
             {...register("description")}
             error={!!errors.description}
             errorMessage={errors.description?.message}
+          />
+          <Controller
+            name="dueDate"
+            control={control}
+            render={({ field, fieldState }) => (
+              <DateInput
+                value={field.value instanceof Date ? field.value : new Date()}
+                onChange={(date: Date | null) => field.onChange(date)}
+                error={!!fieldState.error}
+                errorMessage={fieldState.error?.message}
+              />
+            )}
           />
         </form>
       </ModalBody>

@@ -7,7 +7,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: boolean;
   errorMessage?: string;
-  toggle?: boolean;
+  imageRightUrl?: string;
+  imageLeftUrl?: string;
 }
 
 const Input = forwardRef(
@@ -18,7 +19,8 @@ const Input = forwardRef(
       className,
       errorMessage,
       placeholder,
-      toggle,
+      imageRightUrl,
+      imageLeftUrl,
       ...props
     }: InputProps,
     ref: ForwardedRef<HTMLInputElement>
@@ -39,11 +41,21 @@ const Input = forwardRef(
             placeholder={placeholder}
             {...props}
           />
-          {toggle && (
+          {imageRightUrl && (
             <div className="absolute right-4 top-1/2 -translate-y-1/2">
               <Image
-                src="/column/toggle-icon.svg"
-                alt="토글 아이콘"
+                src={imageRightUrl}
+                alt={imageRightUrl}
+                width={26}
+                height={26}
+              />
+            </div>
+          )}
+          {imageLeftUrl && (
+            <div className="absolute left-4 top-1/2 -translate-y-1/2">
+              <Image
+                src={imageLeftUrl}
+                alt={imageLeftUrl}
                 width={26}
                 height={26}
               />

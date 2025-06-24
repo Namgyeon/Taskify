@@ -10,7 +10,8 @@ interface AssignInputProps {
   members?: Member[];
   value?: Member | null;
   onChange?: (member: Member | null) => void;
-  error?: string;
+  error?: boolean;
+  errorMessage?: string;
 }
 
 const AssignInput = ({
@@ -19,6 +20,7 @@ const AssignInput = ({
   value,
   onChange,
   error,
+  errorMessage,
 }: AssignInputProps) => {
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -55,11 +57,11 @@ const AssignInput = ({
       <div onClick={() => setOpen(true)} className="relative">
         <Input
           placeholder="담당자를 지정해주세요"
-          toggle={true}
+          imageRightUrl={"/column/toggle-icon.svg"}
           readOnly
           value={value?.nickname || ""}
-          error={!!error}
-          errorMessage={error}
+          error={error}
+          errorMessage={errorMessage}
         />
         {value && (
           <div className="absolute right-10 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
