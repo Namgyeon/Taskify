@@ -10,6 +10,7 @@ import { Member } from "@/apis/members/types";
 import Input from "../ui/Field/Input";
 import Textarea from "../ui/Field/Textarea";
 import DateInput from "../ui/Field/DateInput";
+import TagInput from "../ui/Field/TagInput";
 
 interface CardModalProps {
   onClose: () => void;
@@ -96,6 +97,18 @@ const CardModal = ({ onClose }: CardModalProps) => {
               <DateInput
                 value={field.value instanceof Date ? field.value : new Date()}
                 onChange={(date: Date | null) => field.onChange(date)}
+                error={!!fieldState.error}
+                errorMessage={fieldState.error?.message}
+              />
+            )}
+          />
+          <Controller
+            name="tags"
+            control={control}
+            render={({ field, fieldState }) => (
+              <TagInput
+                value={field.value}
+                onChange={(tags: string[]) => field.onChange(tags)}
                 error={!!fieldState.error}
                 errorMessage={fieldState.error?.message}
               />
