@@ -21,7 +21,7 @@ const Textarea = forwardRef(
     ref: ForwardedRef<HTMLTextAreaElement>
   ) => {
     return (
-      <div>
+      <div className="flex flex-col gap-2">
         {label && <BaseLabel>{label}</BaseLabel>}
         <textarea
           ref={ref}

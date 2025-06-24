@@ -11,6 +11,7 @@ import Input from "../ui/Field/Input";
 import Textarea from "../ui/Field/Textarea";
 import DateInput from "../ui/Field/DateInput";
 import TagInput from "../ui/Field/TagInput";
+import ImageUpload from "../ui/Field/ImageUpload";
 
 interface CardModalProps {
   onClose: () => void;
@@ -109,6 +110,26 @@ const CardModal = ({ onClose }: CardModalProps) => {
               <TagInput
                 value={field.value}
                 onChange={(tags: string[]) => field.onChange(tags)}
+                error={!!fieldState.error}
+                errorMessage={fieldState.error?.message}
+              />
+            )}
+          />
+          <Controller
+            name="imageUrl"
+            control={control}
+            render={({ field, fieldState }) => (
+              <ImageUpload
+                value={field.value}
+                onChange={(file: File | null) => {
+                  if (file) {
+                    // File을 URL로 변환해서 저장
+                    const url = URL.createObjectURL(file);
+                    field.onChange(url);
+                  } else {
+                    field.onChange("");
+                  }
+                }}
                 error={!!fieldState.error}
                 errorMessage={fieldState.error?.message}
               />

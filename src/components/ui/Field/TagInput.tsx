@@ -44,7 +44,7 @@ const TagInput = ({
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="입력후 Enter"
-          className="w-full px-4 py-3.5 border border-gray-300 rounded-md outline-none focus:ring-2"
+          className="w-full px-4 py-3.5 border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-[var(--violet-5534DA)]"
         />
         <div className="flex flex-wrap gap-2">
           {value.map((tag, index) => (

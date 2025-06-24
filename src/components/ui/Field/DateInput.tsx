@@ -18,7 +18,7 @@ const DateInput = ({
   errorMessage,
 }: DateInputProps) => {
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       <BaseLabel>마감일</BaseLabel>
       <div className="relative w-full">
         <Image
