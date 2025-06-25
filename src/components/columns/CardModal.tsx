@@ -12,13 +12,18 @@ import Textarea from "../ui/Field/Textarea";
 import DateInput from "../ui/Field/DateInput";
 import TagInput from "../ui/Field/TagInput";
 import ImageUpload from "../ui/Field/ImageUpload";
+import { useCardMutation } from "@/apis/cards/queries";
+import toast from "react-hot-toast";
+import { formatDateForAPI } from "@/utils/formatDate";
 
 interface CardModalProps {
   onClose: () => void;
+  columnId: number;
 }
-const CardModal = ({ onClose }: CardModalProps) => {
+const CardModal = ({ onClose, columnId }: CardModalProps) => {
   const params = useParams();
   const dashboardId = Number(params.id);
+  const { create: createCard } = useCardMutation(dashboardId);
 
   const { data } = useGetMembers({
     dashboardId,
@@ -36,6 +41,13 @@ const CardModal = ({ onClose }: CardModalProps) => {
   } = useForm<CreateCardRequest>({
     resolver: zodResolver(createCardRequestSchema),
     mode: "onChange",
+    defaultValues: {
+      dashboardId,
+      columnId,
+      tags: [],
+      imageUrl: "",
+      dueDate: new Date(),
+    },
   });
 
   const assigneeUserId = watch("assigneeUserId");
@@ -43,7 +55,30 @@ const CardModal = ({ onClose }: CardModalProps) => {
     (member) => member.userId === assigneeUserId
   );
 
-  const onSubmit = (data: CreateCardRequest) => {};
+  const onSubmit = async (data: CreateCardRequest) => {
+    try {
+      const formattedData = {
+        ...data,
+        dueDate:
+          data.dueDate instanceof Date
+            ? formatDateForAPI(data.dueDate)
+            : data.dueDate,
+        imageUrl:
+          data.imageUrl ||
+          "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/taskify/task_image/",
+      };
+
+      await createCard(formattedData);
+      toast.success("카드가 생성되었습니다.");
+      onClose();
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "알 수 없는 오류가 발생했습니다.";
+      toast.error(errorMessage);
+    }
+  };
 
   return (
     <div className="flex flex-col gap-6 md:gap-8">
@@ -123,7 +158,6 @@ const CardModal = ({ onClose }: CardModalProps) => {
                 value={field.value}
                 onChange={(file: File | null) => {
                   if (file) {
-                    // File을 URL로 변환해서 저장
                     const url = URL.createObjectURL(file);
                     field.onChange(url);
                   } else {
