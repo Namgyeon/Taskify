@@ -21,16 +21,18 @@ const Input = forwardRef(
       placeholder,
       imageRightUrl,
       imageLeftUrl,
+      id,
       ...props
     }: InputProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
       <div className="w-full flex flex-col gap-2">
-        {label && <BaseLabel>{label}</BaseLabel>}
+        {label && <BaseLabel id={id}>{label}</BaseLabel>}
         <div className="relative">
           <input
             ref={ref}
+            id={id}
             className={clsx(
               "w-full px-4 py-3.5 border rounded-md outline-none focus:ring-2",
               error

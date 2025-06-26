@@ -1,6 +1,15 @@
-const BaseLabel = ({ children }: { children: React.ReactNode }) => {
+const BaseLabel = ({
+  children,
+  id,
+}: {
+  children: React.ReactNode;
+  id?: string;
+}) => {
   return (
-    <label className="text-lg font-normal text-[var(--black-333236)]">
+    <label
+      htmlFor={id}
+      className="text-lg font-normal text-[var(--black-333236)]"
+    >
       {children}
     </label>
   );

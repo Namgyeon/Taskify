@@ -16,13 +16,14 @@ const Textarea = forwardRef(
       error,
       errorMessage,
       className,
+      id,
       ...props
     }: TextareaProps,
     ref: ForwardedRef<HTMLTextAreaElement>
   ) => {
     return (
       <div className="flex flex-col gap-2">
-        {label && <BaseLabel>{label}</BaseLabel>}
+        {label && <BaseLabel id={id}>{label}</BaseLabel>}
         <textarea
           ref={ref}
           className={clsx(
@@ -33,6 +34,7 @@ const Textarea = forwardRef(
             className
           )}
           placeholder={placeholder}
+          id={id}
           {...props}
         />
         {errorMessage && (

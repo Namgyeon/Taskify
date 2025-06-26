@@ -6,6 +6,7 @@ interface TagInputProps {
   onChange?: (tags: string[]) => void;
   error?: boolean;
   errorMessage?: string;
+  id?: string;
 }
 
 const TagInput = ({
@@ -13,6 +14,7 @@ const TagInput = ({
   onChange,
   error,
   errorMessage,
+  id,
 }: TagInputProps) => {
   const [inputValue, setInputValue] = useState("");
 
@@ -36,9 +38,10 @@ const TagInput = ({
 
   return (
     <div className="flex flex-col gap-2">
-      <BaseLabel>태그</BaseLabel>
+      <BaseLabel id={id}>태그</BaseLabel>
       <div className="flex flex-col gap-2">
         <input
+          id={id}
           type="text"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}

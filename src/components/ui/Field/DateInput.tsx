@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { InputHTMLAttributes, useState } from "react";
 import DatePicker from "react-datepicker";
 import BaseLabel from "./BaseLabel";
 import "react-datepicker/dist/react-datepicker.css";
@@ -9,6 +9,7 @@ interface DateInputProps {
   onChange: (date: Date | null) => void;
   error?: boolean;
   errorMessage?: string;
+  id?: string;
 }
 
 const DateInput = ({
@@ -16,10 +17,11 @@ const DateInput = ({
   onChange,
   error,
   errorMessage,
+  id,
 }: DateInputProps) => {
   return (
     <div className="flex flex-col gap-2">
-      <BaseLabel>마감일</BaseLabel>
+      <BaseLabel id={id}>마감일</BaseLabel>
       <div className="relative w-full">
         <Image
           className="absolute left-4 top-1/2 -translate-y-1/2"
@@ -29,6 +31,7 @@ const DateInput = ({
           height={22}
         />
         <DatePicker
+          id={id}
           wrapperClassName="w-full"
           className="w-full px-10 py-3.5 border rounded-md outline-none focus:ring-2 border-[var(--gray-D9D9D9)] focus:ring-[var(--violet-5534DA)]"
           selected={value}

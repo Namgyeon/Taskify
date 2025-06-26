@@ -98,6 +98,7 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
             control={control}
             render={({ field, fieldState }) => (
               <AssignInput
+                id="assignee"
                 label="담당자*"
                 members={data?.members}
                 value={selectedMember}
@@ -112,6 +113,7 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
             )}
           />
           <Input
+            id="title"
             label="제목*"
             placeholder="제목을 입력해주세요"
             {...register("title")}
@@ -119,6 +121,7 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
             errorMessage={errors.title?.message}
           />
           <Textarea
+            id="description"
             label="설명*"
             placeholder="설명을 입력해주세요"
             rows={3}
@@ -131,6 +134,7 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
             control={control}
             render={({ field, fieldState }) => (
               <DateInput
+                id="dueDate"
                 value={field.value instanceof Date ? field.value : new Date()}
                 onChange={(date: Date | null) => field.onChange(date)}
                 error={!!fieldState.error}
@@ -143,6 +147,7 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
             control={control}
             render={({ field, fieldState }) => (
               <TagInput
+                id="tags"
                 value={field.value}
                 onChange={(tags: string[]) => field.onChange(tags)}
                 error={!!fieldState.error}
@@ -155,6 +160,7 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
             control={control}
             render={({ field, fieldState }) => (
               <ImageUpload
+                id="image"
                 value={field.value}
                 onChange={(file: File | null) => {
                   if (file) {

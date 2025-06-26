@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { InputHTMLAttributes, useEffect, useRef, useState } from "react";
 import BaseLabel from "./BaseLabel";
 import Input from "./Input";
 import Image from "next/image";
 import { Member } from "@/apis/members/types";
 import Avatar from "../Avatar";
 
-interface AssignInputProps {
+interface AssignInputProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "value"> {
   label: string;
   members?: Member[];
   value?: Member | null;
@@ -21,6 +22,7 @@ const AssignInput = ({
   onChange,
   error,
   errorMessage,
+  id,
 }: AssignInputProps) => {
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -53,9 +55,10 @@ const AssignInput = ({
 
   return (
     <div className="relative flex flex-col gap-2.5" ref={wrapperRef}>
-      <BaseLabel>{label}</BaseLabel>
+      <BaseLabel id={id}>{label}</BaseLabel>
       <div onClick={() => setOpen(true)} className="relative">
         <Input
+          id={id}
           placeholder="담당자를 지정해주세요"
           imageRightUrl={"/column/toggle-icon.svg"}
           readOnly

@@ -7,6 +7,7 @@ interface ImageUploadProps {
   onChange?: (file: File | null) => void;
   error?: boolean;
   errorMessage?: string;
+  id?: string;
 }
 
 const ImageUpload = ({
@@ -14,6 +15,7 @@ const ImageUpload = ({
   onChange,
   error,
   errorMessage,
+  id,
 }: ImageUploadProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -41,8 +43,8 @@ const ImageUpload = ({
   };
 
   return (
-    <div>
-      <BaseLabel>이미지</BaseLabel>
+    <div className="flex flex-col gap-2">
+      <BaseLabel id={id}>이미지</BaseLabel>
       <div>
         {preview && (
           <div className="relative w-14 h-14">
@@ -60,6 +62,7 @@ const ImageUpload = ({
         )}
         {/* 파일 입력 버튼 */}
         <button
+          id={id}
           className="relative w-14 h-14"
           type="button"
           onClick={() => fileInputRef.current?.click()}
