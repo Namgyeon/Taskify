@@ -1,5 +1,5 @@
 import { safeResponse } from "@/utils/network/safeResponse";
-import { cardSchema, CreateCardRequest } from "./types";
+import { Card, cardSchema, CreateCardRequest } from "./types";
 import axiosClientHelper from "@/utils/network/axiosClientHelper";
 
 /**
@@ -7,6 +7,6 @@ import axiosClientHelper from "@/utils/network/axiosClientHelper";
  * https://sp-taskify-api.vercel.app/docs/#/cards
  */
 export const postCard = async (formData: CreateCardRequest) => {
-  const response = await axiosClientHelper.post("/cards", formData);
+  const response = await axiosClientHelper.post<Card>("/cards", formData);
   return safeResponse(response.data, cardSchema);
 };

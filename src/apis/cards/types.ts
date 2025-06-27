@@ -11,7 +11,21 @@ export const createCardRequestSchema = z.object({
   //   message: "유효하지 않은 날짜 형식이 아닙니다.",
   // })
   tags: z.array(z.string().trim().max(10, "10글자 이하로 작성해주세요")),
-  imageUrl: z.string().url().optional(),
+  imageUrl: z
+    .instanceof(File)
+    .refine(
+      (file) =>
+        ["image/jpeg", "image/jpg", "image/png", "image/x-icon"].includes(
+          file.type
+        ),
+      {
+        message: "이미지는 jpeg, jpg, png, ico 형식만 허용됩니다.",
+      }
+    )
+    .refine((file) => file.size < 5 * 1024 * 1024, {
+      message: "5MB이하인 이미지만 등록 가능합니다.",
+    })
+    .optional(),
 });
 export type CreateCardRequest = z.infer<typeof createCardRequestSchema>;
 
@@ -33,3 +47,17 @@ export const cardSchema = z.object({
   updatedAt: z.string(),
 });
 export type Card = z.infer<typeof cardSchema>;
+
+export const cardListRequestSchema = z.object({
+  columnId: z.number(),
+  size: z.number().optional(),
+  cursorId: z.number().optional(),
+});
+export type CardListRequest = z.infer<typeof cardListRequestSchema>;
+
+export const cardListResponseSchema = z.object({
+  cards: z.array(cardSchema),
+  totalCount: z.number(),
+  cursorId: z.number().nullable(),
+});
+export type CardListResponse = z.infer<typeof cardListResponseSchema>;

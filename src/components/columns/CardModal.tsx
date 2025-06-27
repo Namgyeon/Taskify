@@ -12,9 +12,13 @@ import Textarea from "../ui/Field/Textarea";
 import DateInput from "../ui/Field/DateInput";
 import TagInput from "../ui/Field/TagInput";
 import ImageUpload from "../ui/Field/ImageUpload";
-import { useCardMutation } from "@/apis/cards/queries";
 import toast from "react-hot-toast";
 import { formatDateForAPI } from "@/utils/formatDate";
+import { postCardImage } from "@/apis/columns";
+import { useState } from "react";
+
+const DEFAULT_POST_IMAGE =
+  "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/taskify/task_image/12-5_45251_1739412796075.jpeg";
 
 interface CardModalProps {
   onClose: () => void;
@@ -45,7 +49,6 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
       dashboardId,
       columnId,
       tags: [],
-      imageUrl: "",
       dueDate: new Date(),
     },
   });
@@ -55,17 +58,22 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
     (member) => member.userId === assigneeUserId
   );
 
+  const imageFile = watch("imageUrl");
+
   const onSubmit = async (data: CreateCardRequest) => {
     try {
+      const { imageUrl } = data.imageUrl
+        ? await postCardImage(columnId, { image: data.imageUrl })
+        : { imageUrl: DEFAULT_POST_IMAGE };
+
+      // formattedData 정의 필요
       const formattedData = {
         ...data,
         dueDate:
           data.dueDate instanceof Date
             ? formatDateForAPI(data.dueDate)
             : data.dueDate,
-        imageUrl:
-          data.imageUrl ||
-          "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/taskify/task_image/",
+        imageUrl,
       };
 
       await createCard(formattedData);
@@ -158,20 +166,13 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
           <Controller
             name="imageUrl"
             control={control}
-            render={({ field, fieldState }) => (
+            render={({ field }) => (
               <ImageUpload
                 id="image"
                 value={field.value}
-                onChange={(file: File | null) => {
-                  if (file) {
-                    const url = URL.createObjectURL(file);
-                    field.onChange(url);
-                  } else {
-                    field.onChange("");
-                  }
+                onChange={(file: File | null | undefined) => {
+                  field.onChange(file);
                 }}
-                error={!!fieldState.error}
-                errorMessage={fieldState.error?.message}
               />
             )}
           />
