@@ -23,8 +23,13 @@ export const postCard = async (formData: CreateCardRequest) => {
  * https://sp-taskify-api.vercel.app/docs/#/cards
  */
 export const getCards = async (params: CardListRequest) => {
+  const { cursorId, size, columnId } = params;
   const response = await axiosClientHelper.get<CardListResponse>("/cards", {
-    params,
+    params: {
+      size,
+      columnId,
+      ...(cursorId && { cursorId }),
+    },
   });
   return safeResponse(response.data, cardListResponseSchema);
 };

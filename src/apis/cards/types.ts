@@ -36,7 +36,7 @@ export const cardSchema = z.object({
   tags: z.array(z.string()),
   dueDate: z.string(),
   assignee: z.object({
-    profileImageUrl: z.string().url(),
+    profileImageUrl: z.string().url().nullable(),
     nickname: z.string(),
     id: z.number(),
   }),
