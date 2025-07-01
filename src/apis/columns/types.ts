@@ -27,3 +27,13 @@ export const createColumnRequestSchema = z.object({
     .min(2, { message: "컬럼 이름은 최소 2글자 이상이어야 합니다." }),
 });
 export type CreateColumnRequest = z.infer<typeof createColumnRequestSchema>;
+
+export const cardImageFormSchema = z.object({
+  image: z.instanceof(File),
+});
+export type CardImageForm = z.infer<typeof cardImageFormSchema>;
+
+export const cardImageResponseSchema = z.object({
+  imageUrl: z.string(),
+});
+export type CardImageResponse = z.infer<typeof cardImageResponseSchema>;

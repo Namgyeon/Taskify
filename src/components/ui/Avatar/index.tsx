@@ -4,14 +4,16 @@ import getRandomColor from "../../../utils/getRandomColor";
 
 type AvatarProps = {
   profileImageUrl?: string | null;
-  email: string;
+  email?: string;
   nickname: string;
+  className?: string;
 };
 
 const Avatar = ({
   profileImageUrl,
   email,
   nickname,
+  className,
   ...props
 }: AvatarProps) => {
   const userName = email || nickname || "user";
@@ -21,7 +23,7 @@ const Avatar = ({
 
   return (
     <figure
-      className="w-[34px] md:w-[38px] aspect-square rounded-full overflow-hidden bg-black"
+      className={`w-[34px] md:w-[38px] aspect-square rounded-full overflow-hidden bg-black ${className}`}
       {...props}
     >
       {profileImageUrl ? (

@@ -1,5 +1,8 @@
 import axiosClientHelper from "@/utils/network/axiosClientHelper";
 import {
+  CardImageForm,
+  CardImageResponse,
+  cardImageResponseSchema,
   Column,
   ColumnResponse,
   columnResponseSchema,
@@ -37,4 +40,24 @@ export const postColumn = async (
     dashboardId,
   });
   return safeResponse(response.data, columnSchema);
+};
+
+/**
+ * card image 생성
+ * https://sp-taskify-api.vercel.app/docs/#/columns/{columnId}/card-image
+ */
+export const postCardImage = async (
+  columnId: number,
+  cardImageForm: CardImageForm
+) => {
+  const response = await axiosClientHelper.post<CardImageResponse>(
+    `/columns/${columnId}/card-image`,
+    cardImageForm,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+  return safeResponse(response.data, cardImageResponseSchema);
 };

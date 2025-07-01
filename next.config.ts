@@ -1,6 +1,16 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "sprint-fe-project.s3.ap-northeast-2.amazonaws.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
   webpack(config) {
     // 기존에 svg를 file-loader/url-loader 로 처리하던 부분을 찾아 제거하거나, 새 규칙을 밑에 추가하세요.
     config.module.rules.push({

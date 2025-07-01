@@ -1,8 +1,8 @@
 "use client";
 
 import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input";
-import PasswordInput from "@/components/ui/PasswordInput";
+import Input from "@/components/ui/Field/Input";
+import PasswordInput from "@/components/ui/Field/PasswordInput";
 import { useSignup } from "@/apis/users/queries";
 import { SignupFormData } from "@/apis/users/types";
 import { useForm } from "react-hook-form";

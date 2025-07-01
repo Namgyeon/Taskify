@@ -4,7 +4,7 @@ import {
   PostDashboardsFormData,
   postDashboardsFormSchema,
 } from "@/apis/dashboards/types";
-import Input from "@/components/ui/Input";
+import Input from "@/components/ui/Field/Input";
 import { ModalBody } from "@/components/ui/Modal";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
