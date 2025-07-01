@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { InputHTMLAttributes, useState } from "react";
 import DatePicker from "react-datepicker";
 import BaseLabel from "./BaseLabel";
 import "react-datepicker/dist/react-datepicker.css";

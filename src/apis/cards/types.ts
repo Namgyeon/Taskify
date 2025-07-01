@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const createCardRequestSchema = z.object({
+export const createCardFormSchema = z.object({
   assigneeUserId: z.number().min(1, "담당자를 지정해주세요"),
   dashboardId: z.number(),
   columnId: z.number(),
@@ -26,6 +26,18 @@ export const createCardRequestSchema = z.object({
       message: "5MB이하인 이미지만 등록 가능합니다.",
     })
     .optional(),
+});
+export type CreateCardForm = z.infer<typeof createCardFormSchema>;
+
+export const createCardRequestSchema = z.object({
+  assigneeUserId: z.number(),
+  dashboardId: z.number(),
+  columnId: z.number(),
+  title: z.string(),
+  description: z.string(),
+  dueDate: z.string(),
+  tags: z.array(z.string()),
+  imageUrl: z.string().optional(),
 });
 export type CreateCardRequest = z.infer<typeof createCardRequestSchema>;
 

@@ -4,7 +4,7 @@ import AssignInput from "../ui/Field/AssignInput";
 import { ModalBody, ModalFooter, ModalHeader } from "../ui/Modal";
 import { useParams } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
-import { CreateCardRequest, createCardRequestSchema } from "@/apis/cards/types";
+import { CreateCardForm, createCardFormSchema } from "@/apis/cards/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Member } from "@/apis/members/types";
 import Input from "../ui/Field/Input";
@@ -42,14 +42,18 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
     watch,
     control,
     formState: { errors, isSubmitting },
-  } = useForm<CreateCardRequest>({
-    resolver: zodResolver(createCardRequestSchema),
+  } = useForm<CreateCardForm>({
+    resolver: zodResolver(createCardFormSchema),
     mode: "onChange",
     defaultValues: {
       dashboardId,
       columnId,
+      assigneeUserId: 0,
+      title: "",
+      description: "",
       tags: [],
-      dueDate: new Date(),
+      dueDate: undefined,
+      imageUrl: undefined,
     },
   });
 
@@ -58,7 +62,7 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
     (member) => member.userId === assigneeUserId
   );
 
-  const onSubmit = async (data: CreateCardRequest) => {
+  const onSubmit = async (data: CreateCardForm) => {
     try {
       // 이미지 업로드하고 URL 받기
       const { imageUrl } = data.imageUrl
@@ -103,7 +107,7 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
           <Controller
             name="assigneeUserId"
             control={control}
-            render={({ field, fieldState }) => (
+            render={() => (
               <AssignInput
                 id="assignee"
                 label="담당자*"

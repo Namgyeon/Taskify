@@ -4,7 +4,6 @@ import { useGetColumnsQuery } from "@/apis/columns/queries";
 import { useParams } from "next/navigation";
 import Column from "./Column";
 import CreateColumn from "./CreateColumn";
-import { useGetMembers } from "@/apis/members/queries";
 
 const ColumnList = () => {
   const params = useParams();
