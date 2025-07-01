@@ -37,7 +37,7 @@ const ImageUpload = ({ value, onChange, id }: ImageUploadProps) => {
       return;
     }
 
-    const maxSize = 5 * 1024 * 1024; // 5MB
+    const maxSize = 2 * 1024 * 1024; // 2MB
     if (file.size > maxSize) {
       toast.error("파일 크기는 5MB 이하이여야 합니다.");
       return;

@@ -15,7 +15,7 @@ import ImageUpload from "../ui/Field/ImageUpload";
 import toast from "react-hot-toast";
 import { formatDateForAPI } from "@/utils/formatDate";
 import { postCardImage } from "@/apis/columns";
-import { useState } from "react";
+import { useCreateCard } from "@/apis/cards/queries";
 
 const DEFAULT_POST_IMAGE =
   "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/taskify/task_image/12-5_45251_1739412796075.jpeg";
@@ -27,7 +27,7 @@ interface CardModalProps {
 const CardModal = ({ onClose, columnId }: CardModalProps) => {
   const params = useParams();
   const dashboardId = Number(params.id);
-  const { create: createCard } = useCardMutation(dashboardId);
+  const { mutateAsync: createCard } = useCreateCard();
 
   const { data } = useGetMembers({
     dashboardId,
@@ -58,10 +58,9 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
     (member) => member.userId === assigneeUserId
   );
 
-  const imageFile = watch("imageUrl");
-
   const onSubmit = async (data: CreateCardRequest) => {
     try {
+      // 이미지 업로드하고 URL 받기
       const { imageUrl } = data.imageUrl
         ? await postCardImage(columnId, { image: data.imageUrl })
         : { imageUrl: DEFAULT_POST_IMAGE };

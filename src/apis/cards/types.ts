@@ -22,7 +22,7 @@ export const createCardRequestSchema = z.object({
         message: "이미지는 jpeg, jpg, png, ico 형식만 허용됩니다.",
       }
     )
-    .refine((file) => file.size < 5 * 1024 * 1024, {
+    .refine((file) => file.size < 2 * 1024 * 1024, {
       message: "5MB이하인 이미지만 등록 가능합니다.",
     })
     .optional(),
@@ -30,21 +30,22 @@ export const createCardRequestSchema = z.object({
 export type CreateCardRequest = z.infer<typeof createCardRequestSchema>;
 
 export const cardSchema = z.object({
+  dashboardId: z.number(),
   id: z.number(),
-  title: z.string(),
-  description: z.string(),
-  tags: z.array(z.string()),
+  title: z.string().trim(),
+  description: z.string().trim(),
+  tags: z.array(z.string().trim().max(10, "10글자 이하로 작성해주세요")),
   dueDate: z.string(),
   assignee: z.object({
-    profileImageUrl: z.string().url().nullable(),
+    profileImageUrl: z.union([z.string(), z.null()]),
     nickname: z.string(),
     id: z.number(),
   }),
-  imageUrl: z.string().url(),
+  imageUrl: z.string().nullable(),
   teamId: z.string(),
   columnId: z.number(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
+  createdAt: z.union([z.string(), z.date()]),
+  updatedAt: z.union([z.string(), z.date()]),
 });
 export type Card = z.infer<typeof cardSchema>;
 

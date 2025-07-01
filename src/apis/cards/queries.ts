@@ -3,7 +3,7 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { CardListRequest, CreateCardRequest } from "./types";
+import { Card, CardListRequest, CreateCardRequest } from "./types";
 import { getCards, postCard } from ".";
 
 export const useGetCardsQuery = (params: CardListRequest) => {
@@ -24,12 +24,12 @@ export const useCreateCard = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (cardForm: CreateCardRequest) => {
-      return postCard(cardForm);
+    mutationFn: (cardRequest: CreateCardRequest) => {
+      return postCard(cardRequest);
     },
-    onSuccess: () => {
+    onSuccess: (card: Card) => {
       queryClient.invalidateQueries({
-        queryKey: [""],
+        queryKey: ["cards", card.columnId],
       });
     },
   });

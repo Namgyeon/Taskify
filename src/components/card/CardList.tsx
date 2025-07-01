@@ -50,9 +50,7 @@ const CardList = ({ columnId }: CardListProps) => {
   }
 
   if (error) {
-    return (
-      <div className="text-center py-4 text-red-500">에러가 발생했습니다.</div>
-    );
+    return <div className="text-center py-4 text-red-500">{error.message}</div>;
   }
 
   return (
@@ -81,7 +79,7 @@ const CardList = ({ columnId }: CardListProps) => {
               </h3>
 
               {/* 태그들 */}
-              <div className="md:flex md:gap-4 lg:gap-2 md:items-center lg:items-center">
+              <div className="md:flex lg:flex-col md:gap-4 lg:gap-2 md:items-center lg:items-start">
                 {card.tags && card.tags.length > 0 && (
                   <div className="flex flex-wrap gap-1">
                     {card.tags.map((tag, index) => (
