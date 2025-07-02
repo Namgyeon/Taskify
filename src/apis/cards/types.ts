@@ -74,3 +74,8 @@ export const cardListResponseSchema = z.object({
   cursorId: z.number().nullable(),
 });
 export type CardListResponse = z.infer<typeof cardListResponseSchema>;
+
+export const cardDetailFormSchema = z.object({
+  cardId: z.number(),
+});
+export type CardDetailForm = z.infer<typeof cardDetailFormSchema>;
