@@ -1,6 +1,8 @@
 import { safeResponse } from "@/utils/network/safeResponse";
 import {
   Card,
+  CardDetailResponse,
+  cardDetailResponseSchema,
   CardListRequest,
   CardListResponse,
   cardListResponseSchema,
@@ -32,4 +34,15 @@ export const getCards = async (params: CardListRequest) => {
     },
   });
   return safeResponse(response.data, cardListResponseSchema);
+};
+
+/**
+ * 카드 상세 조회
+ * https://sp-taskify-api.vercel.app/docs/#/cards/{cardId}
+ */
+export const getCardDetail = async (cardId: number) => {
+  const response = await axiosClientHelper.get<CardDetailResponse>(
+    `/cards/${cardId}`
+  );
+  return safeResponse(response.data, cardDetailResponseSchema);
 };

@@ -1,11 +1,17 @@
 import Image from "next/image";
 import { ModalBody, ModalHeader } from "../ui/Modal";
+import { useGetCardDetailQuery } from "@/apis/cards/queries";
 
 interface CardDetailModalProps {
   onClose: () => void;
+  cardId: number;
 }
 
-const CardDetailModal = ({ onClose }: CardDetailModalProps) => {
+const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
+  const { data } = useGetCardDetailQuery(cardId);
+
+  console.log("카드상세데이터:", data);
+
   return (
     <div>
       <ModalHeader>

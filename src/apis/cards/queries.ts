@@ -1,10 +1,11 @@
 import {
   useInfiniteQuery,
   useMutation,
+  useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
 import { Card, CardListRequest, CreateCardRequest } from "./types";
-import { getCards, postCard } from ".";
+import { getCardDetail, getCards, postCard } from ".";
 
 export const useGetCardsQuery = (params: CardListRequest) => {
   return useInfiniteQuery({
@@ -32,5 +33,12 @@ export const useCreateCard = () => {
         queryKey: ["cards", card.columnId],
       });
     },
+  });
+};
+
+export const useGetCardDetailQuery = (cardId: number) => {
+  return useQuery({
+    queryKey: ["card", cardId],
+    queryFn: () => getCardDetail(cardId),
   });
 };

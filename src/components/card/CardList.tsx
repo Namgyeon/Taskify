@@ -50,8 +50,6 @@ const CardList = ({ columnId }: CardListProps) => {
     return <div className="text-center py-4 text-red-500">{error.message}</div>;
   }
 
-  console.log(`컬럼아이디 ${columnId}번 카드목록:`, data?.pages);
-
   return (
     <div className="flex flex-col gap-4">
       {/* 카드 목록 렌더링 */}
