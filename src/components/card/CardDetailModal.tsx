@@ -1,6 +1,10 @@
 import Image from "next/image";
 import { ModalBody, ModalHeader } from "../ui/Modal";
 import { useGetCardDetailQuery } from "@/apis/cards/queries";
+import { useGetColumnsQuery } from "@/apis/columns/queries";
+import Avatar from "../ui/Avatar";
+import { Column } from "@/apis/columns/types";
+import getRandomColor from "@/utils/getRandomColor";
 
 interface CardDetailModalProps {
   onClose: () => void;
@@ -8,12 +12,28 @@ interface CardDetailModalProps {
 }
 
 const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
-  const { data } = useGetCardDetailQuery(cardId);
+  const { data: cardData } = useGetCardDetailQuery(cardId);
+  const { data: columnData } = useGetColumnsQuery(
+    { dashboardId: cardData?.dashboardId || 0 },
+    {
+      enabled: !!cardData?.dashboardId,
+    }
+  );
 
-  console.log("카드상세데이터:", data);
+  const cardColumn = columnData?.data?.find(
+    (column: Column) => column.id === cardData?.columnId
+  );
+
+  console.log("카드데이터:", cardData);
+  console.log("칼럼데이터:", columnData);
+  console.log("카드칼럼:", cardColumn);
+
+  if (!cardData) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       <ModalHeader>
         <div className="w-full flex items-center justify-between gap-2">
           <h2 className="text-xl font-bold text-[#333236]">
@@ -42,7 +62,53 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
           </div>
         </div>
       </ModalHeader>
-      <ModalBody>sd</ModalBody>
+      <ModalBody>
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center px-4 py-2 border border-gray-200 rounded-lg">
+            <div className="flex-1 flex-col">
+              <h3 className="text-xs font-semibold">담당자</h3>
+              <div className="flex items-center gap-2">
+                <Avatar
+                  nickname={cardData!.assignee.nickname}
+                  profileImageUrl={cardData?.assignee.profileImageUrl}
+                  className="!w-[28px] md:!w-[34px]"
+                />
+                <span className="text-xs text-[#333236]">
+                  {cardData!.assignee.nickname}
+                </span>
+              </div>
+            </div>
+            <div className="flex-1 flex flex-col gap-2">
+              <h3 className="text-xs font-semibold">마감일</h3>
+              <div className="text-xs text-[#333236]">{cardData!.dueDate}</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 bg-[#F1EFFD] rounded-2xl px-2 py-1 ">
+              <div className="w-2 h-2 bg-[#5534DA] rounded-full"></div>
+              <div className="text-xs text-[#5534DA]">{cardColumn?.title}</div>
+            </div>
+            <div className="w-px h-5 bg-gray-300"></div>
+            <div>
+              {cardData?.tags.map((tag: string, index: number) => {
+                const tagColor = getRandomColor(tag);
+                return (
+                  <div
+                    key={index}
+                    className="flex items-center gap-2 px-1.5 py-1 text-xs rounded-sm"
+                    style={{
+                      color: tagColor,
+                      backgroundColor: `color-mix(in srgb, ${tagColor} 15%, white 85%)`,
+                    }}
+                  >
+                    {tag}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </ModalBody>
     </div>
   );
 };
