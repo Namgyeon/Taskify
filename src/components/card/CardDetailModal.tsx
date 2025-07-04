@@ -5,6 +5,7 @@ import { useGetColumnsQuery } from "@/apis/columns/queries";
 import Avatar from "../ui/Avatar";
 import { Column } from "@/apis/columns/types";
 import getRandomColor from "@/utils/getRandomColor";
+import CardComment from "./CardComment";
 
 interface CardDetailModalProps {
   onClose: () => void;
@@ -124,6 +125,8 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
               />
             </div>
           )}
+          {/* 댓글 입력창 */}
+          <CardComment cardId={cardData.id} />
         </div>
       </ModalBody>
     </div>
