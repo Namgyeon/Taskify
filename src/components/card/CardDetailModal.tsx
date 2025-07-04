@@ -64,6 +64,7 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
       </ModalHeader>
       <ModalBody>
         <div className="flex flex-col gap-4">
+          {/* 담당자 및 마감일 */}
           <div className="flex items-center px-4 py-2 border border-gray-200 rounded-lg">
             <div className="flex-1 flex-col">
               <h3 className="text-xs font-semibold">담당자</h3>
@@ -83,6 +84,7 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
               <div className="text-xs text-[#333236]">{cardData!.dueDate}</div>
             </div>
           </div>
+          {/* 컬럼 제목 및 태그 */}
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-2 bg-[#F1EFFD] rounded-2xl px-2 py-1 ">
               <div className="w-2 h-2 bg-[#5534DA] rounded-full"></div>
@@ -107,6 +109,21 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
               })}
             </div>
           </div>
+          {/* 카드 설명 */}
+          <div>
+            <p className="text-xs md:text-sm">{cardData?.description}</p>
+          </div>
+          {/* 카드 이미지 */}
+          {cardData.imageUrl && (
+            <div className="relative w-full aspect-video rounded-lg">
+              <Image
+                src={cardData.imageUrl}
+                alt={`${cardData.title} 이미지`}
+                fill
+                className="object-cover"
+              />
+            </div>
+          )}
         </div>
       </ModalBody>
     </div>
