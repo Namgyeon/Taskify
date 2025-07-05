@@ -5,6 +5,7 @@ export const commentSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
   cardId: z.number(),
+  content: z.string(),
   author: z.object({
     profileImageUrl: z.string().nullable(),
     nickname: z.string(),
@@ -27,9 +28,14 @@ export const commentListRequestSchema = z.object({
 export type CommentListRequest = z.infer<typeof commentListRequestSchema>;
 
 export const createCommentFormSchema = z.object({
-  content: z.string().trim().min(1, "댓글을 입력해주세요"),
+  content: z.string(),
   cardId: z.number(),
   columnId: z.number(),
   dashboardId: z.number(),
 });
 export type CreateCommentForm = z.infer<typeof createCommentFormSchema>;
+
+export const commentInputSchema = z.object({
+  content: z.string().trim().min(1, "댓글을 입력해주세요"),
+});
+export type CommentInputForm = z.infer<typeof commentInputSchema>;
