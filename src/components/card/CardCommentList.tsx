@@ -11,7 +11,10 @@ const CardCommentList = ({ cardId }: { cardId: number }) => {
   return (
     <div>
       {isLoading ? (
-        <div>로딩중 </div>
+        <div className="flex flex-col gap-3">
+          <CommentSkeleton />
+          <CommentSkeleton />
+        </div>
       ) : (
         <div className="flex flex-col gap-3">
           {data?.comments.map((comment: Comment) => (
@@ -45,3 +48,16 @@ const CardCommentList = ({ cardId }: { cardId: number }) => {
   );
 };
 export default CardCommentList;
+
+const CommentSkeleton = () => {
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="flex gap-2">
+        <div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse"></div>
+        <div className="w-12 h-8 bg-gray-200 rounded-md animate-pulse"></div>
+        <div className="w-12 h-8 bg-gray-200 rounded-md animate-pulse"></div>
+      </div>
+      <div className="w-full h-8 bg-gray-200 rounded-md animate-pulse"></div>
+    </div>
+  );
+};

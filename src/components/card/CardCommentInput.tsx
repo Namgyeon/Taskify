@@ -18,6 +18,7 @@ const CardCommentInput = ({
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(commentInputSchema),
@@ -28,6 +29,7 @@ const CardCommentInput = ({
   });
 
   const createCommentMutation = useCreateComment();
+  const contentValue = watch("content");
 
   const onSubmit = async (data: CommentInputForm) => {
     try {
@@ -46,20 +48,21 @@ const CardCommentInput = ({
     }
   };
 
+  const isDisabled = createCommentMutation.isPending || !contentValue.trim();
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="relative">
       <Textarea
         label="댓글"
         placeholder="댓글 작성하기"
-        {...register("content", { required: true })}
+        {...register("content")}
         error={!!errors.content}
         errorMessage={errors.content?.message}
       />
       <button
-        className="absolute right-5 bottom-3 px-7 py-2 border border-[#D9D9D9] rounded-lg cursor-pointer hover:bg-gray-200 transition-colors"
-        type="button"
-        disabled={createCommentMutation.isPending}
-        onClick={handleSubmit(onSubmit)}
+        className="absolute right-5 bottom-3 px-7 py-2 border border-[#D9D9D9] rounded-lg cursor-pointer hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        type="submit"
+        disabled={isDisabled}
       >
         {createCommentMutation.isPending ? "작성중..." : "입력"}
       </button>
