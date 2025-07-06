@@ -12,7 +12,7 @@ import { safeResponse } from "@/utils/network/safeResponse";
  * https://sp-taskify-api.vercel.app/docs/#/comments
  */
 export const getComments = async (params: CommentListRequest) => {
-  const { cursorId, size = 10, cardId } = params;
+  const { cursorId, size = 5, cardId } = params;
   const response = await axiosClientHelper.get("/comments", { params });
   return safeResponse(response.data, commentListResponseSchema);
 };

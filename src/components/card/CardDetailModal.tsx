@@ -35,7 +35,7 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 h-[90vh]">
       <ModalHeader>
         <div className="w-full flex items-center justify-between gap-2">
           <h2 className="text-xl font-bold text-[#333236]">

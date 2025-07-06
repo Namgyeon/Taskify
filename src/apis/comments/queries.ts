@@ -1,5 +1,6 @@
 import {
   QueryClient,
+  useInfiniteQuery,
   useMutation,
   useQuery,
   useQueryClient,
@@ -7,10 +8,15 @@ import {
 import { getComments, postComment } from ".";
 import { CommentListRequest, CreateCommentForm } from "./types";
 
-export const useGetComments = (params: CommentListRequest) => {
-  return useQuery({
+// 댓글 무한스크롤 처리
+export const useGetCommentsInfinite = (params: CommentListRequest) => {
+  return useInfiniteQuery({
     queryKey: ["comments", params.cardId],
-    queryFn: () => getComments(params),
+    queryFn: ({ pageParam }) => {
+      return getComments({ ...params, cursorId: pageParam });
+    },
+    getNextPageParam: (lastPage) => lastPage.cursorId,
+    initialPageParam: undefined as number | undefined,
   });
 };
 
@@ -24,6 +30,10 @@ export const useCreateComment = () => {
     onSuccess: (formData) => {
       queryClient.invalidateQueries({
         queryKey: ["comments", formData.cardId],
+      });
+      // 무한스크롤 쿼리도 무효화
+      queryClient.invalidateQueries({
+        queryKey: ["comments", "infinite", formData.cardId],
       });
     },
   });

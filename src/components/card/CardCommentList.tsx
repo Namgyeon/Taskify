@@ -1,12 +1,35 @@
-import { useGetComments } from "@/apis/comments/queries";
+import { useGetCommentsInfinite } from "@/apis/comments/queries";
 import { Comment } from "@/apis/comments/types";
 import Avatar from "../ui/Avatar";
 import { formatDateForAPI as formatDate } from "@/utils/formatDate";
+import { useEffect, useRef } from "react";
 
 const CardCommentList = ({ cardId }: { cardId: number }) => {
-  const { data, isLoading } = useGetComments({ cardId });
+  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
+    useGetCommentsInfinite({ cardId });
 
   console.log("카드댓글가져오기", data);
+
+  const observerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
+          fetchNextPage();
+        }
+      },
+      { threshold: 1.0 }
+    );
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+
+  const allComments = data?.pages.flatMap((page) => page.comments) ?? [];
 
   return (
     <div>
@@ -17,7 +40,7 @@ const CardCommentList = ({ cardId }: { cardId: number }) => {
         </div>
       ) : (
         <div className="flex flex-col gap-3">
-          {data?.comments.map((comment: Comment) => (
+          {allComments?.map((comment: Comment) => (
             <div key={comment.id} className="flex flex-col gap-2">
               <div className="flex gap-2 items-center">
                 <Avatar
@@ -44,6 +67,12 @@ const CardCommentList = ({ cardId }: { cardId: number }) => {
           ))}
         </div>
       )}
+      {/* 무한 스크롤 트리거 요소 */}
+      <div ref={observerRef}>
+        {isFetchingNextPage && (
+          <div className="text-gray-500">댓글 불러오는중</div>
+        )}
+      </div>
     </div>
   );
 };
