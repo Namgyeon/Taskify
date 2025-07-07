@@ -65,10 +65,10 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
         </div>
       </ModalHeader>
       <ModalBody>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 md:flex-row">
           {/* 담당자 및 마감일 */}
-          <div className="flex items-center px-4 py-2 border border-gray-200 rounded-lg">
-            <div className="flex-1 flex-col">
+          <div className="flex md:w-1/3 h-fit md:flex-col md:gap-4 md:order-2 items-center md:items-start px-4 py-2 md:p-4 border border-gray-200 rounded-lg">
+            <div className="flex-1 md:flex-none flex-col">
               <h3 className="text-xs font-semibold">담당자</h3>
               <div className="flex items-center gap-2">
                 <Avatar
@@ -81,59 +81,63 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
                 </span>
               </div>
             </div>
-            <div className="flex-1 flex flex-col gap-2">
+            <div className="flex-1 md:flex-none flex flex-col gap-2">
               <h3 className="text-xs font-semibold">마감일</h3>
               <div className="text-xs text-[#333236]">{cardData!.dueDate}</div>
             </div>
           </div>
           {/* 컬럼 제목 및 태그 */}
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-2 bg-[#F1EFFD] rounded-2xl px-2 py-1 ">
-              <div className="w-2 h-2 bg-[#5534DA] rounded-full"></div>
-              <div className="text-xs text-[#5534DA]">{cardColumn?.title}</div>
+          <div className="flex-1 flex flex-col gap-4">
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 bg-[#F1EFFD] rounded-2xl px-2 py-1">
+                <div className="w-2 h-2 bg-[#5534DA] rounded-full"></div>
+                <div className="text-xs text-[#5534DA]">
+                  {cardColumn?.title}
+                </div>
+              </div>
+              <div className="w-px h-5 bg-gray-300"></div>
+              <div>
+                {cardData?.tags.map((tag: string, index: number) => {
+                  const tagColor = getRandomColor(tag);
+                  return (
+                    <div
+                      key={index}
+                      className="flex items-center gap-2 px-1.5 py-1 text-xs rounded-sm"
+                      style={{
+                        color: tagColor,
+                        backgroundColor: `color-mix(in srgb, ${tagColor} 15%, white 85%)`,
+                      }}
+                    >
+                      {tag}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-            <div className="w-px h-5 bg-gray-300"></div>
+            {/* 카드 설명 */}
             <div>
-              {cardData?.tags.map((tag: string, index: number) => {
-                const tagColor = getRandomColor(tag);
-                return (
-                  <div
-                    key={index}
-                    className="flex items-center gap-2 px-1.5 py-1 text-xs rounded-sm"
-                    style={{
-                      color: tagColor,
-                      backgroundColor: `color-mix(in srgb, ${tagColor} 15%, white 85%)`,
-                    }}
-                  >
-                    {tag}
-                  </div>
-                );
-              })}
+              <p className="text-xs md:text-sm">{cardData?.description}</p>
             </div>
+            {/* 카드 이미지 */}
+            {cardData.imageUrl && (
+              <div className="relative w-full aspect-video rounded-lg">
+                <Image
+                  src={cardData.imageUrl}
+                  alt={`${cardData.title} 이미지`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )}
+            {/* 댓글 입력창 */}
+            <CardCommentInput
+              cardId={cardData.id}
+              columnId={cardData.columnId}
+              dashboardId={cardData.dashboardId}
+            />
+            {/* 댓글 리스트 */}
+            <CardCommentList cardId={cardData.id} />
           </div>
-          {/* 카드 설명 */}
-          <div>
-            <p className="text-xs md:text-sm">{cardData?.description}</p>
-          </div>
-          {/* 카드 이미지 */}
-          {cardData.imageUrl && (
-            <div className="relative w-full aspect-video rounded-lg">
-              <Image
-                src={cardData.imageUrl}
-                alt={`${cardData.title} 이미지`}
-                fill
-                className="object-cover"
-              />
-            </div>
-          )}
-          {/* 댓글 입력창 */}
-          <CardCommentInput
-            cardId={cardData.id}
-            columnId={cardData.columnId}
-            dashboardId={cardData.dashboardId}
-          />
-          {/* 댓글 리스트 */}
-          <CardCommentList cardId={cardData.id} />
         </div>
       </ModalBody>
     </div>
