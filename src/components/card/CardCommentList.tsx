@@ -8,8 +8,6 @@ const CardCommentList = ({ cardId }: { cardId: number }) => {
   const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useGetCommentsInfinite({ cardId });
 
-  console.log("카드댓글가져오기", data);
-
   const observerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -68,7 +66,7 @@ const CardCommentList = ({ cardId }: { cardId: number }) => {
         </div>
       )}
       {/* 무한 스크롤 트리거 요소 */}
-      <div ref={observerRef}>
+      <div ref={observerRef} className="h-10 flex items-center justify-center">
         {isFetchingNextPage && (
           <div className="text-gray-500">댓글 불러오는중</div>
         )}
