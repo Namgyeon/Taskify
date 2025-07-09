@@ -70,7 +70,7 @@ const Card = ({ card }: CardProps) => {
           </div>
         </div>
       </div>
-      <Modal ref={modalRef} className="min-w-[320px] md:min-w-[580px]">
+      <Modal ref={modalRef} className="min-w-[320px] md:min-w-[678px]">
         <CardDetailModal
           onClose={() => modalRef.current?.close()}
           cardId={card.id}

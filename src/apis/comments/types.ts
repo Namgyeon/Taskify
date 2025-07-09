@@ -39,3 +39,9 @@ export const commentInputSchema = z.object({
   content: z.string().trim().min(1, "댓글을 입력해주세요"),
 });
 export type CommentInputForm = z.infer<typeof commentInputSchema>;
+
+export const updateCommentRequestSchema = z.object({
+  commentId: z.number(),
+  content: z.string().trim().min(1, "댓글을 입력해주세요"),
+});
+export type UpdateCommentRequest = z.infer<typeof updateCommentRequestSchema>;
