@@ -40,7 +40,7 @@ const CardCommentList = ({ cardId }: { cardId: number }) => {
       ) : (
         <div className="flex flex-col gap-3">
           {allComments?.map((comment: Comment) => (
-            <CardComment key={comment.id} comment={comment} />
+            <CardComment key={comment.id} comment={comment} cardId={cardId} />
           ))}
         </div>
       )}

@@ -7,6 +7,7 @@ import {
   UpdateCommentRequest,
 } from "./types";
 import { safeResponse } from "@/utils/network/safeResponse";
+import { z } from "zod";
 
 /**
  * 댓글 목록 조회
@@ -39,4 +40,13 @@ export const putComment = async ({
     content,
   });
   return safeResponse(response.data, commentSchema);
+};
+
+/**
+ * 댓글 삭제
+ * https://sp-taskify-api.vercel.app/docs/#/comments/{commentId}
+ */
+export const deleteComment = async (commentId: number) => {
+  const response = await axiosClientHelper.delete(`/comments/${commentId}`);
+  return {};
 };

@@ -6,16 +6,23 @@ import {
 import Avatar from "../ui/Avatar";
 import { formatDateForAPI } from "@/utils/formatDate";
 import { useState } from "react";
-import { useUpdateComment } from "@/apis/comments/queries";
+import { useDeleteComment, useUpdateComment } from "@/apis/comments/queries";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Textarea from "../ui/Field/Textarea";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
 
-const CardComment = ({ comment }: { comment: Comment }) => {
+const CardComment = ({
+  comment,
+  cardId,
+}: {
+  comment: Comment;
+  cardId: number;
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const updateCommentMutation = useUpdateComment();
+  const deleteCommentMutation = useDeleteComment();
 
   const {
     register,
@@ -38,6 +45,22 @@ const CardComment = ({ comment }: { comment: Comment }) => {
   const handleEditCancel = () => {
     setIsEditing(false);
     setValue("content", comment.content);
+  };
+
+  const handleDeleteClick = async () => {
+    try {
+      await deleteCommentMutation.mutateAsync({
+        commentId: comment.id,
+        cardId,
+      });
+      toast.success("댓글이 삭제되었습니다.");
+    } catch (error) {
+      const errorMessage =
+        error instanceof AxiosError
+          ? error.response?.data.message
+          : "댓글 삭제에 실패했습니다.";
+      toast.error(errorMessage);
+    }
   };
 
   const onSubmit = async (data: CommentInputForm) => {
@@ -107,7 +130,10 @@ const CardComment = ({ comment }: { comment: Comment }) => {
               >
                 수정
               </button>
-              <button className="text-sm text-[#9FA6B2] underline cursor-pointer">
+              <button
+                onClick={handleDeleteClick}
+                className="text-sm text-[#9FA6B2] underline cursor-pointer"
+              >
                 삭제
               </button>
             </div>

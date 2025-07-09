@@ -5,7 +5,7 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { getComments, postComment, putComment } from ".";
+import { deleteComment, getComments, postComment, putComment } from ".";
 import {
   CommentListRequest,
   CreateCommentForm,
@@ -55,6 +55,29 @@ export const useUpdateComment = () => {
       });
       queryClient.invalidateQueries({
         queryKey: ["comments", "infinite", data.cardId],
+      });
+    },
+  });
+};
+
+export const useDeleteComment = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({
+      commentId,
+      cardId,
+    }: {
+      commentId: number;
+      cardId: number;
+    }) => {
+      return deleteComment(commentId);
+    },
+    onSuccess: (_, { cardId }) => {
+      queryClient.invalidateQueries({
+        queryKey: ["comments", cardId],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["comments", "infinite", cardId],
       });
     },
   });
