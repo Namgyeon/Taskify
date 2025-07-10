@@ -7,6 +7,7 @@ import { Column } from "@/apis/columns/types";
 import getRandomColor from "@/utils/getRandomColor";
 import CardCommentInput from "./CardCommentInput";
 import CardCommentList from "./CardCommentList";
+import Dropdown from "../ui/Dropdown";
 
 interface CardDetailModalProps {
   onClose: () => void;
@@ -26,10 +27,6 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
     (column: Column) => column.id === cardData?.columnId
   );
 
-  console.log("카드데이터:", cardData);
-  console.log("칼럼데이터:", columnData);
-  console.log("카드칼럼:", cardColumn);
-
   if (!cardData) {
     return <div>Loading...</div>;
   }
@@ -42,14 +39,9 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
             새로운 일정 관리 Taskify
           </h2>
           <div className="flex items-center gap-2">
-            <div className="relative w-5 h-5 md:w-7 md:h-7 cursor-pointer hover:bg-gray-200 rounded-lg transition-colors">
-              <Image
-                src="/ui/kebabMenu-icon.svg"
-                alt="카드 메뉴 아이콘"
-                fill
-                className="object-cover"
-              />
-            </div>
+            <Dropdown
+              options={[{ label: "수정하기" }, { label: "삭제하기" }]}
+            />
             <div
               className="relative w-5 h-5 md:w-7 md:h-7 cursor-pointer hover:bg-gray-200 rounded-lg transition-colors"
               onClick={onClose}
