@@ -8,9 +8,10 @@ interface DropdownOption {
 
 interface DropdownProps {
   options: DropdownOption[];
+  cardId?: number;
 }
 
-const Dropdown = ({ options }: DropdownProps) => {
+const Dropdown = ({ options, cardId }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -56,7 +57,7 @@ const Dropdown = ({ options }: DropdownProps) => {
             <button
               key={index}
               onClick={option.onClick}
-              className="px-4 py-2 rounded-lg hover:bg-gray-200 hover:text-purple-500 transition-colors whitespace-nowrap"
+              className="px-4 py-2 rounded-lg whitespace-nowrap cursor-pointer hover:bg-gray-200 hover:text-purple-500 transition-colors"
             >
               {option.label}
             </button>

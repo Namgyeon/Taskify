@@ -40,6 +40,7 @@ export const createCardRequestSchema = z.object({
   imageUrl: z.string().optional(),
 });
 export type CreateCardRequest = z.infer<typeof createCardRequestSchema>;
+export type UpdateCardRequest = z.infer<typeof createCardFormSchema>;
 
 export const cardSchema = z.object({
   dashboardId: z.number(),

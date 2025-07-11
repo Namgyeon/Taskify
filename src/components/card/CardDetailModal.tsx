@@ -23,6 +23,8 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
     }
   );
 
+  console.log("카드데이터", cardData);
+
   const cardColumn = columnData?.data?.find(
     (column: Column) => column.id === cardData?.columnId
   );
@@ -41,6 +43,7 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
           <div className="flex items-center gap-2">
             <Dropdown
               options={[{ label: "수정하기" }, { label: "삭제하기" }]}
+              cardId={cardId}
             />
             <div
               className="relative w-5 h-5 md:w-7 md:h-7 cursor-pointer hover:bg-gray-200 rounded-lg transition-colors"
