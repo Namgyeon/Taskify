@@ -9,11 +9,19 @@ interface ImageUploadProps {
   error?: boolean;
   errorMessage?: string;
   id?: string;
+  existingImageUrl?: string;
 }
 
-const ImageUpload = ({ value, onChange, id }: ImageUploadProps) => {
+const ImageUpload = ({
+  value,
+  onChange,
+  id,
+  existingImageUrl,
+}: ImageUploadProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [preview, setPreview] = useState<string | null>(null);
+  const [preview, setPreview] = useState<string | null>(
+    existingImageUrl ?? null
+  );
 
   useEffect(() => {
     if (typeof value === "string") {
@@ -25,10 +33,12 @@ const ImageUpload = ({ value, onChange, id }: ImageUploadProps) => {
       return () => {
         URL.revokeObjectURL(url);
       };
+    } else if (existingImageUrl) {
+      setPreview(existingImageUrl);
     } else {
       setPreview(null);
     }
-  }, [value]);
+  }, [value, existingImageUrl]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

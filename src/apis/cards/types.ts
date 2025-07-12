@@ -28,6 +28,7 @@ export const createCardFormSchema = z.object({
     .optional(),
 });
 export type CreateCardForm = z.infer<typeof createCardFormSchema>;
+export type UpdateCardForm = z.infer<typeof createCardFormSchema>;
 
 export const createCardRequestSchema = z.object({
   assigneeUserId: z.number(),

@@ -102,7 +102,7 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
         <form
           id="card-form"
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col gap-4"
+          className="flex flex-col gap-4  pl-1 pr-4 overflow-y-auto scrollbar-hide"
         >
           <Controller
             name="assigneeUserId"

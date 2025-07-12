@@ -11,6 +11,33 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   imageLeftUrl?: string;
 }
 
+/**
+ * 재사용 가능한 입력 필드 컴포넌트
+ *
+ * @param props - InputProps 객체
+ * @param props.label - 입력 필드 위에 표시될 라벨 텍스트
+ * @param props.error - 에러 상태를 나타내는 플래그
+ * @param props.errorMessage - 에러 메시지 텍스트
+ * @param props.imageRightUrl - 입력 필드 오른쪽에 표시될 이미지 URL
+ * @param props.imageLeftUrl - 입력 필드 왼쪽에 표시될 이미지 URL
+ * @param props.className - 추가 CSS 클래스
+ * @param props.placeholder - 플레이스홀더 텍스트
+ * @param props.id - 입력 필드의 고유 ID
+ * @param props - 기타 HTML input 요소의 모든 속성들
+ * @param ref - 입력 필드에 전달될 ref
+ *
+ * @example
+ * ```tsx
+ * <Input
+ *   label="이메일"
+ *   placeholder="이메일을 입력하세요"
+ *   error={hasError}
+ *   errorMessage="올바른 이메일 형식이 아닙니다"
+ *   imageRightUrl="/icons/email.svg"
+ * />
+ * ```
+ */
+
 const Input = forwardRef(
   (
     {
@@ -44,7 +71,7 @@ const Input = forwardRef(
             {...props}
           />
           {imageRightUrl && (
-            <div className="absolute right-4 top-1/2 -translate-y-1/2">
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer hover:bg-gray-200 rounded-lg transition-colors">
               <Image
                 src={imageRightUrl}
                 alt={imageRightUrl}
@@ -54,7 +81,7 @@ const Input = forwardRef(
             </div>
           )}
           {imageLeftUrl && (
-            <div className="absolute left-4 top-1/2 -translate-y-1/2">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 cursor-pointer hover:bg-gray-200 rounded-lg transition-colors">
               <Image
                 src={imageLeftUrl}
                 alt={imageLeftUrl}
