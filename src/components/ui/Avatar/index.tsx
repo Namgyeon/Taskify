@@ -5,7 +5,7 @@ import getRandomColor from "../../../utils/getRandomColor";
 type AvatarProps = {
   profileImageUrl?: string | null;
   email?: string;
-  nickname: string;
+  nickname?: string;
   className?: string;
 };
 

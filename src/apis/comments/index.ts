@@ -7,14 +7,12 @@ import {
   UpdateCommentRequest,
 } from "./types";
 import { safeResponse } from "@/utils/network/safeResponse";
-import { z } from "zod";
 
 /**
  * 댓글 목록 조회
  * https://sp-taskify-api.vercel.app/docs/#/comments
  */
 export const getComments = async (params: CommentListRequest) => {
-  const { cursorId, size = 5, cardId } = params;
   const response = await axiosClientHelper.get("/comments", { params });
   return safeResponse(response.data, commentListResponseSchema);
 };
@@ -47,6 +45,6 @@ export const putComment = async ({
  * https://sp-taskify-api.vercel.app/docs/#/comments/{commentId}
  */
 export const deleteComment = async (commentId: number) => {
-  const response = await axiosClientHelper.delete(`/comments/${commentId}`);
+  await axiosClientHelper.delete(`/comments/${commentId}`);
   return {};
 };

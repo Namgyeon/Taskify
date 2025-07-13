@@ -1,6 +1,6 @@
 import Button from "../ui/Button";
 import AssignInput from "../ui/Field/AssignInput";
-import { ModalBody, ModalFooter, ModalHandle, ModalHeader } from "../ui/Modal";
+import { ModalBody, ModalFooter, ModalHeader } from "../ui/Modal";
 import { Controller, useForm } from "react-hook-form";
 import { Member } from "@/apis/members/types";
 import Input from "../ui/Field/Input";
@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
 import { useGetMembers } from "@/apis/members/queries";
 import { useUpdateCard } from "@/apis/cards/queries";
-import { postCardImage } from "@/apis/columns";
+// import { postCardImage } from "@/apis/columns";
 import { formatDateForAPI } from "@/utils/formatDate";
 import toast from "react-hot-toast";
 import StateInput from "../ui/Field/StateInput";
@@ -58,20 +58,27 @@ const EditCardModal = ({
       dueDate: cardData.dueDate,
       tags: cardData.tags,
       imageUrl: undefined,
+      columnId: cardData.columnId,
+      dashboardId: cardData.dashboardId,
     },
   });
 
   const assigneeUserId = watch("assigneeUserId");
+  const watchedColumnId = watch("columnId");
   const selectedMember = data?.members.find(
     (member) => member.userId === assigneeUserId
   );
 
+  const selectedTitle =
+    columnData?.find((column) => column.id === watchedColumnId)?.title ?? "";
+  console.log("selectedTitle", selectedTitle);
+
   const onSubmit = async (data: UpdateCardForm) => {
     try {
       // 이미지 업로드하고 URL 받기
-      const { imageUrl } = data.imageUrl
-        ? await postCardImage(cardData.columnId, { image: data.imageUrl })
-        : { imageUrl: cardData.imageUrl };
+      // const { imageUrl } = data.imageUrl
+      //   ? await postCardImage(cardData.columnId, { image: data.imageUrl })
+      //   : { imageUrl: cardData.imageUrl };
 
       const formattedData = {
         ...data,
@@ -109,17 +116,25 @@ const EditCardModal = ({
         >
           <div className="flex flex-col gap-4 md:flex-row md:justify-between">
             <Controller
-              name="title"
+              name="columnId"
               control={control}
-              render={() => (
+              render={({ field }) => (
                 <StateInput
+                  id="columnId"
+                  label="상태"
+                  value={selectedTitle}
+                  onChange={(title) => {
+                    const found = columnData?.find(
+                      (col) => col.title === title
+                    );
+                    field.onChange(found?.id ?? 0);
+                  }}
+                  columnData={columnData}
                   error={!!errors.title}
                   errorMessage={errors.title?.message}
-                  columnData={columnData}
                 />
               )}
             />
-
             <Controller
               name="assigneeUserId"
               control={control}

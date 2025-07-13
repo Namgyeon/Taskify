@@ -1,8 +1,6 @@
 import {
-  QueryClient,
   useInfiniteQuery,
   useMutation,
-  useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
 import { deleteComment, getComments, postComment, putComment } from ".";
@@ -63,13 +61,7 @@ export const useUpdateComment = () => {
 export const useDeleteComment = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({
-      commentId,
-      cardId,
-    }: {
-      commentId: number;
-      cardId: number;
-    }) => {
+    mutationFn: ({ commentId }: { commentId: number; cardId: number }) => {
       return deleteComment(commentId);
     },
     onSuccess: (_, { cardId }) => {

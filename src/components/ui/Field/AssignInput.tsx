@@ -32,6 +32,7 @@ const AssignInput = ({
             email={member.email}
             nickname={member.nickname}
             profileImageUrl={member.profileImageUrl}
+            className="!w-[30px] !h-[30px]"
           />
           <span>{member.nickname}</span>
         </div>
@@ -51,6 +52,17 @@ const AssignInput = ({
           value={value?.nickname || ""}
           error={error}
           errorMessage={errorMessage}
+          displayElement={
+            <div className="flex items-center gap-2">
+              <Avatar
+                email={value?.email}
+                nickname={value?.nickname}
+                profileImageUrl={value?.profileImageUrl}
+                className="!w-[32px] !h-[32px]"
+              />
+              <span>{value?.nickname}</span>
+            </div>
+          }
         />
         <div className="absolute right-4 top-1/2 -translate-y-1/2">
           <Dropdown options={memberOptions} icon="/column/toggle-icon.svg" />

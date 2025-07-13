@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import Image from "next/image";
-import { ReactNode, useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import { ReactNode } from "react";
+import { Menu } from "@headlessui/react";
 
 interface DropdownOption {
   label: ReactNode;
@@ -13,95 +13,51 @@ interface DropdownProps {
   options: DropdownOption[];
   icon?: string;
   className?: string;
+  value?: string;
+  onChange?: (value: string) => void;
+  selectedInput?: boolean;
 }
 
-const Dropdown = ({ options, icon, className }: DropdownProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [dropdownPos, setDropdownPos] = useState({
-    top: 0,
-    left: 0,
-    width: 0,
-  });
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
+const Dropdown = ({ options, icon, onChange }: DropdownProps) => {
   const handleOptionClick = (option: DropdownOption) => {
     if (option.onClick) {
       option.onClick();
     }
-    setIsOpen(false);
+    onChange?.(option.value ?? "");
   };
-
-  const toggleDropdown = () => {
-    if (!isOpen && dropdownRef.current) {
-      const rect = dropdownRef.current.getBoundingClientRect();
-      setDropdownPos({
-        top: rect.bottom + window.scrollY,
-        width: rect.width,
-        left: rect.left + window.scrollX,
-      });
-    }
-    setIsOpen(!isOpen);
-  };
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(e.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("click", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [isOpen]);
 
   return (
-    <div ref={dropdownRef} className={clsx("relative", className)}>
-      <div className="relative w-5 h-5 md:w-7 md:h-7 hover:bg-gray-200 rounded-lg transition-colors">
-        <button onClick={toggleDropdown} className="cursor-pointer">
-          <Image
-            src={icon ?? "/ui/kebabMenu-icon.svg"}
-            alt="카드 메뉴 아이콘"
-            fill
-            className="object-cover"
-          />
-        </button>
-      </div>
+    <Menu as="div" className="relative">
+      <Menu.Button className="relative flex items-center w-5 h-5 md:w-7 md:h-7 hover:bg-gray-200 rounded-lg transition-colors cursor-pointer">
+        <Image
+          src={icon ?? "/ui/kebabMenu-icon.svg"}
+          alt="드롭다운 아이콘"
+          fill
+          className="object-cover"
+        />
+      </Menu.Button>
 
-      {isOpen &&
-        createPortal(
-          <div
-            className="flex flex-col gap-2 p-2 bg-white rounded-lg shadow-md z-[9999]"
-            style={{
-              position: "fixed",
-              top: dropdownPos.top,
-              left: dropdownPos.left,
-              minWidth: dropdownPos.width,
-            }}
-          >
-            {options.map((option, index) => (
+      <Menu.Items className="absolute right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-[9999]">
+        {options.map((option, idx) => (
+          <Menu.Item key={idx}>
+            {({ active }) => (
               <button
-                key={index}
                 onClick={() => handleOptionClick(option)}
                 value={option.value ?? ""}
-                className={
-                  "px-4 py-2 rounded-lg whitespace-nowrap cursor-pointer hover:bg-gray-200 hover:text-purple-500 transition-colors"
-                }
+                className={clsx(
+                  "px-4 py-2 rounded-lg whitespace-nowrap cursor-pointer transition-colors text-left w-full",
+                  active
+                    ? "bg-gray-200 text-purple-500"
+                    : "text-gray-700 hover:bg-gray-100"
+                )}
               >
                 {option.label}
               </button>
-            ))}
-          </div>,
-          document.body
-        )}
-    </div>
+            )}
+          </Menu.Item>
+        ))}
+      </Menu.Items>
+    </Menu>
   );
 };
 

@@ -8,7 +8,7 @@ import getRandomColor from "@/utils/getRandomColor";
 import CardCommentInput from "./CardCommentInput";
 import CardCommentList from "./CardCommentList";
 import Dropdown from "../ui/Dropdown";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import EditCardModal from "./EditCardModal";
 
 interface CardDetailModalProps {

@@ -9,6 +9,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string;
   imageRightUrl?: string;
   imageLeftUrl?: string;
+  displayElement?: React.ReactNode;
 }
 
 /**
@@ -25,6 +26,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
  * @param props.id - 입력 필드의 고유 ID
  * @param props - 기타 HTML input 요소의 모든 속성들
  * @param ref - 입력 필드에 전달될 ref
+ * @param props.displayElementUI - 입력 필드 커스텀 UI 요소
  *
  * @example
  * ```tsx
@@ -49,6 +51,7 @@ const Input = forwardRef(
       imageRightUrl,
       imageLeftUrl,
       id,
+      displayElement,
       ...props
     }: InputProps,
     ref: ForwardedRef<HTMLInputElement>
@@ -56,20 +59,35 @@ const Input = forwardRef(
     return (
       <div className="w-full flex flex-col gap-2">
         {label && <BaseLabel id={id}>{label}</BaseLabel>}
-        <div className="relative">
-          <input
-            ref={ref}
-            id={id}
-            className={clsx(
-              "w-full px-4 py-3.5 border rounded-md outline-none focus:ring-2",
-              error
-                ? "border-[var(--red-D6173A)] focus:ring-[var(--red-D6173A)]"
-                : "border-[var(--gray-D9D9D9)] focus:ring-[var(--violet-5534DA)]",
-              className
-            )}
-            placeholder={placeholder}
-            {...props}
-          />
+        <div className="relative flex items-center">
+          {displayElement ? (
+            <div
+              className={clsx(
+                "md:w-[220px] px-4 py-3.5 border rounded-md outline-none focus:ring-2 min-h-[48px]",
+                error
+                  ? "border-[var(--red-D6173A)] focus:ring-[var(--red-D6173A)]"
+                  : "border-[var(--gray-D9D9D9)] focus:ring-[var(--violet-5534DA)]",
+                className
+              )}
+            >
+              {displayElement}
+            </div>
+          ) : (
+            <input
+              ref={ref}
+              id={id}
+              className={clsx(
+                "w-full px-4 py-3.5 border rounded-md outline-none focus:ring-2",
+                error
+                  ? "border-[var(--red-D6173A)] focus:ring-[var(--red-D6173A)]"
+                  : "border-[var(--gray-D9D9D9)] focus:ring-[var(--violet-5534DA)]",
+                className
+              )}
+              placeholder={placeholder}
+              {...props}
+            />
+          )}
+
           {imageRightUrl && (
             <div className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer hover:bg-gray-200 rounded-lg transition-colors">
               <Image
