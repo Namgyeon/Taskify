@@ -31,7 +31,9 @@ const ColumnSettingBtn = (column: Column) => {
       await update({ columnId: column.id, formData: { title: data.title } });
       toast.success("컬럼 이름이 변경되었습니다.");
     } catch (err) {
-      toast.error("컬럼 이름 변경에 실패했습니다.");
+      const errorMessage =
+        err instanceof Error ? err.message : "컬럼 이름 변경에 실패했습니다.";
+      toast.error(errorMessage);
     }
 
     updateModalRef.current?.close();
@@ -42,7 +44,9 @@ const ColumnSettingBtn = (column: Column) => {
       await deleteColumn(column.id);
       toast.success("컬럼이 삭제되었습니다.");
     } catch (err) {
-      toast.error("컬럼 삭제에 실패했습니다.");
+      const errorMessage =
+        err instanceof Error ? err.message : "컬럼 삭제에 실패했습니다.";
+      toast.error(errorMessage);
     }
   };
 
