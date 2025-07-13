@@ -5,7 +5,7 @@ type ButtonVariant = "primary" | "secondary";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  text: string;
+  children: React.ReactNode;
   variant?: ButtonVariant;
   size?: ButtonSize;
   disabled?: boolean;
@@ -32,7 +32,7 @@ const sizeStyles = {
 const disabledStyles = "opacity-50 cursor-not-allowed hover:bg-opacity-100";
 
 const Button = ({
-  text,
+  children,
   variant = "primary",
   size = "md",
   disabled,
@@ -55,7 +55,7 @@ const Button = ({
       onClick={onClick}
       {...props}
     >
-      {text}
+      {children}
     </button>
   );
 };

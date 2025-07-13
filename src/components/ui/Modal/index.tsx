@@ -32,7 +32,7 @@ export const Modal = forwardRef<ModalHandle, ModalProps>(
       >
         <div
           className={clsx(
-            "min-w-[320px] bg-white rounded-xl p-5 md:p-8 shadow-lg",
+            "min-w-[320px] md:min-w-[568px] bg-white rounded-xl p-5 md:p-8 shadow-lg",
             className
           )}
         >
