@@ -8,7 +8,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="en">
       <body>
         <QueryClientProvider>{children}</QueryClientProvider>
         <Toaster position="bottom-center" />

@@ -28,6 +28,7 @@ export const createCardFormSchema = z.object({
     .optional(),
 });
 export type CreateCardForm = z.infer<typeof createCardFormSchema>;
+export type UpdateCardForm = z.infer<typeof createCardFormSchema>;
 
 export const createCardRequestSchema = z.object({
   assigneeUserId: z.number(),
@@ -40,6 +41,7 @@ export const createCardRequestSchema = z.object({
   imageUrl: z.string().optional(),
 });
 export type CreateCardRequest = z.infer<typeof createCardRequestSchema>;
+export type UpdateCardRequest = z.infer<typeof createCardFormSchema>;
 
 export const cardSchema = z.object({
   dashboardId: z.number(),
@@ -74,3 +76,6 @@ export const cardListResponseSchema = z.object({
   cursorId: z.number().nullable(),
 });
 export type CardListResponse = z.infer<typeof cardListResponseSchema>;
+
+export const cardDetailResponseSchema = cardSchema;
+export type CardDetailResponse = z.infer<typeof cardDetailResponseSchema>;

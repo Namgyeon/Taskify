@@ -1,33 +1,40 @@
-import { useGetMembers } from "@/apis/members/queries";
 import Button from "../ui/Button";
 import AssignInput from "../ui/Field/AssignInput";
 import { ModalBody, ModalFooter, ModalHeader } from "../ui/Modal";
-import { useParams } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
-import { CreateCardForm, createCardFormSchema } from "@/apis/cards/types";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Member } from "@/apis/members/types";
 import Input from "../ui/Field/Input";
 import Textarea from "../ui/Field/Textarea";
 import DateInput from "../ui/Field/DateInput";
 import TagInput from "../ui/Field/TagInput";
 import ImageUpload from "../ui/Field/ImageUpload";
-import toast from "react-hot-toast";
+import { Card, createCardFormSchema, UpdateCardForm } from "@/apis/cards/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useParams } from "next/navigation";
+import { useGetMembers } from "@/apis/members/queries";
+import { useUpdateCard } from "@/apis/cards/queries";
+// import { postCardImage } from "@/apis/columns";
 import { formatDateForAPI } from "@/utils/formatDate";
-import { postCardImage } from "@/apis/columns";
-import { useCreateCard } from "@/apis/cards/queries";
+import toast from "react-hot-toast";
+import StateInput from "../ui/Field/StateInput";
+import { Column } from "@/apis/columns/types";
 
-const DEFAULT_POST_IMAGE =
-  "https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/taskify/task_image/12-5_45251_1739412796075.jpeg";
-
-interface CardModalProps {
+interface EditCardModalProps {
   onClose: () => void;
-  columnId: number;
+  cardData: Card;
+  cardId: number;
+  columnData?: Column[];
 }
-const CardModal = ({ onClose, columnId }: CardModalProps) => {
+
+const EditCardModal = ({
+  onClose,
+  cardId,
+  cardData,
+  columnData,
+}: EditCardModalProps) => {
   const params = useParams();
   const dashboardId = Number(params.id);
-  const { mutateAsync: createCard } = useCreateCard();
+  const { mutateAsync: updateCard } = useUpdateCard();
 
   const { data } = useGetMembers({
     dashboardId,
@@ -38,49 +45,52 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
   const {
     register,
     handleSubmit,
-    setValue,
-    watch,
     control,
+    watch,
+    setValue,
     formState: { errors, isSubmitting },
-  } = useForm<CreateCardForm>({
+  } = useForm<UpdateCardForm>({
     resolver: zodResolver(createCardFormSchema),
-    mode: "onChange",
     defaultValues: {
-      dashboardId,
-      columnId,
-      assigneeUserId: 0,
-      title: "",
-      description: "",
-      tags: [],
-      dueDate: undefined,
+      assigneeUserId: cardData.assignee.id,
+      title: cardData.title,
+      description: cardData.description,
+      dueDate: cardData.dueDate,
+      tags: cardData.tags,
       imageUrl: undefined,
+      columnId: cardData.columnId,
+      dashboardId: cardData.dashboardId,
     },
   });
 
   const assigneeUserId = watch("assigneeUserId");
+  const watchedColumnId = watch("columnId");
   const selectedMember = data?.members.find(
     (member) => member.userId === assigneeUserId
   );
 
-  const onSubmit = async (data: CreateCardForm) => {
+  const selectedTitle =
+    columnData?.find((column) => column.id === watchedColumnId)?.title ?? "";
+  console.log("selectedTitle", selectedTitle);
+
+  const onSubmit = async (data: UpdateCardForm) => {
     try {
       // 이미지 업로드하고 URL 받기
-      const { imageUrl } = data.imageUrl
-        ? await postCardImage(columnId, { image: data.imageUrl })
-        : { imageUrl: DEFAULT_POST_IMAGE };
+      // const { imageUrl } = data.imageUrl
+      //   ? await postCardImage(cardData.columnId, { image: data.imageUrl })
+      //   : { imageUrl: cardData.imageUrl };
 
-      // formattedData 정의 필요
       const formattedData = {
         ...data,
         dueDate:
           data.dueDate instanceof Date
             ? formatDateForAPI(data.dueDate)
             : data.dueDate,
-        imageUrl,
+        imageUrl: data.imageUrl || undefined,
       };
 
-      await createCard(formattedData);
-      toast.success("카드가 생성되었습니다.");
+      await updateCard({ cardId, ...formattedData });
+      toast.success("카드가 수정되었습니다.");
       onClose();
     } catch (error) {
       const errorMessage =
@@ -92,40 +102,62 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-6 md:gap-8">
+    <div className="flex flex-col gap-6 md:gap-8 h-[90vh]">
       <ModalHeader>
         <h2 className="text-xl md:text-2xl font-bold text-[#333236]">
-          할 일 생성
+          할 일 수정
         </h2>
       </ModalHeader>
       <ModalBody>
         <form
           id="card-form"
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col gap-4  pl-1 pr-4 overflow-y-auto scrollbar-hide"
+          className="flex flex-col gap-4 pl-1 pr-4 overflow-y-auto scrollbar-hide"
         >
-          <Controller
-            name="assigneeUserId"
-            control={control}
-            render={() => (
-              <AssignInput
-                id="assignee"
-                label="담당자*"
-                members={data?.members}
-                value={selectedMember}
-                onChange={(member: Member | null) =>
-                  setValue("assigneeUserId", member?.userId ?? 0, {
-                    shouldValidate: true,
-                  })
-                }
-                error={!!errors.assigneeUserId}
-                errorMessage={errors.assigneeUserId?.message}
-              />
-            )}
-          />
+          <div className="flex flex-col gap-4 md:flex-row md:justify-between">
+            <Controller
+              name="columnId"
+              control={control}
+              render={({ field }) => (
+                <StateInput
+                  id="columnId"
+                  label="상태"
+                  value={selectedTitle}
+                  onChange={(title) => {
+                    const found = columnData?.find(
+                      (col) => col.title === title
+                    );
+                    field.onChange(found?.id ?? 0);
+                  }}
+                  columnData={columnData}
+                  error={!!errors.title}
+                  errorMessage={errors.title?.message}
+                />
+              )}
+            />
+            <Controller
+              name="assigneeUserId"
+              control={control}
+              render={() => (
+                <AssignInput
+                  id="assignee"
+                  label="담당자"
+                  members={data?.members}
+                  value={selectedMember}
+                  onChange={(member: Member | null) =>
+                    setValue("assigneeUserId", member?.userId ?? 0, {
+                      shouldValidate: true,
+                    })
+                  }
+                  error={!!errors.assigneeUserId}
+                  errorMessage={errors.assigneeUserId?.message}
+                />
+              )}
+            />
+          </div>
           <Input
             id="title"
-            label="제목*"
+            label="제목"
             placeholder="제목을 입력해주세요"
             {...register("title")}
             error={!!errors.title}
@@ -133,7 +165,7 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
           />
           <Textarea
             id="description"
-            label="설명*"
+            label="설명"
             placeholder="설명을 입력해주세요"
             rows={3}
             {...register("description")}
@@ -173,6 +205,7 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
               <ImageUpload
                 id="image"
                 value={field.value}
+                existingImageUrl={cardData.imageUrl ?? undefined}
                 onChange={(file: File | null | undefined) => {
                   field.onChange(file);
                 }}
@@ -202,4 +235,4 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
   );
 };
 
-export default CardModal;
+export default EditCardModal;

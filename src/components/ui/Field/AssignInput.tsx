@@ -1,9 +1,9 @@
-import { InputHTMLAttributes, useEffect, useRef, useState } from "react";
+import { InputHTMLAttributes } from "react";
 import BaseLabel from "./BaseLabel";
 import Input from "./Input";
-import Image from "next/image";
 import { Member } from "@/apis/members/types";
 import Avatar from "../Avatar";
+import Dropdown from "../Dropdown";
 
 interface AssignInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "value"> {
@@ -24,109 +24,50 @@ const AssignInput = ({
   errorMessage,
   id,
 }: AssignInputProps) => {
-  const [open, setOpen] = useState(false);
-  const wrapperRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        wrapperRef.current &&
-        !wrapperRef.current.contains(event.target as Node)
-      ) {
-        setOpen(false);
-      }
-    }
-    if (open) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [open]);
-
-  const handleMemberSelect = (member: Member) => {
-    onChange?.(member);
-    setOpen(false);
-  };
-
-  const handleClear = () => {
-    onChange?.(null);
-  };
+  const memberOptions =
+    members?.map((member) => ({
+      label: (
+        <div className="flex items-center gap-2">
+          <Avatar
+            email={member.email}
+            nickname={member.nickname}
+            profileImageUrl={member.profileImageUrl}
+            className="!w-[30px] !h-[30px]"
+          />
+          <span>{member.nickname}</span>
+        </div>
+      ),
+      value: member.nickname,
+      onClick: () => onChange?.(member),
+    })) || [];
 
   return (
-    <div className="relative flex flex-col gap-2.5" ref={wrapperRef}>
+    <div className="relative flex flex-col gap-2.5">
       <BaseLabel id={id}>{label}</BaseLabel>
-      <div onClick={() => setOpen(true)} className="relative">
+      <div className="relative">
         <Input
           id={id}
           placeholder="담당자를 지정해주세요"
-          imageRightUrl={"/column/toggle-icon.svg"}
           readOnly
           value={value?.nickname || ""}
           error={error}
           errorMessage={errorMessage}
+          displayElement={
+            <div className="flex items-center gap-2">
+              <Avatar
+                email={value?.email}
+                nickname={value?.nickname}
+                profileImageUrl={value?.profileImageUrl}
+                className="!w-[32px] !h-[32px]"
+              />
+              <span>{value?.nickname}</span>
+            </div>
+          }
         />
-        {value && (
-          <div className="absolute right-10 top-1/2 transform -translate-y-1/2 flex items-center gap-2">
-            <Avatar
-              email={value.email}
-              nickname={value.nickname}
-              profileImageUrl={value.profileImageUrl}
-            />
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handleClear();
-              }}
-              className="cursor-pointer hover:bg-gray-200 transition-colors duration-200 rounded-full p-1"
-            >
-              <Image
-                src="/column/close-icon.svg"
-                alt="선택 해제"
-                width={16}
-                height={16}
-              />
-            </button>
-          </div>
-        )}
-      </div>
-      {/* 멤버 목록 */}
-      {open && (
-        <div className="absolute top-9 z-10 p-3 w-full flex flex-col gap-3 border rounded-lg border-gray-500 bg-white">
-          <div className="flex justify-between">
-            <p className="text-lg font-semibold">멤버 목록</p>
-            <button
-              className="cursor-pointer hover:bg-gray-200 transition-colors duration-200 rounded-lg"
-              onClick={() => setOpen(false)}
-            >
-              <Image
-                src="/column/close-icon.svg"
-                alt="닫기"
-                width={25}
-                height={25}
-              />
-            </button>
-          </div>
-          <div>
-            {members?.map((member) => (
-              <div
-                key={member.id}
-                className="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-200 cursor-pointer"
-                onClick={() => handleMemberSelect(member)}
-              >
-                <div>
-                  <Avatar
-                    email={member.email}
-                    nickname={member.nickname}
-                    profileImageUrl={member.profileImageUrl}
-                  />
-                </div>
-                <p>{member.nickname}</p>
-              </div>
-            ))}
-          </div>
+        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+          <Dropdown options={memberOptions} icon="/column/toggle-icon.svg" />
         </div>
-      )}
+      </div>
     </div>
   );
 };

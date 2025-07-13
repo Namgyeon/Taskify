@@ -2,10 +2,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CreateColumnRequest, GetColumnsRequest } from "./types";
 import { getColumns, postColumn } from ".";
 
-export const useGetColumnsQuery = (params: GetColumnsRequest) => {
+export const useGetColumnsQuery = (
+  params: GetColumnsRequest,
+  options?: { enabled?: boolean }
+) => {
   return useQuery({
     queryKey: ["columns", params.dashboardId],
     queryFn: () => getColumns(params),
+    enabled: options?.enabled ?? true,
   });
 };
 
