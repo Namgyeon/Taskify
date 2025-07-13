@@ -9,6 +9,7 @@ import {
   columnSchema,
   CreateColumnRequest,
   GetColumnsRequest,
+  UpdateColumnRequest,
 } from "./types";
 import { safeResponse } from "@/utils/network/safeResponse";
 
@@ -38,6 +39,20 @@ export const postColumn = async (
   const response = await axiosClientHelper.post<Column>("/columns", {
     title,
     dashboardId,
+  });
+  return safeResponse(response.data, columnSchema);
+};
+
+/**
+ * 컬럼 수정
+ * https://sp-taskify-api.vercel.app/docs/#/columns/{columnId}
+ */
+export const updateColumn = async (
+  columnId: number,
+  formData: UpdateColumnRequest
+) => {
+  const response = await axiosClientHelper.put<Column>(`/columns/${columnId}`, {
+    title: formData.title,
   });
   return safeResponse(response.data, columnSchema);
 };

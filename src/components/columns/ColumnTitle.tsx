@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ColumnSettingBtn from "./ColumnSettingBtn";
 
 const ColumnTitle = ({ title }: { title: string }) => {
   return (
@@ -11,12 +12,7 @@ const ColumnTitle = ({ title }: { title: string }) => {
         </p>
       </div>
       <div>
-        <Image
-          src="/column/setting-icon.svg"
-          alt="설정 아이콘"
-          width={22}
-          height={22}
-        />
+        <ColumnSettingBtn />
       </div>
     </div>
   );
