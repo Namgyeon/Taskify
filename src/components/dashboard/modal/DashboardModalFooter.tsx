@@ -14,18 +14,20 @@ const DashboardModalFooter = ({
     <ModalFooter>
       <div className="flex justify-end gap-2">
         <Button
-          text="취소"
           onClick={onClose}
           className="min-w-[144px] min-h-[54px] text-[#787486] bg-white border-[#D9D9D9] hover:bg-[#D9D9D9]"
-        />
+        >
+          취소
+        </Button>
 
         <Button
           type="submit"
           form="dashboard-form"
           disabled={isSubmitting}
-          text={isSubmitting ? "생성 중..." : "생성"}
           className="min-w-[144px] min-h-[54px] text-[white] hover:bg-[#4A2DB8]"
-        />
+        >
+          {isSubmitting ? "생성 중..." : "생성"}
+        </Button>
       </div>
     </ModalFooter>
   );

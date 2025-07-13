@@ -28,6 +28,14 @@ export const createColumnRequestSchema = z.object({
 });
 export type CreateColumnRequest = z.infer<typeof createColumnRequestSchema>;
 
+export const updateColumnRequestSchema = z.object({
+  title: z
+    .string()
+    .trim()
+    .min(2, { message: "컬럼 이름은 최소 2글자 이상이어야 합니다." }),
+});
+export type UpdateColumnRequest = z.infer<typeof updateColumnRequestSchema>;
+
 export const cardImageFormSchema = z.object({
   image: z.instanceof(File),
 });

@@ -55,7 +55,9 @@ const SigninForm = () => {
         error={!!errors.password}
         errorMessage={errors.password?.message}
       />
-      <Button type="submit" text="로그인" disabled={!isValid || isSubmitting} />
+      <Button type="submit" disabled={!isValid || isSubmitting}>
+        로그인
+      </Button>
     </form>
   );
 };

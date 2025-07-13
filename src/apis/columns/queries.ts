@@ -1,6 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { CreateColumnRequest, GetColumnsRequest } from "./types";
-import { getColumns, postColumn } from ".";
+import {
+  CreateColumnRequest,
+  GetColumnsRequest,
+  UpdateColumnRequest,
+} from "./types";
+import { deleteColumn, getColumns, postColumn, updateColumn } from ".";
 
 export const useGetColumnsQuery = (
   params: GetColumnsRequest,
@@ -27,7 +31,37 @@ export const useColumnMutation = (dashboardId: number) => {
     },
   });
 
+  const update = useMutation({
+    mutationFn: ({
+      columnId,
+      formData,
+    }: {
+      columnId: number;
+      formData: UpdateColumnRequest;
+    }) => {
+      return updateColumn(columnId, formData);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["columns", dashboardId],
+      });
+    },
+  });
+
+  const deleteColumnMutation = useMutation({
+    mutationFn: (columnId: number) => {
+      return deleteColumn(columnId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["columns", dashboardId],
+      });
+    },
+  });
+
   return {
     create: post.mutateAsync,
+    update: update.mutateAsync,
+    deleteColumn: deleteColumnMutation.mutateAsync,
   };
 };

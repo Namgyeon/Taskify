@@ -90,11 +90,9 @@ const SignupForm = () => {
         error={!!errors.passwordConfirmation}
         errorMessage={errors.passwordConfirmation?.message}
       />
-      <Button
-        type="submit"
-        text="회원가입"
-        disabled={!isValid || isSubmitting}
-      />
+      <Button type="submit" disabled={!isValid || isSubmitting}>
+        회원가입
+      </Button>
     </form>
   );
 };
