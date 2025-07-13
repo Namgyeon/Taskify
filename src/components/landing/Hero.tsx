@@ -25,7 +25,7 @@ const Hero = () => {
         </span>
         <div className="mt-10 md:mt-14 w-[235px] md:w-[280px] h-[46px] md:h-[54px]">
           <Link href={"/signin"}>
-            <Button text="로그인하기" />
+            <Button>로그인하기</Button>
           </Link>
         </div>
       </section>

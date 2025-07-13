@@ -74,19 +74,21 @@ const MyInvitedDashboardList = () => {
                   </div>
                   <div className="md:w-1/3 flex gap-3 md:justify-center">
                     <Button
-                      text="수락"
                       variant="primary"
                       size="sm"
                       className="px-11 md:px-6 lg:px-7.5"
                       onClick={() => handleAccept(invitation.id)}
-                    />
+                    >
+                      수락
+                    </Button>
                     <Button
-                      text="거절"
                       variant="secondary"
                       size="sm"
                       className="px-11 md:px-6 lg:px-7.5"
                       onClick={() => handleReject(invitation.id)}
-                    />
+                    >
+                      거절
+                    </Button>
                   </div>
                 </div>
               </div>
