@@ -1,11 +1,5 @@
 import Image from "next/image";
-import {
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHandle,
-  ModalHeader,
-} from "../ui/Modal";
+import { Modal, ModalBody, ModalHandle, ModalHeader } from "../ui/Modal";
 import { useRef } from "react";
 import Input from "../ui/Field/Input";
 import BaseLabel from "../ui/Field/BaseLabel";
@@ -19,7 +13,7 @@ const ColumnSettingBtn = (column: Column) => {
   const updateModalRef = useRef<ModalHandle>(null);
   const deleteModalRef = useRef<ModalHandle>(null);
 
-  const { update } = useColumnMutation(column.dashboardId);
+  const { update, deleteColumn } = useColumnMutation(column.dashboardId);
 
   const {
     register,
@@ -43,6 +37,15 @@ const ColumnSettingBtn = (column: Column) => {
     updateModalRef.current?.close();
   };
 
+  const handleDeleteSubmit = async () => {
+    try {
+      await deleteColumn(column.id);
+      toast.success("컬럼이 삭제되었습니다.");
+    } catch (err) {
+      toast.error("컬럼 삭제에 실패했습니다.");
+    }
+  };
+
   return (
     <>
       <button
@@ -56,6 +59,7 @@ const ColumnSettingBtn = (column: Column) => {
           height={22}
         />
       </button>
+      {/* 수정 모달 */}
       <Modal ref={updateModalRef} className="flex flex-col gap-4">
         <ModalHeader>
           <div className="w-full flex items-center justify-between">
@@ -76,18 +80,25 @@ const ColumnSettingBtn = (column: Column) => {
         <ModalBody>
           <form
             onSubmit={handleSubmit(handleUpdateSubmit)}
-            className="flex flex-col gap-2 p-1"
+            className="flex flex-col gap-4 p-1"
           >
-            <BaseLabel id="title">이름</BaseLabel>
-            <Input
-              {...register("title")}
-              error={!!errors.title}
-              errorMessage={errors.title?.message}
-              id="title"
-            />
+            <div className="flex flex-col gap-2">
+              <BaseLabel id="title">이름</BaseLabel>
+              <Input
+                {...register("title")}
+                error={!!errors.title}
+                errorMessage={errors.title?.message}
+                id="title"
+              />
+            </div>
             <div>
               <div className="flex gap-2">
-                <Button type="button" variant="secondary" className="w-full">
+                <Button
+                  onClick={() => deleteModalRef.current?.open()}
+                  type="button"
+                  variant="secondary"
+                  className="w-full"
+                >
                   삭제
                 </Button>
                 <Button
@@ -99,6 +110,34 @@ const ColumnSettingBtn = (column: Column) => {
                   {isSubmitting ? "변경중..." : "변경"}
                 </Button>
               </div>
+            </div>
+          </form>
+        </ModalBody>
+      </Modal>
+      {/* 삭제 모달 */}
+      <Modal ref={deleteModalRef}>
+        <ModalBody>
+          <form className="flex flex-col gap-8">
+            <p className="md:text-xl font-medium text-center">
+              컬럼의 모든 카드가 삭제됩니다.
+            </p>
+            <div className="flex gap-2">
+              <Button
+                type="button"
+                onClick={() => deleteModalRef.current?.close()}
+                variant="secondary"
+                className="w-full"
+              >
+                취소
+              </Button>
+              <Button
+                type="button"
+                onClick={handleDeleteSubmit}
+                variant="primary"
+                className="w-full"
+              >
+                삭제
+              </Button>
             </div>
           </form>
         </ModalBody>

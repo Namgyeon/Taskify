@@ -58,6 +58,15 @@ export const updateColumn = async (
 };
 
 /**
+ * 컬럼 삭제
+ * https://sp-taskify-api.vercel.app/docs/#/columns/{columnId}
+ */
+export const deleteColumn = async (columnId: number) => {
+  await axiosClientHelper.delete(`/columns/${columnId}`);
+  return {};
+};
+
+/**
  * card image 생성
  * https://sp-taskify-api.vercel.app/docs/#/columns/{columnId}/card-image
  */

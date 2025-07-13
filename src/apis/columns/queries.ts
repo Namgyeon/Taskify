@@ -4,7 +4,7 @@ import {
   GetColumnsRequest,
   UpdateColumnRequest,
 } from "./types";
-import { getColumns, postColumn, updateColumn } from ".";
+import { deleteColumn, getColumns, postColumn, updateColumn } from ".";
 
 export const useGetColumnsQuery = (
   params: GetColumnsRequest,
@@ -48,8 +48,20 @@ export const useColumnMutation = (dashboardId: number) => {
     },
   });
 
+  const deleteColumnMutation = useMutation({
+    mutationFn: (columnId: number) => {
+      return deleteColumn(columnId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["columns", dashboardId],
+      });
+    },
+  });
+
   return {
     create: post.mutateAsync,
     update: update.mutateAsync,
+    deleteColumn: deleteColumnMutation.mutateAsync,
   };
 };
