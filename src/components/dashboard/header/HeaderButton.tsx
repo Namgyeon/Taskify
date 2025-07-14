@@ -7,12 +7,7 @@ interface HeaderButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: string;
 }
 
-const HeaderButton = ({
-  children,
-  href,
-  icon,
-  ...props
-}: HeaderButtonProps) => {
+const HeaderButton = ({ children, href, icon }: HeaderButtonProps) => {
   return (
     <Link href={href}>
       <div className="flex items-center gap-2 px-4 py-2 border border-gray-400 rounded-lg hover:bg-gray-200 transition-colors">

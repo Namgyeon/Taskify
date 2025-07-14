@@ -8,10 +8,9 @@ const AvatarStack = ({ dashboardId }: { dashboardId: number }) => {
     page: 1,
     size: 10,
   });
-  console.log("멤버 데이터", data);
 
   const visibleMembers = data?.members.slice(0, 4);
-  const remainMembers = data?.totalCount! - 4;
+  const remainMembers = data!.totalCount - 4;
 
   return (
     <div className="flex items-center -space-x-2.5">
