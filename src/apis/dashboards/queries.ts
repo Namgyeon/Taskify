@@ -1,11 +1,18 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { GetDashboardsRequest, PostDashboardsFormData } from "./types";
-import { getDashboards, postDashboards } from ".";
+import { getDashboard, getDashboards, postDashboards } from ".";
 
 export const useGetDashboardsQuery = (params: GetDashboardsRequest) => {
   return useQuery({
     queryKey: ["dashboards", params],
     queryFn: () => getDashboards(params),
+  });
+};
+
+export const useGetDashboardQuery = (dashboardId: number) => {
+  return useQuery({
+    queryKey: ["dashboard", dashboardId],
+    queryFn: () => getDashboard(dashboardId),
   });
 };
 
