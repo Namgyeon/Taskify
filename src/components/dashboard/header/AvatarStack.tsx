@@ -10,7 +10,7 @@ const AvatarStack = ({ dashboardId }: { dashboardId: number }) => {
   });
 
   const visibleMembers = data?.members.slice(0, 4);
-  const remainMembers = data!.totalCount - 4;
+  const remainMembers = data?.totalCount ? data.totalCount - 4 : 0;
 
   return (
     <div className="flex items-center -space-x-2.5">

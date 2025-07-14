@@ -5,7 +5,10 @@ const DashBoardInfo = ({ dashboardId }: { dashboardId: number }) => {
   return (
     <div className="flex items-center justify-between gap-8">
       <div className="flex gap-1.5 md:gap-4">
-        <HeaderButton href="#" icon="/column/setting-icon.svg">
+        <HeaderButton
+          href={dashboardId ? `/dashboard/${dashboardId}/edit` : ""}
+          icon="/column/setting-icon.svg"
+        >
           관리
         </HeaderButton>
         <HeaderButton href="#" icon="/dashboard/add-icon.svg">
