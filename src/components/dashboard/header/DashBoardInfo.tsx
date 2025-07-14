@@ -3,7 +3,7 @@ import AvatarStack from "./AvatarStack";
 
 const DashBoardInfo = ({ dashboardId }: { dashboardId: number }) => {
   return (
-    <div className="flex items-center gap-8">
+    <div className="flex items-center justify-between gap-8">
       <div className="flex gap-1.5 md:gap-4">
         <HeaderButton href="#" icon="/column/setting-icon.svg">
           관리
