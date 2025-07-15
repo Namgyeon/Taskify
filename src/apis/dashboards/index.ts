@@ -6,6 +6,7 @@ import {
   dashboardSchema,
   GetDashboardsRequest,
   getDashboardsResponseSchema,
+  PatchDashboardFormData,
   PostDashboardsFormData,
 } from "./types";
 
@@ -42,6 +43,21 @@ export const getDashboards = async (params: GetDashboardsRequest) => {
 export const getDashboard = async (dashboardId: number) => {
   const response = await axiosClientHelper.get<Dashboard>(
     `/dashboards/${dashboardId}`
+  );
+  return safeResponse(response.data, dashboardSchema);
+};
+
+/**
+ * 대시보드 수정
+ * https://sp-taskify-api.vercel.app/docs/#/dashboards/{dashboardId}
+ */
+export const patchDashboard = async (
+  dashboardId: number,
+  data: PatchDashboardFormData
+) => {
+  const response = await axiosClientHelper.put<Dashboard>(
+    `/dashboards/${dashboardId}`,
+    data
   );
   return safeResponse(response.data, dashboardSchema);
 };
