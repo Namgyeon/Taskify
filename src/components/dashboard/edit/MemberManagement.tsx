@@ -64,10 +64,11 @@ const MemberManagement = ({ dashboardId }: { dashboardId: number }) => {
                 </div>
                 <Button
                   onClick={() => handleDeleteMember(member.id)}
+                  disabled={member.isOwner}
                   variant="secondary"
                   size="sm"
                 >
-                  삭제
+                  {member.isOwner ? "관리자" : "삭제"}
                 </Button>
               </div>
             );
