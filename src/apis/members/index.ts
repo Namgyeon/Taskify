@@ -17,3 +17,12 @@ export const getMembers = async (params: GetMembersRequest) => {
   });
   return safeResponse(response.data, membersSchema);
 };
+
+/**
+ * 대시보드 멤버 삭제
+ * https://sp-taskify-api.vercel.app/docs/#/members/{memberId}
+ */
+export const deleteMember = async (memberId: number) => {
+  const response = await axiosClientHelper.delete(`/members/${memberId}`);
+  return {};
+};
