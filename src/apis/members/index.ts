@@ -23,6 +23,6 @@ export const getMembers = async (params: GetMembersRequest) => {
  * https://sp-taskify-api.vercel.app/docs/#/members/{memberId}
  */
 export const deleteMember = async (memberId: number) => {
-  const response = await axiosClientHelper.delete(`/members/${memberId}`);
+  await axiosClientHelper.delete(`/members/${memberId}`);
   return {};
 };

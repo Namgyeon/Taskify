@@ -1,10 +1,12 @@
 "use client";
 
-import { useGetMembers } from "@/apis/members/queries";
+import { useDeleteMember, useGetMembers } from "@/apis/members/queries";
 import Pagination from "@/components/pagination/Pagination";
 import Avatar from "@/components/ui/Avatar";
 import Button from "@/components/ui/Button";
+import { getErrorMessage } from "@/utils/network/errorMessage";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const MemberManagement = ({ dashboardId }: { dashboardId: number }) => {
   const [page, setPage] = useState<number>(1);
@@ -15,8 +17,21 @@ const MemberManagement = ({ dashboardId }: { dashboardId: number }) => {
     page,
     size,
   });
+  const { mutate: deleteMember } = useDeleteMember();
+
+  console.log("멤버데이터:", data);
 
   const totalPage = data?.totalCount ? Math.ceil(data.totalCount / size) : 1;
+
+  const handleDeleteMember = async (memberId: number) => {
+    try {
+      await deleteMember(memberId);
+      toast.success("멤버가 삭제되었습니다.");
+    } catch (error) {
+      const errorMessage = getErrorMessage(error);
+      toast.error(errorMessage);
+    }
+  };
 
   return (
     <div className="max-w-[540px] lg:max-w-[620px] flex flex-col gap-6 px-4 md:px-7 py-5 md:py-8 rounded-lg bg-white">
@@ -47,7 +62,11 @@ const MemberManagement = ({ dashboardId }: { dashboardId: number }) => {
                   />
                   <div>{member.nickname}</div>
                 </div>
-                <Button variant="secondary" size="sm">
+                <Button
+                  onClick={() => handleDeleteMember(member.id)}
+                  variant="secondary"
+                  size="sm"
+                >
                   삭제
                 </Button>
               </div>
