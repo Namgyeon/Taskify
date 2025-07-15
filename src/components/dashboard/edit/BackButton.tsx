@@ -4,7 +4,7 @@ import Link from "next/link";
 const BackButton = ({ href }: { href: string }) => {
   return (
     <Link href={href}>
-      <div className="flex items-center gap-1">
+      <div className="inline-flex px-1 py-1 items-center gap-1 rounded hover:bg-gray-200 transition-colors">
         <Image
           src="/edit/back-icon.svg"
           alt="뒤로가기 아이콘"

@@ -34,6 +34,12 @@ export const postDashboardsFormSchema = z.object({
 });
 export type PostDashboardsFormData = z.infer<typeof postDashboardsFormSchema>;
 
+export const patchDashboardFormSchema = z.object({
+  title: z.string().trim().min(2, "2글자 이상 입력해주세요,"),
+  color: z.string(),
+});
+export type PatchDashboardFormData = z.infer<typeof patchDashboardFormSchema>;
+
 export const dashboardInviterSchema = z.object({
   nickname: z.string(),
   email: z.string(),
