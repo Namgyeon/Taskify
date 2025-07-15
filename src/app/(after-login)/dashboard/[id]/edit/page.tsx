@@ -11,6 +11,10 @@ const EditPage = async ({ params }: { params: Promise<{ id: string }> }) => {
       <DetailModify dashboardId={dashboardId} />
     </div>
   );
+
+const EditPage = () => {
+  return <div>EditPage</div>;
+
 };
 
 export default EditPage;
