@@ -7,7 +7,6 @@ const EditPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   return (
     <div className="p-5 flex flex-col gap-4">
       <BackButton href={`/dashboard/${id}`} />
-
       <DetailModify dashboardId={dashboardId} />
     </div>
   );
