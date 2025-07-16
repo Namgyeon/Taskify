@@ -1,6 +1,7 @@
-import BackButton from "@/components/dashboard/edit/BackButton";
-import DetailModify from "@/components/dashboard/edit/DetailModify";
-import MemberManagement from "@/components/dashboard/edit/MemberManagement";
+import BackButton from "@/components/edit/BackButton";
+import DetailModify from "@/components/edit/DetailModify";
+import InviteManagement from "@/components/edit/InviteManagement";
+import MemberManagement from "@/components/edit/MemberManagement";
 
 const EditPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
@@ -10,6 +11,7 @@ const EditPage = async ({ params }: { params: Promise<{ id: string }> }) => {
       <BackButton href={`/dashboard/${id}`} />
       <DetailModify dashboardId={dashboardId} />
       <MemberManagement dashboardId={dashboardId} />
+      <InviteManagement />
     </div>
   );
 };

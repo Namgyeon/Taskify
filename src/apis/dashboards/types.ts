@@ -57,3 +57,21 @@ export const dashboardInvitationSchema = z.object({
   updatedAt: z.string(),
 });
 export type DashboardInvitation = z.infer<typeof dashboardInvitationSchema>;
+
+export const getDashboardMemberInvitationsSchema = z.object({
+  dashboardId: z.number(),
+  page: z.number(),
+  size: z.number(),
+});
+export type GetDashboardMemberInvitations = z.infer<
+  typeof getDashboardMemberInvitationsSchema
+>;
+
+export const getDashboardMemberInvitationsResponseSchema = z.object({
+  invitations: z.array(dashboardInvitationSchema),
+  totalCount: z.number(),
+  cursorId: z.null(),
+});
+export type GetDashboardMemberInvitationsResponse = z.infer<
+  typeof getDashboardMemberInvitationsResponseSchema
+>;

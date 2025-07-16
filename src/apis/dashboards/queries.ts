@@ -1,10 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  GetDashboardMemberInvitations,
   GetDashboardsRequest,
   PatchDashboardFormData,
   PostDashboardsFormData,
 } from "./types";
-import { getDashboard, getDashboards, patchDashboard, postDashboards } from ".";
+import {
+  getDashboard,
+  getDashboardMemberInvitations,
+  getDashboards,
+  patchDashboard,
+  postDashboards,
+} from ".";
 
 export const useGetDashboardsQuery = (params: GetDashboardsRequest) => {
   return useQuery({
@@ -39,5 +46,14 @@ export const usePatchDashboard = (dashboardId: number) => {
       queryClient.invalidateQueries({ queryKey: ["dashboard", dashboardId] });
       queryClient.invalidateQueries({ queryKey: ["dashboards"] });
     },
+  });
+};
+
+export const useGetDashboardMemberInvitationsQuery = (
+  params: GetDashboardMemberInvitations
+) => {
+  return useQuery({
+    queryKey: ["dashboard-members", params.dashboardId],
+    queryFn: () => getDashboardMemberInvitations(params),
   });
 };
