@@ -60,13 +60,11 @@ export const useGetDashboardMemberInvitationsQuery = (
   });
 };
 
-export const usePostDashboardMemberInvitation = (
-  dashboardId: number,
-  data: PostDashboardMemberInvitationRequest
-) => {
+export const usePostDashboardMemberInvitation = (dashboardId: number) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () => postDashboardMemberInvitation(dashboardId, data),
+    mutationFn: (data: PostDashboardMemberInvitationRequest) =>
+      postDashboardMemberInvitation(dashboardId, data),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["dashboard-members", dashboardId],
