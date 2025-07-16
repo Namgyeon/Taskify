@@ -59,8 +59,16 @@ export const ModalHeader = ({
   );
 };
 
-export const ModalBody = ({ children }: { children: ReactNode }) => {
-  return <div className="h-full overflow-y-auto">{children}</div>;
+export const ModalBody = ({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) => {
+  return (
+    <div className={clsx("h-full overflow-y-auto", className)}>{children}</div>
+  );
 };
 
 export const ModalFooter = ({ children }: { children: ReactNode }) => {

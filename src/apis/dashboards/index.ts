@@ -69,6 +69,15 @@ export const patchDashboard = async (
 };
 
 /**
+ * 대시보드 삭제
+ * https://sp-taskify-api.vercel.app/docs/#/dashboards/{dashboardId}
+ */
+export const deleteDashboard = async (dashboardId: number) => {
+  await axiosClientHelper.delete(`/dashboards/${dashboardId}`);
+  return {};
+};
+
+/**
  * 대시보드 초대 불러오기
  * https://sp-taskify-api.vercel.app/docs/#/dashboards/{dashboardId}/invitations
  */

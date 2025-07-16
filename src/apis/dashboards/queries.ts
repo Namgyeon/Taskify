@@ -7,6 +7,7 @@ import {
   PostDashboardsFormData,
 } from "./types";
 import {
+  deleteDashboard,
   deleteDashboardMemberInvitation,
   getDashboard,
   getDashboardMemberInvitations,
@@ -48,6 +49,17 @@ export const usePatchDashboard = (dashboardId: number) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["dashboard", dashboardId] });
       queryClient.invalidateQueries({ queryKey: ["dashboards"] });
+    },
+  });
+};
+
+export const useDeleteDashboard = (dashboardId: number) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: () => deleteDashboard(dashboardId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["dashboards"] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard", dashboardId] });
     },
   });
 };
