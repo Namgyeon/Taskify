@@ -57,3 +57,27 @@ export const dashboardInvitationSchema = z.object({
   updatedAt: z.string(),
 });
 export type DashboardInvitation = z.infer<typeof dashboardInvitationSchema>;
+
+export const getDashboardMemberInvitationsSchema = z.object({
+  dashboardId: z.number(),
+  page: z.number(),
+  size: z.number(),
+});
+export type GetDashboardMemberInvitations = z.infer<
+  typeof getDashboardMemberInvitationsSchema
+>;
+
+export const getDashboardMemberInvitationsResponseSchema = z.object({
+  invitations: z.array(dashboardInvitationSchema),
+  totalCount: z.number(),
+});
+export type GetDashboardMemberInvitationsResponse = z.infer<
+  typeof getDashboardMemberInvitationsResponseSchema
+>;
+
+export const postDashboardMemberInvitationRequestSchema = z.object({
+  email: z.string().email("이메일 형식이 올바르지 않습니다."),
+});
+export type PostDashboardMemberInvitationRequest = z.infer<
+  typeof postDashboardMemberInvitationRequestSchema
+>;
