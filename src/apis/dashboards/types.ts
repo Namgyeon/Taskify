@@ -70,7 +70,6 @@ export type GetDashboardMemberInvitations = z.infer<
 export const getDashboardMemberInvitationsResponseSchema = z.object({
   invitations: z.array(dashboardInvitationSchema),
   totalCount: z.number(),
-  cursorId: z.null(),
 });
 export type GetDashboardMemberInvitationsResponse = z.infer<
   typeof getDashboardMemberInvitationsResponseSchema

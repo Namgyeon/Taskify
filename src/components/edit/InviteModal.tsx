@@ -24,6 +24,7 @@ const InviteModal = ({
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     defaultValues: {
       email: "",
@@ -38,6 +39,7 @@ const InviteModal = ({
   const onSubmit = async (data: PostDashboardMemberInvitationRequest) => {
     try {
       await postInvitation(data);
+      reset();
       close();
       toast.success("초대 메일이 발송되었습니다.");
     } catch (error) {
@@ -73,10 +75,20 @@ const InviteModal = ({
             />
           </div>
           <div className="flex gap-2">
-            <Button variant="secondary" className="flex-1" onClick={close}>
+            <Button
+              variant="secondary"
+              className="flex-1"
+              onClick={close}
+              disabled={isPending}
+            >
               취소
             </Button>
-            <Button variant="primary" className="flex-1" type="submit">
+            <Button
+              variant="primary"
+              className="flex-1"
+              type="submit"
+              disabled={isPending}
+            >
               {isPending ? "초대중..." : "초대"}
             </Button>
           </div>

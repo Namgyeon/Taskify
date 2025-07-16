@@ -7,6 +7,7 @@ import {
   PostDashboardsFormData,
 } from "./types";
 import {
+  deleteDashboardMemberInvitation,
   getDashboard,
   getDashboardMemberInvitations,
   getDashboards,
@@ -55,7 +56,12 @@ export const useGetDashboardMemberInvitationsQuery = (
   params: GetDashboardMemberInvitations
 ) => {
   return useQuery({
-    queryKey: ["dashboard-members", params.dashboardId],
+    queryKey: [
+      "dashboard-members",
+      params.dashboardId,
+      params.page,
+      params.size,
+    ],
     queryFn: () => getDashboardMemberInvitations(params),
   });
 };
@@ -65,6 +71,19 @@ export const usePostDashboardMemberInvitation = (dashboardId: number) => {
   return useMutation({
     mutationFn: (data: PostDashboardMemberInvitationRequest) =>
       postDashboardMemberInvitation(dashboardId, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["dashboard-members", dashboardId],
+      });
+    },
+  });
+};
+
+export const useDeleteDashboardMemberInvitation = (dashboardId: number) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (invitationId: number) =>
+      deleteDashboardMemberInvitation(dashboardId, invitationId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["dashboard-members", dashboardId],

@@ -106,3 +106,17 @@ export const postDashboardMemberInvitation = async (
   );
   return safeResponse(response.data, dashboardInvitationSchema);
 };
+
+/**
+ * 대시보드 초대 취소
+ * https://sp-taskify-api.vercel.app/docs/#/dashboards/{dashboardId}/invitations/{invitationId}
+ */
+export const deleteDashboardMemberInvitation = async (
+  dashboardId: number,
+  invitationId: number
+) => {
+  await axiosClientHelper.delete(
+    `/dashboards/${dashboardId}/invitations/${invitationId}`
+  );
+  return {};
+};
