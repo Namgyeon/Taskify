@@ -3,7 +3,6 @@ import Avatar from "@/components/ui/Avatar";
 
 const Profile = () => {
   const { data, isFetching } = useGetUser();
-  console.log(data);
   return (
     <div>
       {isFetching ? (

@@ -19,7 +19,7 @@ const MemberManagement = ({ dashboardId }: { dashboardId: number }) => {
   });
   const { mutate: deleteMember } = useDeleteMember();
 
-  console.log("멤버데이터:", data);
+  // console.log("멤버데이터:", data);
 
   const totalPage = data?.totalCount ? Math.ceil(data.totalCount / size) : 1;
 

@@ -75,3 +75,10 @@ export const getDashboardMemberInvitationsResponseSchema = z.object({
 export type GetDashboardMemberInvitationsResponse = z.infer<
   typeof getDashboardMemberInvitationsResponseSchema
 >;
+
+export const postDashboardMemberInvitationRequestSchema = z.object({
+  email: z.string().email("이메일 형식이 올바르지 않습니다."),
+});
+export type PostDashboardMemberInvitationRequest = z.infer<
+  typeof postDashboardMemberInvitationRequestSchema
+>;

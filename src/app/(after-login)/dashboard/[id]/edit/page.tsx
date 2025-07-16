@@ -11,7 +11,7 @@ const EditPage = async ({ params }: { params: Promise<{ id: string }> }) => {
       <BackButton href={`/dashboard/${id}`} />
       <DetailModify dashboardId={dashboardId} />
       <MemberManagement dashboardId={dashboardId} />
-      <InviteManagement />
+      <InviteManagement dashboardId={dashboardId} />
     </div>
   );
 };

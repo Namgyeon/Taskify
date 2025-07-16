@@ -3,6 +3,7 @@ import {
   GetDashboardMemberInvitations,
   GetDashboardsRequest,
   PatchDashboardFormData,
+  PostDashboardMemberInvitationRequest,
   PostDashboardsFormData,
 } from "./types";
 import {
@@ -10,6 +11,7 @@ import {
   getDashboardMemberInvitations,
   getDashboards,
   patchDashboard,
+  postDashboardMemberInvitation,
   postDashboards,
 } from ".";
 
@@ -55,5 +57,20 @@ export const useGetDashboardMemberInvitationsQuery = (
   return useQuery({
     queryKey: ["dashboard-members", params.dashboardId],
     queryFn: () => getDashboardMemberInvitations(params),
+  });
+};
+
+export const usePostDashboardMemberInvitation = (
+  dashboardId: number,
+  data: PostDashboardMemberInvitationRequest
+) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: () => postDashboardMemberInvitation(dashboardId, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["dashboard-members", dashboardId],
+      });
+    },
   });
 };

@@ -20,7 +20,7 @@ const DetailModify = ({ dashboardId }: { dashboardId: number }) => {
   const { mutate: patchDashboard } = usePatchDashboard(dashboardId);
 
   const colors = ["#7AC555", "#760DDE", "#FFA500", "#76A5EA", "#E876EA"];
-  console.log("edit대시드데이터", data);
+  // console.log("edit대시드데이터", data);
 
   const { register, handleSubmit, reset, setValue } = useForm({
     defaultValues: {

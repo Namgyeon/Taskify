@@ -1,6 +1,14 @@
+"use client";
+import { useGetDashboardMemberInvitationsQuery } from "@/apis/dashboards/queries";
 import Pagination from "../pagination/Pagination";
 
-const InviteManagement = () => {
+const InviteManagement = ({ dashboardId }: { dashboardId: number }) => {
+  const { data } = useGetDashboardMemberInvitationsQuery({
+    dashboardId,
+    page: 1,
+    size: 5,
+  });
+  console.log("관리페이지에서 초대불러오기 리스트:", data);
   return (
     <div className="max-w-[540px] lg:max-w-[620px] flex flex-col gap-6 px-4 md:px-7 py-5 md:py-8 rounded-lg bg-white">
       <div>

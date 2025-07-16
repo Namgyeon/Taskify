@@ -2,6 +2,8 @@ import axiosClientHelper from "@/utils/network/axiosClientHelper";
 import { safeResponse } from "@/utils/network/safeResponse";
 import {
   Dashboard,
+  DashboardInvitation,
+  dashboardInvitationSchema,
   Dashboards,
   dashboardSchema,
   GetDashboardMemberInvitations,
@@ -10,6 +12,7 @@ import {
   GetDashboardsRequest,
   getDashboardsResponseSchema,
   PatchDashboardFormData,
+  PostDashboardMemberInvitationRequest,
   PostDashboardsFormData,
 } from "./types";
 
@@ -87,4 +90,19 @@ export const getDashboardMemberInvitations = async (
     response.data,
     getDashboardMemberInvitationsResponseSchema
   );
+};
+
+/**
+ * 대시보드 초대하기
+ * https://sp-taskify-api.vercel.app/docs/#/dashboards/{dashboardId}/invitations
+ */
+export const postDashboardMemberInvitation = async (
+  dashboardId: number,
+  data: PostDashboardMemberInvitationRequest
+) => {
+  const response = await axiosClientHelper.post<DashboardInvitation>(
+    `/dashboards/${dashboardId}/invitations`,
+    data
+  );
+  return safeResponse(response.data, dashboardInvitationSchema);
 };
