@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Modal, ModalBody, ModalHeader } from "../ui/Modal";
+import { ModalBody, ModalHeader } from "../ui/Modal";
 import BaseLabel from "../ui/Field/BaseLabel";
 import Input from "../ui/Field/Input";
 import Button from "../ui/Button";
