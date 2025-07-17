@@ -37,7 +37,7 @@ export const getUser = async () => {
  * https://sp-taskify-api.vercel.app/docs/#/users/me
  */
 export const patchUser = async (data: PatchUser) => {
-  const response = await axiosClientHelper.patch<User>("/users/me", data);
+  const response = await axiosClientHelper.put<User>("/users/me", data);
   return safeResponse(response.data, userSchema);
 };
 
@@ -48,7 +48,12 @@ export const patchUser = async (data: PatchUser) => {
 export const postProfileImage = async (data: PostProfileImageFormData) => {
   const response = await axiosClientHelper.post<PostProfileImageResponse>(
     "/users/me/image",
-    data
+    data,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }
   );
   return safeResponse(response.data, postProfileImageResponseSchema);
 };

@@ -7,7 +7,7 @@ import clsx from "clsx";
 
 interface ImageUploadProps {
   value?: string | File | null | undefined;
-  onChange: (file: File | null | undefined) => void;
+  onChange: (file: File | null | undefined) => Promise<void>;
   error?: boolean;
   errorMessage?: string;
   id?: string;
@@ -57,6 +57,10 @@ const ImageUpload = ({
       return;
     }
     onChange?.(file);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   return (
