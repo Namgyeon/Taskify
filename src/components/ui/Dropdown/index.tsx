@@ -52,7 +52,9 @@ const Dropdown = ({
           />
         )}
         {text && (
-          <p className="md:text-lg font-medium text-[#333236]">{text}</p>
+          <p className="md:text-lg font-medium text-[#333236] whitespace-nowrap">
+            {text}
+          </p>
         )}
       </Menu.Button>
 

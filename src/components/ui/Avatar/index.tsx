@@ -23,7 +23,7 @@ const Avatar = ({
 
   return (
     <figure
-      className={`w-[34px] md:w-[38px] aspect-square rounded-full overflow-hidden bg-black border-2 border-white ${className}`}
+      className={`relative w-[34px] md:w-[38px] aspect-square rounded-full overflow-hidden bg-black border-2 border-white ${className}`}
       {...props}
     >
       {profileImageUrl ? (
