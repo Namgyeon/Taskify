@@ -27,3 +27,28 @@ export const userSchema = z.object({
 export type SignupResponse = z.infer<typeof userSchema>;
 
 export type User = z.infer<typeof userSchema>;
+
+export const patchUserSchema = z.object({
+  nickname: z.string().trim().min(1, "닉네임을 입력해주세요"),
+  profileImageUrl: z.union([z.string().url(), z.null()]),
+});
+export type PatchUser = z.infer<typeof patchUserSchema>;
+
+export const patchUserFormSchema = patchUserSchema.extend({
+  email: z.string().email(),
+});
+export type PatchUserFormData = z.infer<typeof patchUserFormSchema>;
+
+export const postProfileImageFormSchema = z.object({
+  image: z.instanceof(File),
+});
+export type PostProfileImageFormData = z.infer<
+  typeof postProfileImageFormSchema
+>;
+
+export const postProfileImageResponseSchema = z.object({
+  profileImageUrl: z.string(),
+});
+export type PostProfileImageResponse = z.infer<
+  typeof postProfileImageResponseSchema
+>;

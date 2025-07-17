@@ -1,15 +1,18 @@
+"use client";
 import { useEffect, useRef, useState } from "react";
 import BaseLabel from "./BaseLabel";
 import Image from "next/image";
 import toast from "react-hot-toast";
+import clsx from "clsx";
 
 interface ImageUploadProps {
   value?: string | File | null | undefined;
-  onChange: (file: File | null | undefined) => void;
+  onChange: (file: File | null | undefined) => Promise<void>;
   error?: boolean;
   errorMessage?: string;
   id?: string;
   existingImageUrl?: string;
+  size?: string;
 }
 
 const ImageUpload = ({
@@ -17,6 +20,7 @@ const ImageUpload = ({
   onChange,
   id,
   existingImageUrl,
+  size = "w-20 h-20",
 }: ImageUploadProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(
@@ -53,6 +57,10 @@ const ImageUpload = ({
       return;
     }
     onChange?.(file);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   return (
@@ -63,21 +71,25 @@ const ImageUpload = ({
         {!preview && (
           <button
             id={id}
-            className="relative w-20 h-20 cursor-pointer"
+            className={clsx(
+              "relative flex items-center justify-center cursor-pointer bg-gray-100 rounded-xl",
+              size
+            )}
             type="button"
             onClick={() => fileInputRef.current?.click()}
           >
             <Image
               src="/dashboard/add-icon2.svg"
               alt="이미지 추가"
-              fill
-              className="object-contain"
+              width={25}
+              height={25}
+              className="w-5 h-5 md:w-7.5 md:h-7.5"
             />
           </button>
         )}
 
         {preview && (
-          <div className="relative w-20 h-20">
+          <div className={clsx("relative", size)}>
             <Image src={preview} alt="미리보기" fill className="object-cover" />
             <button
               className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 text-white bg-black rounded-full p-1 cursor-pointer"

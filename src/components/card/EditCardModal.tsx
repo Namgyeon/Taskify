@@ -18,6 +18,8 @@ import { formatDateForAPI } from "@/utils/formatDate";
 import toast from "react-hot-toast";
 import StateInput from "../ui/Field/StateInput";
 import { Column } from "@/apis/columns/types";
+import { usePostCardImage } from "@/apis/columns/queries";
+import { getErrorMessage } from "@/utils/network/errorMessage";
 
 interface EditCardModalProps {
   onClose: () => void;
@@ -34,6 +36,7 @@ const EditCardModal = ({
 }: EditCardModalProps) => {
   const params = useParams();
   const dashboardId = Number(params.id);
+  const { mutateAsync: uploadCardImage } = usePostCardImage(dashboardId);
   const { mutateAsync: updateCard } = useUpdateCard();
 
   const { data } = useGetMembers({
@@ -71,7 +74,22 @@ const EditCardModal = ({
 
   const selectedTitle =
     columnData?.find((column) => column.id === watchedColumnId)?.title ?? "";
-  console.log("selectedTitle", selectedTitle);
+
+  const handleImageUpload = async (file: File | null | undefined) => {
+    if (file) {
+      try {
+        await uploadCardImage({
+          columnId: cardData.columnId,
+          cardImageForm: { image: file },
+        });
+      } catch (error) {
+        const errorMessage = getErrorMessage(error);
+        toast.error(errorMessage);
+      }
+    } else {
+      setValue("imageUrl", undefined);
+    }
+  };
 
   const onSubmit = async (data: UpdateCardForm) => {
     try {
@@ -206,9 +224,7 @@ const EditCardModal = ({
                 id="image"
                 value={field.value}
                 existingImageUrl={cardData.imageUrl ?? undefined}
-                onChange={(file: File | null | undefined) => {
-                  field.onChange(file);
-                }}
+                onChange={handleImageUpload}
               />
             )}
           />

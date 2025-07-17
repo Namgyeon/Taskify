@@ -67,7 +67,7 @@ export const deleteColumn = async (columnId: number) => {
 };
 
 /**
- * card image 생성
+ * 카드 이미지 업로드
  * https://sp-taskify-api.vercel.app/docs/#/columns/{columnId}/card-image
  */
 export const postCardImage = async (
