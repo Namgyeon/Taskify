@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { PatchUser, SignupFormData } from "./types";
-import { getUser, patchUser, signup } from ".";
+import { PatchUser, PostProfileImageFormData, SignupFormData } from "./types";
+import { getUser, patchUser, postProfileImage, signup } from ".";
 
 export const useSignup = () => {
   return useMutation({
@@ -22,6 +22,18 @@ export const usePatchUser = () => {
   return useMutation({
     mutationFn: (data: PatchUser) => {
       return patchUser(data);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+    },
+  });
+};
+
+export const usePostProfileImage = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (data: PostProfileImageFormData) => {
+      return postProfileImage(data);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });

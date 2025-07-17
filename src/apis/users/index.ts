@@ -2,6 +2,9 @@ import axiosClientHelper from "@/utils/network/axiosClientHelper";
 import { safeResponse } from "@/utils/network/safeResponse";
 import {
   PatchUser,
+  PostProfileImageFormData,
+  PostProfileImageResponse,
+  postProfileImageResponseSchema,
   SignupFormData,
   SignupResponse,
   User,
@@ -36,4 +39,16 @@ export const getUser = async () => {
 export const patchUser = async (data: PatchUser) => {
   const response = await axiosClientHelper.patch<User>("/users/me", data);
   return safeResponse(response.data, userSchema);
+};
+
+/**
+ * 프로필 이미지 업로드
+ * https://sp-taskify-api.vercel.app/docs/#/users/me/image
+ */
+export const postProfileImage = async (data: PostProfileImageFormData) => {
+  const response = await axiosClientHelper.post<PostProfileImageResponse>(
+    "/users/me/image",
+    data
+  );
+  return safeResponse(response.data, postProfileImageResponseSchema);
 };
