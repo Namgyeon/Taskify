@@ -1,10 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  CardImageForm,
   CreateColumnRequest,
   GetColumnsRequest,
   UpdateColumnRequest,
 } from "./types";
-import { deleteColumn, getColumns, postColumn, updateColumn } from ".";
+import {
+  deleteColumn,
+  getColumns,
+  postCardImage,
+  postColumn,
+  updateColumn,
+} from ".";
 
 export const useGetColumnsQuery = (
   params: GetColumnsRequest,
@@ -64,4 +71,22 @@ export const useColumnMutation = (dashboardId: number) => {
     update: update.mutateAsync,
     deleteColumn: deleteColumnMutation.mutateAsync,
   };
+};
+
+export const usePostCardImage = (dashboardId: number) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({
+      columnId,
+      cardImageForm,
+    }: {
+      columnId: number;
+      cardImageForm: CardImageForm;
+    }) => postCardImage(columnId, cardImageForm),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["columns", dashboardId],
+      });
+    },
+  });
 };
