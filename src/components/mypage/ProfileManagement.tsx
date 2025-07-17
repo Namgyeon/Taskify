@@ -10,21 +10,16 @@ import ImageUpload from "../ui/Field/ImageUpload";
 import Input from "../ui/Field/Input";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  PatchUser,
-  patchUserFormSchema,
-  patchUserSchema,
-} from "@/apis/users/types";
+import { PatchUser, patchUserFormSchema } from "@/apis/users/types";
 import { useEffect } from "react";
 import { getErrorMessage } from "@/utils/network/errorMessage";
 import toast from "react-hot-toast";
 
 const ProfileManagement = () => {
   const { data } = useGetUser();
-  const { mutateAsync: patchUser } = usePatchUser();
+  const { mutateAsync: patchUser, isPending } = usePatchUser();
   const { mutateAsync: uploadProfileImage } = usePostProfileImage();
 
-  console.log("계정관리 유저데이터", data);
   const {
     register,
     handleSubmit,
@@ -113,7 +108,9 @@ const ProfileManagement = () => {
             />
           </div>
         </div>
-        <Button variant="primary">저장</Button>
+        <Button variant="primary" disabled={!isDirty || !isValid || isPending}>
+          {isPending ? "저장중..." : "저장"}
+        </Button>
       </form>
     </div>
   );
