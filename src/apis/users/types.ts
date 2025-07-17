@@ -27,3 +27,9 @@ export const userSchema = z.object({
 export type SignupResponse = z.infer<typeof userSchema>;
 
 export type User = z.infer<typeof userSchema>;
+
+export const patchUserSchema = z.object({
+  nickname: z.string().trim().min(1, "닉네임을 입력해주세요"),
+  profileImageUrl: z.union([z.string().url(), z.null()]),
+});
+export type PatchUser = z.infer<typeof patchUserSchema>;
