@@ -1,15 +1,29 @@
 "use client";
 
 import {
-  useGetDashboardInvitations,
+  useGetDashboardInvitationsInfinite,
   useRespondToInvitation,
 } from "@/apis/invitations/queries";
 import MyInvitedEmptyCard from "./MyInvitedEmptyCard";
 import Button from "../ui/Button";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 
 const MyInvitedDashboardList = () => {
-  const { data, isLoading } = useGetDashboardInvitations({ size: 10 });
+  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
+    useGetDashboardInvitationsInfinite({ size: 6 });
   const { mutate: respondToInvitation } = useRespondToInvitation();
+  const { ref, inView } = useInView({
+    threshold: 1.0,
+  });
+
+  const allInvitations = data?.pages.flatMap((page) => page.invitations) ?? [];
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   const handleAccept = (invitationId: number) => {
     respondToInvitation({ invitationId, inviteAccepted: true });
@@ -41,11 +55,11 @@ const MyInvitedDashboardList = () => {
 
   return (
     <div>
-      {data?.invitations.length === 0 ? (
+      {allInvitations.length === 0 ? (
         <MyInvitedEmptyCard />
       ) : (
         <div>
-          {data?.invitations.map((invitation) => {
+          {allInvitations.map((invitation) => {
             return (
               <div
                 key={invitation.id}
@@ -94,6 +108,17 @@ const MyInvitedDashboardList = () => {
               </div>
             );
           })}
+          {/* 무한스크롤 트리커 */}
+          <div ref={ref} className="h-10 flex items-center justify-center">
+            {isFetchingNextPage && (
+              <div className="text-gray-500">더 많은 초대를 불러오는 중...</div>
+            )}
+            {!hasNextPage && allInvitations.length > 0 && (
+              <div className="text-gray-400 text-sm">
+                모든 초대를 불러왔습니다.
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>

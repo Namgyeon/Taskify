@@ -1,11 +1,20 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { getInvitations, respondToInvitation } from ".";
 import { GetMyInvitationsRequest, RespondToInvitationRequest } from "./types";
 
-export const useGetDashboardInvitations = (params: GetMyInvitationsRequest) => {
-  return useQuery({
+export const useGetDashboardInvitationsInfinite = (
+  params: GetMyInvitationsRequest
+) => {
+  return useInfiniteQuery({
     queryKey: ["myInvitations", params],
-    queryFn: () => getInvitations(params),
+    queryFn: ({ pageParam }) =>
+      getInvitations({ ...params, cursorId: pageParam }),
+    getNextPageParam: (lastPage) => lastPage.cursorId || undefined,
+    initialPageParam: 0,
   });
 };
 
