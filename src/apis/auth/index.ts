@@ -1,6 +1,7 @@
 import { safeResponse } from "@/utils/network/safeResponse";
 import {
   PutPasswordFormData,
+  PutPasswordRequestData,
   SignInFormData,
   SignInResponse,
   signInResponseSchema,
@@ -27,7 +28,8 @@ export const logout = async () => {
  * 비밀번호 변경
  * https://sp-taskify-api.vercel.app/docs/#/auth/password
  */
-
-export const putPassword = async (putPasswordFormData: PutPasswordFormData) => {
-  await axiosClientHelper.put<void>("/auth/password", putPasswordFormData);
+export const putPassword = async (
+  putPasswordRequestData: PutPasswordRequestData
+) => {
+  await axiosClientHelper.put<void>("/auth/password", putPasswordRequestData);
 };
