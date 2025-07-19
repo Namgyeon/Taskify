@@ -1,9 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  PutPasswordFormData,
-  PutPasswordRequestData,
-  SignInFormData,
-} from "@/apis/auth/types";
+import { PutPasswordRequestData, SignInFormData } from "@/apis/auth/types";
 import { login, logout, putPassword } from "@/apis/auth";
 
 export const useSignIn = () => {

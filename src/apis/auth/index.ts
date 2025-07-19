@@ -1,6 +1,5 @@
 import { safeResponse } from "@/utils/network/safeResponse";
 import {
-  PutPasswordFormData,
   PutPasswordRequestData,
   SignInFormData,
   SignInResponse,

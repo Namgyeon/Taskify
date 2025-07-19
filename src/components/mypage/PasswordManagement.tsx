@@ -1,7 +1,6 @@
 "use client";
 import { useForm } from "react-hook-form";
 import BaseLabel from "../ui/Field/BaseLabel";
-import Input from "../ui/Field/Input";
 import Button from "../ui/Button";
 import { usePutPassword } from "@/apis/auth/queries";
 import { PutPasswordFormData, PutPasswordRequestData } from "@/apis/auth/types";
