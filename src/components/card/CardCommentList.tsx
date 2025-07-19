@@ -1,6 +1,6 @@
 import { useGetCommentsInfinite } from "@/apis/comments/queries";
 import { Comment } from "@/apis/comments/types";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import CardComment from "./CardComment";
 import { useInView } from "react-intersection-observer";
 
