@@ -1,4 +1,4 @@
-import Input from "../components/ui/Input";
+import Input from "../components/ui/Field/Input";
 
 export default {
   title: "Test/Input",

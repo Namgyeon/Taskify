@@ -1,6 +1,6 @@
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
-import QueryProviders from "./QueryProviders";
+import QueryClientProvider from "../components/providers/QueryProviders";
 
 export default function RootLayout({
   children,
@@ -8,9 +8,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body className="min-h-screen w-full antialiased">
-        <QueryProviders>{children}</QueryProviders>
+    <html lang="en">
+      <body>
+        <QueryClientProvider>{children}</QueryClientProvider>
         <Toaster position="bottom-center" />
       </body>
     </html>

@@ -1,0 +1,92 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  CardImageForm,
+  CreateColumnRequest,
+  GetColumnsRequest,
+  UpdateColumnRequest,
+} from "./types";
+import {
+  deleteColumn,
+  getColumns,
+  postCardImage,
+  postColumn,
+  updateColumn,
+} from ".";
+
+export const useGetColumnsQuery = (
+  params: GetColumnsRequest,
+  options?: { enabled?: boolean }
+) => {
+  return useQuery({
+    queryKey: ["columns", params.dashboardId],
+    queryFn: () => getColumns(params),
+    enabled: options?.enabled ?? true,
+  });
+};
+
+export const useColumnMutation = (dashboardId: number) => {
+  const queryClient = useQueryClient();
+
+  const post = useMutation({
+    mutationFn: (columnForm: CreateColumnRequest) => {
+      return postColumn(dashboardId, columnForm);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["columns", dashboardId],
+      });
+    },
+  });
+
+  const update = useMutation({
+    mutationFn: ({
+      columnId,
+      formData,
+    }: {
+      columnId: number;
+      formData: UpdateColumnRequest;
+    }) => {
+      return updateColumn(columnId, formData);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["columns", dashboardId],
+      });
+    },
+  });
+
+  const deleteColumnMutation = useMutation({
+    mutationFn: (columnId: number) => {
+      return deleteColumn(columnId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["columns", dashboardId],
+      });
+    },
+  });
+
+  return {
+    create: post.mutateAsync,
+    update: update.mutateAsync,
+    deleteColumn: deleteColumnMutation.mutateAsync,
+  };
+};
+
+export const usePostCardImage = (dashboardId: number) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({
+      columnId,
+      cardImageForm,
+    }: {
+      columnId: number;
+      cardImageForm: CardImageForm;
+    }) => postCardImage(columnId, cardImageForm),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["columns", dashboardId],
+      });
+    },
+  });
+};
