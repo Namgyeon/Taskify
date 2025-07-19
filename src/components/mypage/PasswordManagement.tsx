@@ -9,16 +9,26 @@ import toast from "react-hot-toast";
 import { getErrorMessage } from "@/utils/network/errorMessage";
 import PasswordInput from "../ui/Field/PasswordInput";
 const PasswordManagement = () => {
-  const { mutateAsync: putPassword } = usePutPassword();
+  const { mutateAsync: putPassword, isPending } = usePutPassword();
 
-  const { register, handleSubmit, reset } = useForm<PutPasswordFormData>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm<PutPasswordFormData>({
     mode: "onChange",
   });
 
-  //새비밀번호 확인하는 로직 필요
-  //값 제출하고 리셋해야함.
+  const newPasswordConfirm = watch("newPasswordConfirm");
+  const newPassword = watch("newPassword");
 
   const onSubmit = async (data: PutPasswordRequestData) => {
+    if (newPassword !== newPasswordConfirm) {
+      toast.error("비밀번호가 일치하지 않습니다.");
+      return;
+    }
     try {
       await putPassword(data);
       toast.success("비밀번호가 변경되었습니다.");
@@ -38,6 +48,8 @@ const PasswordManagement = () => {
           <PasswordInput
             id="password"
             {...register("password")}
+            error={!!errors.password}
+            errorMessage={errors.password?.message}
             placeholder="비밀번호 입력"
           />
         </div>
@@ -46,6 +58,8 @@ const PasswordManagement = () => {
           <PasswordInput
             id="newPassword"
             {...register("newPassword")}
+            error={!!errors.newPassword}
+            errorMessage={errors.newPassword?.message}
             placeholder="새 비밀번호 입력"
           />
         </div>
@@ -53,12 +67,17 @@ const PasswordManagement = () => {
           <BaseLabel id="newPasswordConfirm">새 비밀번호 확인</BaseLabel>
           <PasswordInput
             id="newPasswordConfirm"
-            {...register("newPasswordConfirm")}
+            {...register("newPasswordConfirm", {
+              validate: (value) =>
+                value === newPassword || "비밀번호가 일치하지 않습니다",
+            })}
+            error={!!errors.newPasswordConfirm}
+            errorMessage={errors.newPasswordConfirm?.message}
             placeholder="새 비밀번호 확인"
           />
         </div>
-        <Button type="submit" variant="primary">
-          변경
+        <Button type="submit" variant="primary" disabled={isPending}>
+          {isPending ? "변경중..." : "변경"}
         </Button>
       </form>
     </div>
