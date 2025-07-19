@@ -2,30 +2,20 @@ import { useGetCommentsInfinite } from "@/apis/comments/queries";
 import { Comment } from "@/apis/comments/types";
 import { useEffect, useRef } from "react";
 import CardComment from "./CardComment";
+import { useInView } from "react-intersection-observer";
 
 const CardCommentList = ({ cardId }: { cardId: number }) => {
   const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useGetCommentsInfinite({ cardId });
 
-  console.log("댓글데이터", data);
-
-  const observerRef = useRef<HTMLDivElement>(null);
+  const { ref, inView } = useInView({
+    threshold: 1.0,
+  });
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
-          fetchNextPage();
-        }
-      },
-      { threshold: 1.0 }
-    );
-
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
     }
-
-    return () => observer.disconnect();
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   const allComments = data?.pages.flatMap((page) => page.comments) ?? [];
@@ -45,7 +35,7 @@ const CardCommentList = ({ cardId }: { cardId: number }) => {
         </div>
       )}
       {/* 무한 스크롤 트리거 요소 */}
-      <div ref={observerRef} className="h-10 flex items-center justify-center">
+      <div ref={ref} className="h-10 flex items-center justify-center">
         {isFetchingNextPage && (
           <div className="text-gray-500">댓글 불러오는중</div>
         )}
