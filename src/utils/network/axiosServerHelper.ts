@@ -4,7 +4,10 @@ import { cookies } from "next/headers";
 console.log("Environment API URL:", process.env.NEXT_PUBLIC_API_URL);
 
 const axiosServerHelper = axios.create({
-  baseURL: "https://sp-taskify-api.vercel.app/12-2",
+  baseURL:
+    process.env.API_URL ||
+    process.env.NEXT_PUBLIC_API_URL ||
+    "https://sp-taskify-api.vercel.app/12-2",
 });
 
 axiosServerHelper.interceptors.request.use(async (config) => {
