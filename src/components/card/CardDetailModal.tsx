@@ -102,7 +102,7 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
                   </div>
                 </div>
                 <div className="w-px h-5 bg-gray-300"></div>
-                <div>
+                <div className="flex gap-1 flex-wrap">
                   {cardData?.tags.map((tag: string, index: number) => {
                     const tagColor = getRandomColor(tag);
                     return (

@@ -19,8 +19,8 @@ const Card = ({ card }: CardProps) => {
         className="flex flex-col gap-2 border border-gray-200 rounded-lg p-4 bg-white hover:shadow-md transition-shadow cursor-pointer"
         onClick={() => modalRef.current?.open()}
       >
-        {/* 카드 이미지 있으면 출력 */}
         <div className="md:flex lg:flex-col md:gap-4">
+          {/* 카드 이미지 있으면 출력 */}
           {card.imageUrl && (
             <div className="relative w-full h-40 md:w-25 md:h-14 lg:w-full lg:h-40">
               <Image
