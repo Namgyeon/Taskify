@@ -34,8 +34,6 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
     size: 20,
   });
 
-  console.log("columnId, dashboardId", columnId, dashboardId);
-
   const {
     register,
     handleSubmit,
@@ -51,8 +49,6 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
       columnId,
     },
   });
-
-  console.log("현재errors:", errors);
 
   const assigneeUserId = watch("assigneeUserId");
   const selectedMember = data?.members.find(

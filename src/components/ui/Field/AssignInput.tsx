@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useRef } from "react";
+import { InputHTMLAttributes } from "react";
 import BaseLabel from "./BaseLabel";
 import Input from "./Input";
 import { Member } from "@/apis/members/types";
