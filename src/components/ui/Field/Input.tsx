@@ -57,7 +57,7 @@ const Input = forwardRef(
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
-      <div className="w-full flex flex-col gap-2">
+      <div className={clsx("w-full flex flex-col gap-2", className)}>
         {label && <BaseLabel id={id}>{label}</BaseLabel>}
         <div className="relative flex items-center">
           {displayElement ? (
@@ -66,8 +66,7 @@ const Input = forwardRef(
                 "md:w-[220px] px-4 py-3.5 border rounded-md outline-none focus:ring-2 min-h-[48px]",
                 error
                   ? "border-[var(--red-D6173A)] focus:ring-[var(--red-D6173A)]"
-                  : "border-[var(--gray-D9D9D9)] focus:ring-[var(--violet-5534DA)]",
-                className
+                  : "border-[var(--gray-D9D9D9)] focus:ring-[var(--violet-5534DA)]"
               )}
             >
               {displayElement}
