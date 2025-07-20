@@ -14,13 +14,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const baseStyles =
-  "rounded-md font-medium cursor-pointer transition-all duration-200 border-2 focus:outline-none focus:ring-2 focus:ring-offset-2";
+  "rounded-md font-medium cursor-pointer hover:shadow-lg transition-all duration-200 border-2 focus:outline-none focus:ring-2 focus:ring-offset-2";
 
 const variantStyles = {
   primary:
     "bg-[var(--violet-5534DA)] text-white border-transparent hover:bg-[var(--violet-5534DA)]/90 focus:ring-[var(--violet-5534DA)]/50",
   secondary:
-    "bg-white text-[var(--violet-5534DA)] border-[var(--violet-5534DA)] hover:bg-[var(--violet-5534DA)]/10 focus:ring-[var(--violet-5534DA)]/50",
+    "bg-white text-[var(--violet-5534DA)] border-gray-300 hover:bg-[var(--violet-5534DA)]/10 focus:ring-[var(--violet-5534DA)]/50",
 };
 
 const sizeStyles = {
