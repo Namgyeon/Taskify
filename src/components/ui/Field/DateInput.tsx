@@ -2,6 +2,7 @@ import Image from "next/image";
 import DatePicker from "react-datepicker";
 import BaseLabel from "./BaseLabel";
 import "react-datepicker/dist/react-datepicker.css";
+import { ko } from "date-fns/locale";
 
 interface DateInputProps {
   value: Date;
@@ -32,7 +33,7 @@ const DateInput = ({
         <DatePicker
           id={id}
           wrapperClassName="w-full"
-          className="w-full px-10 py-3.5 border rounded-md outline-none focus:ring-2 border-[var(--gray-D9D9D9)] focus:ring-[var(--violet-5534DA)]"
+          className="w-full px-10 py-3.5 border rounded-md outline-none cursor-pointer focus:ring-2 border-[var(--gray-D9D9D9)] focus:ring-[var(--violet-5534DA)]"
           selected={value}
           onChange={onChange}
           dateFormat="yyyy. MM. dd HH:mm"
@@ -42,7 +43,7 @@ const DateInput = ({
           timeCaption="시간"
           timeFormat="HH:mm"
           timeIntervals={5}
-          locale="ko"
+          locale={ko}
         />
       </div>
       {error && <p className="text-red-500 text-sm mt-1">{errorMessage}</p>}

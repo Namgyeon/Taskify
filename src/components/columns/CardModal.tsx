@@ -47,12 +47,6 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
     defaultValues: {
       dashboardId,
       columnId,
-      assigneeUserId: 0,
-      title: "",
-      description: "",
-      tags: [],
-      dueDate: undefined,
-      imageUrl: undefined,
     },
   });
 
@@ -68,7 +62,7 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
           columnId,
           cardImageForm: { image: file },
         });
-        setValue("imageUrl", imageUrl as unknown as File);
+        setValue("imageUrl", imageUrl);
       } catch (error) {
         const errorMessage = getErrorMessage(error);
         toast.error(errorMessage);
@@ -79,8 +73,8 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
   };
 
   const onSubmit = async (data: CreateCardForm) => {
+    console.log("현재data:", data);
     try {
-      // formattedData 정의 필요
       const formattedData = {
         ...data,
         dueDate:
@@ -103,7 +97,7 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-6 md:gap-8">
+    <div className="h-[90vh] overflow-y-auto flex flex-col gap-6 md:gap-8">
       <ModalHeader>
         <h2 className="text-xl md:text-2xl font-bold text-[#333236]">
           할 일 생성
