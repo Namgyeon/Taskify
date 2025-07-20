@@ -182,10 +182,7 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
       </ModalBody>
       <ModalFooter>
         <div className="flex justify-end gap-2">
-          <Button
-            onClick={onClose}
-            className="min-w-[144px] min-h-[54px] text-[#787486] bg-white border-[#D9D9D9] hover:bg-[#D9D9D9]"
-          >
+          <Button onClick={onClose} variant="secondary" className="flex-1">
             취소
           </Button>
 
@@ -193,7 +190,8 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
             type="submit"
             form="card-form"
             disabled={isSubmitting}
-            className="min-w-[144px] min-h-[54px] text-[white] hover:bg-[#4A2DB8]"
+            variant="primary"
+            className="flex-1"
           >
             {isSubmitting ? "생성 중..." : "생성"}
           </Button>
