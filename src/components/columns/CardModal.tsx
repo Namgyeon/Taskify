@@ -73,7 +73,6 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
   };
 
   const onSubmit = async (data: CreateCardForm) => {
-    console.log("현재data:", data);
     try {
       const formattedData = {
         ...data,
@@ -88,16 +87,13 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
       toast.success("카드가 생성되었습니다.");
       onClose();
     } catch (error) {
-      const errorMessage =
-        error instanceof Error
-          ? error.message
-          : "알 수 없는 오류가 발생했습니다.";
+      const errorMessage = getErrorMessage(error);
       toast.error(errorMessage);
     }
   };
 
   return (
-    <div className="h-[90vh] overflow-y-auto flex flex-col gap-6 md:gap-8">
+    <div className="h-[90vh] max-w-[680px] overflow-y-auto flex flex-col gap-6 md:gap-8">
       <ModalHeader>
         <h2 className="text-xl md:text-2xl font-bold text-[#333236]">
           할 일 생성

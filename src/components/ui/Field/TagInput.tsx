@@ -17,9 +17,10 @@ const TagInput = ({
   id,
 }: TagInputProps) => {
   const [inputValue, setInputValue] = useState("");
+  const [isComposing, setIsComposing] = useState(false);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && inputValue.trim()) {
+    if (e.key === "Enter" && inputValue.trim() && !isComposing) {
       e.preventDefault();
 
       if (!value.includes(inputValue.trim())) {
@@ -29,6 +30,16 @@ const TagInput = ({
 
       setInputValue("");
     }
+  };
+
+  // 조합 시작
+  const handleCompositionStart = () => {
+    setIsComposing(true);
+  };
+
+  // 조합 종료
+  const handleCompositionEnd = () => {
+    setIsComposing(false);
   };
 
   const removeTag = (tagToRemove: string) => {
@@ -46,6 +57,9 @@ const TagInput = ({
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
+          maxLength={10}
+          onCompositionStart={handleCompositionStart} // 추가
+          onCompositionEnd={handleCompositionEnd}
           placeholder="입력후 Enter"
           className="w-full px-4 py-3.5 border border-gray-300 rounded-md outline-none focus:ring-2 focus:ring-[var(--violet-5534DA)]"
         />
