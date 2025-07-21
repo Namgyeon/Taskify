@@ -11,13 +11,14 @@ import Button from "../ui/Button";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { getErrorMessage } from "@/utils/network/errorMessage";
+import Skeleton from "react-loading-skeleton";
 
 const InviteManagement = ({ dashboardId }: { dashboardId: number }) => {
   const pageSize = 5;
   const [page, setPage] = useState(1);
   const modalRef = useRef<ModalHandle>(null);
 
-  const { data } = useGetDashboardMemberInvitationsQuery({
+  const { data, isLoading } = useGetDashboardMemberInvitationsQuery({
     dashboardId,
     page,
     size: pageSize,
@@ -35,6 +36,24 @@ const InviteManagement = ({ dashboardId }: { dashboardId: number }) => {
       toast.error(errorMessage);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="max-w-[540px] lg:max-w-[620px] flex flex-col gap-6 px-4 md:px-7 py-5 md:py-8 rounded-lg bg-white">
+        <div className="flex items-center justify-between">
+          <Skeleton width={80} height={20} />
+          <Skeleton width={120} height={20} />
+        </div>
+        <div className="flex items-center justify-between">
+          <Skeleton width={100} height={20} />
+          <Skeleton width={40} height={32} />
+        </div>
+        <div className="flex items-center justify-between">
+          <Skeleton width={100} height={20} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>

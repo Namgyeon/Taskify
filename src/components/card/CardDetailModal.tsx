@@ -26,14 +26,16 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
   );
   const editModalRef = useRef<ModalHandle>(null);
 
-  console.log("컬럼데이터", columnData);
-
   const cardColumn = columnData?.data?.find(
     (column: Column) => column.id === cardData?.columnId
   );
 
   if (!cardData) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-600"></div>
+      </div>
+    );
   }
 
   return (
