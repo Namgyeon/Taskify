@@ -9,7 +9,6 @@ import Button from "@/components/ui/Button";
 import BaseLabel from "@/components/ui/Field/BaseLabel";
 import Input from "@/components/ui/Field/Input";
 import { getErrorMessage } from "@/utils/network/errorMessage";
-import { AxiosError } from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
