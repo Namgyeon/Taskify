@@ -72,6 +72,7 @@ const SidebarBoardList = () => {
                     alt="왕관아이콘"
                     width={20}
                     height={20}
+                    style={{ width: "auto", height: "20px" }}
                   />
                 </div>
               )}

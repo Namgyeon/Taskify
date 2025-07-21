@@ -47,6 +47,7 @@ const Dropdown = ({
           <Image
             src={icon ?? "/ui/kebabMenu-icon.svg"}
             alt="드롭다운 아이콘"
+            sizes="100vw"
             fill
             className="object-cover"
           />

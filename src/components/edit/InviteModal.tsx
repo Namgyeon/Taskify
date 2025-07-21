@@ -57,6 +57,7 @@ const InviteModal = ({
             <Image
               src="/column/close-icon.svg"
               alt="닫기 아이콘"
+              sizes="100vw"
               fill
               className="object-contain"
             />

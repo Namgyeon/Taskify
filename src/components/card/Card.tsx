@@ -27,6 +27,7 @@ const Card = ({ card }: CardProps) => {
                 src={card.imageUrl}
                 alt="카드 이미지"
                 fill
+                sizes="160px"
                 className="object-cover rounded-lg"
               />
             </div>
@@ -57,6 +58,8 @@ const Card = ({ card }: CardProps) => {
                     <Image
                       src={"/column/calendar-icon.svg"}
                       alt="캘린더 아이콘"
+                      sizes="160px"
+                      priority
                       fill
                       className="object-cover"
                     />

@@ -30,6 +30,7 @@ const Avatar = ({
         <Image
           src={profileImageUrl}
           alt={userName}
+          sizes="100vw"
           fill
           className="object-cover"
         />
