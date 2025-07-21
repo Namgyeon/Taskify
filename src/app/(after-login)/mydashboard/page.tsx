@@ -10,11 +10,11 @@ export const metadata: Metadata = {
     title: "Taskify - 내 대시보드",
     description:
       "Taskify 내 대시보드에서 개인 일정을 쉽고 편하게 관리해 보세요.",
-    url: "https://taskify-3ypqbp4os-namgyeons-projects.vercel.app/mydashboard",
+    url: "https://taskify-namgyeon.vercel.app/mydashboard",
     type: "website",
     images: [
       {
-        url: "https://taskify-3ypqbp4os-namgyeons-projects.vercel.app/meta.png",
+        url: "https://taskify-namgyeon.vercel.app/meta.png",
         width: 1200,
         height: 630,
         alt: "Taskify 대시보드 페이지 이미지",
