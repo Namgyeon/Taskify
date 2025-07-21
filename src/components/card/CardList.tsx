@@ -2,6 +2,7 @@ import { useGetCardsQuery } from "@/apis/cards/queries";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import Card from "./Card";
+import Skeleton from "react-loading-skeleton";
 
 interface CardListProps {
   columnId: number;
@@ -24,7 +25,6 @@ const CardList = ({ columnId }: CardListProps) => {
     threshold: 1.0,
   });
 
-  // 무한 스크롤을 위한 Intersection Observer
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
@@ -35,7 +35,14 @@ const CardList = ({ columnId }: CardListProps) => {
   const allCards = data?.pages.flatMap((page) => page.cards) ?? [];
 
   if (isLoading) {
-    return <div className="text-center py-4">카드 로딩 중...</div>;
+    return (
+      <div className="flex flex-col gap-4 w-25 h-25 md:w-full md:h-full">
+        <Skeleton width={300} height={300} />
+        <Skeleton width={300} height={300} />
+        <Skeleton width={300} height={300} />
+        <Skeleton width={300} height={300} />
+      </div>
+    );
   }
 
   if (error) {

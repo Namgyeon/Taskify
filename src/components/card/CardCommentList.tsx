@@ -3,6 +3,7 @@ import { Comment } from "@/apis/comments/types";
 import { useEffect } from "react";
 import CardComment from "./CardComment";
 import { useInView } from "react-intersection-observer";
+import Skeleton from "react-loading-skeleton";
 
 const CardCommentList = ({ cardId }: { cardId: number }) => {
   const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
@@ -23,9 +24,13 @@ const CardCommentList = ({ cardId }: { cardId: number }) => {
   return (
     <div>
       {isLoading ? (
-        <div className="flex flex-col gap-3">
-          <CommentSkeleton />
-          <CommentSkeleton />
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-2">
+            <Skeleton width={40} height={40} />
+            <Skeleton width={48} height={32} />
+            <Skeleton width={48} height={32} />
+          </div>
+          <Skeleton width={100} height={32} />
         </div>
       ) : (
         <div className="flex flex-col gap-3">
@@ -44,16 +49,3 @@ const CardCommentList = ({ cardId }: { cardId: number }) => {
   );
 };
 export default CardCommentList;
-
-const CommentSkeleton = () => {
-  return (
-    <div className="flex flex-col gap-2">
-      <div className="flex gap-2">
-        <div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse"></div>
-        <div className="w-12 h-8 bg-gray-200 rounded-md animate-pulse"></div>
-        <div className="w-12 h-8 bg-gray-200 rounded-md animate-pulse"></div>
-      </div>
-      <div className="w-full h-8 bg-gray-200 rounded-md animate-pulse"></div>
-    </div>
-  );
-};

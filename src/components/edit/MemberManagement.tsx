@@ -7,19 +7,18 @@ import Button from "@/components/ui/Button";
 import { getErrorMessage } from "@/utils/network/errorMessage";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import Skeleton from "react-loading-skeleton";
 
 const MemberManagement = ({ dashboardId }: { dashboardId: number }) => {
   const [page, setPage] = useState<number>(1);
   const size = 4;
 
-  const { data } = useGetMembers({
+  const { data, isLoading } = useGetMembers({
     dashboardId: dashboardId,
     page,
     size,
   });
   const { mutate: deleteMember } = useDeleteMember();
-
-  // console.log("멤버데이터:", data);
 
   const totalPage = data?.totalCount ? Math.ceil(data.totalCount / size) : 1;
 
@@ -32,6 +31,24 @@ const MemberManagement = ({ dashboardId }: { dashboardId: number }) => {
       toast.error(errorMessage);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="max-w-[540px] lg:max-w-[620px] flex flex-col gap-6 px-4 md:px-7 py-5 md:py-8 rounded-lg bg-white">
+        <div className="flex items-center justify-between">
+          <Skeleton width={80} height={20} />
+          <Skeleton width={120} height={20} />
+        </div>
+        <div className="flex items-center justify-between border-b border-gray-200 py-3">
+          <div className="flex items-center gap-2">
+            <Skeleton circle width={30} height={30} />
+            <Skeleton width={100} height={20} />
+          </div>
+          <Skeleton width={40} height={32} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-[540px] lg:max-w-[620px] flex flex-col gap-6 px-4 md:px-7 py-5 md:py-8 rounded-lg bg-white">
