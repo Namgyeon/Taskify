@@ -16,6 +16,7 @@ const SidebarLogo = () => {
             alt="로고이미지"
             width={30}
             height={30}
+            style={{ width: "auto", height: "30px" }}
           />
         </div>
       </Link>
