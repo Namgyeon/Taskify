@@ -4,6 +4,7 @@ import DashboardModalBody from "./DashboardModalBody";
 import DashboardModalFooter from "./DashboardModalFooter";
 import DashboardModalHeader from "./DashboardModalHeader";
 import toast from "react-hot-toast";
+import { getErrorMessage } from "@/utils/network/errorMessage";
 
 interface DashboardModalProps {
   close: () => void;
@@ -18,10 +19,7 @@ const DashboardModal = ({ close }: DashboardModalProps) => {
       toast.success("대시보드가 생성되었습니다");
       close();
     } catch (error) {
-      const errorMessage =
-        error instanceof Error
-          ? error.message
-          : "대시보드 생성 중 알 수 없는 오류가 발생했습니다.";
+      const errorMessage = getErrorMessage(error);
       toast.error(errorMessage);
     }
   };

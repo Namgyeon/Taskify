@@ -1,23 +1,18 @@
 import { useGetCommentsInfinite } from "@/apis/comments/queries";
 import { Comment } from "@/apis/comments/types";
-import { useEffect } from "react";
 import CardComment from "./CardComment";
-import { useInView } from "react-intersection-observer";
 import Skeleton from "react-loading-skeleton";
+import { useInfiniteScroll } from "@/utils/hook/useInfiniteScroll";
 
 const CardCommentList = ({ cardId }: { cardId: number }) => {
   const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useGetCommentsInfinite({ cardId });
 
-  const { ref, inView } = useInView({
-    threshold: 1.0,
+  const { ref } = useInfiniteScroll({
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
   });
-
-  useEffect(() => {
-    if (inView && hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   const allComments = data?.pages.flatMap((page) => page.comments) ?? [];
 

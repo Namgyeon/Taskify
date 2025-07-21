@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CommentInputForm, commentInputSchema } from "@/apis/comments/types";
 import toast from "react-hot-toast";
+import { getErrorMessage } from "@/utils/network/errorMessage";
 
 const CardCommentInput = ({
   cardId,
@@ -42,8 +43,7 @@ const CardCommentInput = ({
       toast.success("댓글이 작성되었습니다.");
       reset();
     } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "댓글 작성에 실패했습니다.";
+      const errorMessage = getErrorMessage(error);
       toast.error(errorMessage);
     }
   };

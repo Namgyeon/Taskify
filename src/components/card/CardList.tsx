@@ -1,8 +1,7 @@
 import { useGetCardsQuery } from "@/apis/cards/queries";
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
 import Card from "./Card";
 import Skeleton from "react-loading-skeleton";
+import { useInfiniteScroll } from "@/utils/hook/useInfiniteScroll";
 
 interface CardListProps {
   columnId: number;
@@ -21,15 +20,11 @@ const CardList = ({ columnId }: CardListProps) => {
     size: 10,
   });
 
-  const { ref, inView } = useInView({
-    threshold: 1.0,
+  const { ref } = useInfiniteScroll({
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
   });
-
-  useEffect(() => {
-    if (inView && hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage, inView]);
 
   // 모든 페이지의 카드들을 하나의 배열로 합치기
   const allCards = data?.pages.flatMap((page) => page.cards) ?? [];

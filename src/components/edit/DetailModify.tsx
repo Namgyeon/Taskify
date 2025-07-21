@@ -8,7 +8,7 @@ import { PatchDashboardFormData } from "@/apis/dashboards/types";
 import Button from "@/components/ui/Button";
 import BaseLabel from "@/components/ui/Field/BaseLabel";
 import Input from "@/components/ui/Field/Input";
-import { AxiosError } from "axios";
+import { getErrorMessage } from "@/utils/network/errorMessage";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -20,7 +20,6 @@ const DetailModify = ({ dashboardId }: { dashboardId: number }) => {
   const { mutate: patchDashboard } = usePatchDashboard(dashboardId);
 
   const colors = ["#7AC555", "#760DDE", "#FFA500", "#76A5EA", "#E876EA"];
-  // console.log("edit대시드데이터", data);
 
   const { register, handleSubmit, reset, setValue } = useForm({
     defaultValues: {
@@ -49,10 +48,7 @@ const DetailModify = ({ dashboardId }: { dashboardId: number }) => {
       await patchDashboard(data);
       toast.success("대시보드 수정 완료");
     } catch (error) {
-      const errorMessage =
-        error instanceof AxiosError
-          ? error.response?.data.message
-          : "대시보드 수정 실패";
+      const errorMessage = getErrorMessage(error);
       toast.error(errorMessage);
     }
   };

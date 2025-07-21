@@ -93,11 +93,6 @@ const EditCardModal = ({
 
   const onSubmit = async (data: UpdateCardForm) => {
     try {
-      // 이미지 업로드하고 URL 받기
-      // const { imageUrl } = data.imageUrl
-      //   ? await postCardImage(cardData.columnId, { image: data.imageUrl })
-      //   : { imageUrl: cardData.imageUrl };
-
       const formattedData = {
         ...data,
         dueDate:
@@ -111,10 +106,7 @@ const EditCardModal = ({
       toast.success("카드가 수정되었습니다.");
       onClose();
     } catch (error) {
-      const errorMessage =
-        error instanceof Error
-          ? error.message
-          : "알 수 없는 오류가 발생했습니다.";
+      const errorMessage = getErrorMessage(error);
       toast.error(errorMessage);
     }
   };

@@ -8,6 +8,7 @@ import Button from "@/components/ui/Button";
 import { useSignIn } from "@/apis/auth/queries";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
+import { getErrorMessage } from "@/utils/network/errorMessage";
 
 const SigninForm = () => {
   const {
@@ -28,11 +29,8 @@ const SigninForm = () => {
         window.location.reload();
       },
       onError: (error: unknown) => {
-        const message =
-          error instanceof Error
-            ? error.message
-            : "로그인 중 알 수 없는 오류가 발생했습니다.";
-        toast.error(message);
+        const errorMessage = getErrorMessage(error);
+        toast.error(errorMessage);
       },
     });
   };

@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { useColumnMutation } from "@/apis/columns/queries";
 import { Column } from "@/apis/columns/types";
 import toast from "react-hot-toast";
+import { getErrorMessage } from "@/utils/network/errorMessage";
 
 const ColumnSettingBtn = (column: Column) => {
   const updateModalRef = useRef<ModalHandle>(null);
@@ -31,8 +32,7 @@ const ColumnSettingBtn = (column: Column) => {
       await update({ columnId: column.id, formData: { title: data.title } });
       toast.success("컬럼 이름이 변경되었습니다.");
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "컬럼 이름 변경에 실패했습니다.";
+      const errorMessage = getErrorMessage(err);
       toast.error(errorMessage);
     }
 
@@ -44,8 +44,7 @@ const ColumnSettingBtn = (column: Column) => {
       await deleteColumn(column.id);
       toast.success("컬럼이 삭제되었습니다.");
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "컬럼 삭제에 실패했습니다.";
+      const errorMessage = getErrorMessage(err);
       toast.error(errorMessage);
     }
   };
