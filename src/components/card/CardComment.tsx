@@ -63,6 +63,8 @@ const CardComment = ({
     }
   };
 
+  console.log("원본시간", comment.createdAt);
+
   const onSubmit = async (data: CommentInputForm) => {
     try {
       await updateCommentMutation.mutateAsync({
