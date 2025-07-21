@@ -2,7 +2,6 @@
 
 import { useGetDashboardsQuery } from "@/apis/dashboards/queries";
 import Pagination from "@/components/pagination/Pagination";
-import clsx from "clsx";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
