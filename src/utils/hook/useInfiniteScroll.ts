@@ -20,7 +20,7 @@ export const useInfiniteScroll = ({
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage, inView]);
 
   return { ref };
 };

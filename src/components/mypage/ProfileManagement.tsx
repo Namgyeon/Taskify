@@ -40,7 +40,7 @@ const ProfileManagement = () => {
         profileImageUrl: data.profileImageUrl,
       });
     }
-  }, [data]);
+  }, [data, reset]);
 
   const handleProfileImageChange = async (file: File | null | undefined) => {
     if (file) {
