@@ -1,5 +1,8 @@
+"use client";
+
 import clsx from "clsx";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 type FeatureCardProps = {
   point: number;
@@ -40,20 +43,34 @@ const FeatureCard = ({
 
 const Feature = () => {
   return (
-    <div className="flex flex-col gap-13">
-      <FeatureCard
-        point={1}
-        title={`일의 우선순위를
+    <div className="flex flex-col gap-40">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        viewport={{ once: false }}
+      >
+        <FeatureCard
+          point={1}
+          title={`일의 우선순위를
           관리하세요`}
-        imgSrc="/landing/feature-1.svg"
-      />
-      <FeatureCard
-        point={2}
-        title={`해야 할 일을
+          imgSrc="/landing/feature-1.svg"
+        />
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        viewport={{ once: false }}
+      >
+        <FeatureCard
+          point={2}
+          title={`해야 할 일을
           등록하세요`}
-        imgSrc="/landing/feature-2.svg"
-        reverse={true}
-      />
+          imgSrc="/landing/feature-2.svg"
+          reverse={true}
+        />
+      </motion.div>
     </div>
   );
 };
