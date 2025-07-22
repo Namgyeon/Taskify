@@ -63,7 +63,7 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
                 <Image
                   src="/column/close-icon.svg"
                   alt="모달 닫기 아이콘"
-                  sizes="100vw"
+                  sizes="40px"
                   fill
                   className="object-cover"
                 />
@@ -133,7 +133,7 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
                   <Image
                     src={cardData.imageUrl}
                     alt={`${cardData.title} 이미지`}
-                    sizes="100vw"
+                    sizes="600px"
                     fill
                     className="object-cover"
                   />

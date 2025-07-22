@@ -46,8 +46,8 @@ const CardList = ({ columnId }: CardListProps) => {
 
   return (
     <div className="flex flex-col gap-4">
-      {allCards.map((card) => (
-        <Card key={card.id} card={card} />
+      {allCards.map((card, index) => (
+        <Card key={card.id} card={card} index={index} />
       ))}
 
       {/* 무한 스크롤 트리거 요소 */}

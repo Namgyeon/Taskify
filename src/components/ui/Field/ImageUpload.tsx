@@ -93,7 +93,8 @@ const ImageUpload = ({
             <Image
               src={preview}
               alt="미리보기"
-              sizes="100vw"
+              sizes="300px"
+              priority
               fill
               className="object-cover"
             />

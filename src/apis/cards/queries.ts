@@ -59,7 +59,7 @@ export const useUpdateCard = () => {
     },
     onSuccess: (card: Card) => {
       queryClient.invalidateQueries({
-        queryKey: ["cards", card.columnId],
+        queryKey: ["cards"],
       });
       queryClient.invalidateQueries({
         queryKey: ["card", card.id],

@@ -79,7 +79,7 @@ const InviteManagement = ({ dashboardId }: { dashboardId: number }) => {
             onClick={() => modalRef.current?.open()}
             className="flex items-center gap-2 bg-[#5534DA] px-4 py-2 rounded-md cursor-pointer 
           border-2 border-transparent transition-all duration-200 ease-in-out
-          hover:shadow-xl hover:border-white"
+          hover:shadow-xl hover:bg-[#4A2DB8]"
           >
             <Image
               src={"/dashboard/add-icon2.svg"}
