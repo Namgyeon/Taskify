@@ -14,6 +14,7 @@ export default function AuthLayout({
             alt="로고 이미지"
             width={200}
             height={280}
+            priority
           />
           <p className="text-xl font-medium text-[var(--black-333236)]">
             오늘도 만나서 반가워요!

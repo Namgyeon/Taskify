@@ -23,6 +23,7 @@ const SidebarHeader = () => {
             alt="더하기버튼"
             width={20}
             height={20}
+            style={{ width: "20px", height: "20px" }}
           />
         </button>
       </div>

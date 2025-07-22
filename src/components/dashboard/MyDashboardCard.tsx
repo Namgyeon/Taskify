@@ -31,6 +31,7 @@ const MyDashboardCard = ({ dashboard }: MyDashboardCardProps) => {
               alt="왕관아이콘"
               width={20}
               height={20}
+              style={{ width: "20px", height: "20px" }}
             />
           </div>
         )}

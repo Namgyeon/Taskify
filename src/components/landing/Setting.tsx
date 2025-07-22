@@ -15,6 +15,7 @@ const SettingCard = ({ title, description, imgSrc }: SettingCardProps) => {
           alt="setting이미지"
           width={200}
           height={200}
+          priority
           className="w-full h-auto"
         />
       </div>

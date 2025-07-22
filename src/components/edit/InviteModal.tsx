@@ -53,7 +53,7 @@ const InviteModal = ({
       <ModalHeader>
         <p className="text-xl md:text-2xl font-bold text-[#333236]">초대하기</p>
         <button type="button" onClick={close}>
-          <div className="relative w-6 h-6 md:w-9 md:h-9">
+          <div className="relative w-6 h-6 md:w-9 md:h-9 cursor-pointer hover:bg-gray-200 rounded-md transition-all duration-200 ease-in-out">
             <Image
               src="/column/close-icon.svg"
               alt="닫기 아이콘"

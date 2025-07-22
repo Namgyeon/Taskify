@@ -46,13 +46,13 @@ const ProfileManagement = () => {
     if (file) {
       try {
         const { profileImageUrl } = await uploadProfileImage({ image: file });
-        setValue("profileImageUrl", profileImageUrl);
+        setValue("profileImageUrl", profileImageUrl, { shouldDirty: true });
       } catch (error) {
         const errorMessage = getErrorMessage(error);
         toast.error(errorMessage);
       }
     } else {
-      setValue("profileImageUrl", null);
+      setValue("profileImageUrl", null, { shouldDirty: true });
     }
   };
 

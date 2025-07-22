@@ -8,9 +8,10 @@ import CardDetailModal from "./CardDetailModal";
 interface CardProps {
   card: CardType;
   onClick?: () => void;
+  index: number;
 }
 
-const Card = ({ card }: CardProps) => {
+const Card = ({ card, index }: CardProps) => {
   const modalRef = useRef<ModalHandle>(null);
   return (
     <>
@@ -27,6 +28,7 @@ const Card = ({ card }: CardProps) => {
                 src={card.imageUrl}
                 alt="카드 이미지"
                 fill
+                priority={index < 2}
                 sizes="160px"
                 className="object-cover rounded-lg"
               />

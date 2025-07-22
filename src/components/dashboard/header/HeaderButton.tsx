@@ -3,13 +3,14 @@ import Link from "next/link";
 import { ButtonHTMLAttributes } from "react";
 
 interface HeaderButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  href: string;
+  href?: string;
   icon: string;
+  onClick?: () => void;
 }
 
-const HeaderButton = ({ children, href, icon }: HeaderButtonProps) => {
+const HeaderButton = ({ children, href, icon, onClick }: HeaderButtonProps) => {
   return (
-    <Link href={href}>
+    <Link href={href ?? ""} onClick={onClick}>
       <div className="flex items-center gap-2 px-4 py-2 border border-gray-400 rounded-lg hover:bg-gray-200 transition-colors">
         <Image
           src={icon}
@@ -17,6 +18,7 @@ const HeaderButton = ({ children, href, icon }: HeaderButtonProps) => {
           width={20}
           height={20}
           className="hidden md:block"
+          style={{ width: "20px", height: "20px" }}
         />
         <div className="font-medium text-[#787486] whitespace-nowrap">
           {children}
