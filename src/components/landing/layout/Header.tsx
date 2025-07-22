@@ -15,6 +15,7 @@ const Header = () => {
         alt="메인페이지 로고 이미지"
         width={100}
         height={50}
+        style={{ width: "100px", height: "50px" }}
         className="hidden md:block"
       />
       <nav>

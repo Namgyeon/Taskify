@@ -10,6 +10,7 @@ const Hero = () => {
           <Image
             src={"/landing/banner_mobile.svg"}
             alt="배너 이미지"
+            priority
             width={722}
             height={422}
             className="w-full h-auto"
