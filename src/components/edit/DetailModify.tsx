@@ -36,7 +36,7 @@ const DetailModify = ({ dashboardId }: { dashboardId: number }) => {
       });
       setSelectedColor(data.color);
     }
-  }, [data]);
+  }, [data, reset]);
 
   const handleColorClick = (color: string) => {
     setSelectedColor(color);

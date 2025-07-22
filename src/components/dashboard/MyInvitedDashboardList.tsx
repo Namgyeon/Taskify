@@ -24,7 +24,7 @@ const MyInvitedDashboardList = () => {
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage, inView]);
 
   const handleAccept = (invitationId: number) => {
     respondToInvitation({ invitationId, inviteAccepted: true });
