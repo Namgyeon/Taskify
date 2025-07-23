@@ -2,6 +2,7 @@ import { useGetCardsQuery } from "@/apis/cards/queries";
 import Card from "./Card";
 import Skeleton from "react-loading-skeleton";
 import { useInfiniteScroll } from "@/utils/hook/useInfiniteScroll";
+import { Draggable } from "@hello-pangea/dnd";
 
 interface CardListProps {
   columnId: number;
@@ -47,7 +48,17 @@ const CardList = ({ columnId }: CardListProps) => {
   return (
     <div className="flex flex-col gap-4">
       {allCards.map((card, index) => (
-        <Card key={card.id} card={card} index={index} />
+        <Draggable key={card.id} draggableId={card.id.toString()} index={index}>
+          {(provided) => (
+            <div
+              ref={provided.innerRef}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+            >
+              <Card key={card.id} card={card} index={index} />
+            </div>
+          )}
+        </Draggable>
       ))}
 
       {/* 무한 스크롤 트리거 요소 */}
