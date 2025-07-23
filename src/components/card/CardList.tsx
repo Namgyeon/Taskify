@@ -49,7 +49,7 @@ const CardList = ({ columnId }: CardListProps) => {
     <div className="flex flex-col gap-4">
       {allCards.map((card, index) => (
         <Draggable key={card.id} draggableId={card.id.toString()} index={index}>
-          {(provided, snapshot) => (
+          {(provided) => (
             <div
               ref={provided.innerRef}
               {...provided.draggableProps}

@@ -4,7 +4,7 @@ import { useGetColumnsQuery } from "@/apis/columns/queries";
 import { useParams } from "next/navigation";
 import Column from "./Column";
 import CreateColumn from "./CreateColumn";
-import { useGetCardDetailQuery, useUpdateCard } from "@/apis/cards/queries";
+import { useUpdateCard } from "@/apis/cards/queries";
 import { DragDropContext, DropResult } from "@hello-pangea/dnd";
 import toast from "react-hot-toast";
 import { getErrorMessage } from "@/utils/network/errorMessage";
