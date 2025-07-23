@@ -10,22 +10,10 @@ export const createCardFormSchema = z.object({
   // .refine((date)=> isValidDate(date),{
   //   message: "유효하지 않은 날짜 형식이 아닙니다.",
   // })
-  tags: z.array(z.string().trim().max(10, "10글자 이하로 작성해주세요")),
-  imageUrl: z
-    .instanceof(File)
-    .refine(
-      (file) =>
-        ["image/jpeg", "image/jpg", "image/png", "image/x-icon"].includes(
-          file.type
-        ),
-      {
-        message: "이미지는 jpeg, jpg, png, ico 형식만 허용됩니다.",
-      }
-    )
-    .refine((file) => file.size < 2 * 1024 * 1024, {
-      message: "5MB이하인 이미지만 등록 가능합니다.",
-    })
+  tags: z
+    .array(z.string().trim().max(10, "10글자 이하로 작성해주세요"))
     .optional(),
+  imageUrl: z.string().optional(),
 });
 export type CreateCardForm = z.infer<typeof createCardFormSchema>;
 export type UpdateCardForm = z.infer<typeof createCardFormSchema>;
@@ -37,7 +25,7 @@ export const createCardRequestSchema = z.object({
   title: z.string(),
   description: z.string(),
   dueDate: z.string(),
-  tags: z.array(z.string()),
+  tags: z.array(z.string()).optional(),
   imageUrl: z.string().optional(),
 });
 export type CreateCardRequest = z.infer<typeof createCardRequestSchema>;

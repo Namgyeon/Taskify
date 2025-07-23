@@ -26,14 +26,16 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
   );
   const editModalRef = useRef<ModalHandle>(null);
 
-  console.log("컬럼데이터", columnData);
-
   const cardColumn = columnData?.data?.find(
     (column: Column) => column.id === cardData?.columnId
   );
 
   if (!cardData) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-600"></div>
+      </div>
+    );
   }
 
   return (
@@ -61,6 +63,7 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
                 <Image
                   src="/column/close-icon.svg"
                   alt="모달 닫기 아이콘"
+                  sizes="40px"
                   fill
                   className="object-cover"
                 />
@@ -102,7 +105,7 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
                   </div>
                 </div>
                 <div className="w-px h-5 bg-gray-300"></div>
-                <div>
+                <div className="flex gap-1 flex-wrap">
                   {cardData?.tags.map((tag: string, index: number) => {
                     const tagColor = getRandomColor(tag);
                     return (
@@ -130,6 +133,7 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
                   <Image
                     src={cardData.imageUrl}
                     alt={`${cardData.title} 이미지`}
+                    sizes="600px"
                     fill
                     className="object-cover"
                   />

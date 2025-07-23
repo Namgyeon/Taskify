@@ -1,6 +1,7 @@
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import QueryClientProvider from "../components/providers/QueryProviders";
+import { Metadata } from "next";
 
 export default function RootLayout({
   children,
@@ -16,3 +17,10 @@ export default function RootLayout({
     </html>
   );
 }
+
+export const metadata: Metadata = {
+  title: "Taskify",
+  icons: {
+    icon: "/favicon.svg",
+  },
+};

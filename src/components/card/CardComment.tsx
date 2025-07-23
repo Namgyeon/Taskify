@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Textarea from "../ui/Field/Textarea";
 import toast from "react-hot-toast";
-import { AxiosError } from "axios";
+import { getErrorMessage } from "@/utils/network/errorMessage";
 
 const CardComment = ({
   comment,
@@ -55,10 +55,7 @@ const CardComment = ({
       });
       toast.success("댓글이 삭제되었습니다.");
     } catch (error) {
-      const errorMessage =
-        error instanceof AxiosError
-          ? error.response?.data.message
-          : "댓글 삭제에 실패했습니다.";
+      const errorMessage = getErrorMessage(error);
       toast.error(errorMessage);
     }
   };
@@ -72,10 +69,7 @@ const CardComment = ({
       setIsEditing(false);
       toast.success("댓글이 수정되었습니다.");
     } catch (error) {
-      const errorMessage =
-        error instanceof AxiosError
-          ? error.response?.data.message
-          : "댓글 수정에 실패했습니다.";
+      const errorMessage = getErrorMessage(error);
       toast.error(errorMessage);
     }
   };

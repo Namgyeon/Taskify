@@ -90,7 +90,14 @@ const ImageUpload = ({
 
         {preview && (
           <div className={clsx("relative", size)}>
-            <Image src={preview} alt="미리보기" fill className="object-cover" />
+            <Image
+              src={preview}
+              alt="미리보기"
+              sizes="300px"
+              priority
+              fill
+              className="object-cover"
+            />
             <button
               className="absolute top-0 right-0 flex items-center justify-center w-5 h-5 text-white bg-black rounded-full p-1 cursor-pointer"
               type="button"

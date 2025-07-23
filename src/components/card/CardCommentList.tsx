@@ -1,41 +1,31 @@
 import { useGetCommentsInfinite } from "@/apis/comments/queries";
 import { Comment } from "@/apis/comments/types";
-import { useEffect, useRef } from "react";
 import CardComment from "./CardComment";
+import Skeleton from "react-loading-skeleton";
+import { useInfiniteScroll } from "@/utils/hook/useInfiniteScroll";
 
 const CardCommentList = ({ cardId }: { cardId: number }) => {
   const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
     useGetCommentsInfinite({ cardId });
 
-  console.log("댓글데이터", data);
-
-  const observerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
-          fetchNextPage();
-        }
-      },
-      { threshold: 1.0 }
-    );
-
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+  const { ref } = useInfiniteScroll({
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  });
 
   const allComments = data?.pages.flatMap((page) => page.comments) ?? [];
 
   return (
     <div>
       {isLoading ? (
-        <div className="flex flex-col gap-3">
-          <CommentSkeleton />
-          <CommentSkeleton />
+        <div className="flex flex-col gap-2">
+          <div className="flex gap-2">
+            <Skeleton width={40} height={40} />
+            <Skeleton width={48} height={32} />
+            <Skeleton width={48} height={32} />
+          </div>
+          <Skeleton width={100} height={32} />
         </div>
       ) : (
         <div className="flex flex-col gap-3">
@@ -45,7 +35,7 @@ const CardCommentList = ({ cardId }: { cardId: number }) => {
         </div>
       )}
       {/* 무한 스크롤 트리거 요소 */}
-      <div ref={observerRef} className="h-10 flex items-center justify-center">
+      <div ref={ref} className="h-10 flex items-center justify-center">
         {isFetchingNextPage && (
           <div className="text-gray-500">댓글 불러오는중</div>
         )}
@@ -54,16 +44,3 @@ const CardCommentList = ({ cardId }: { cardId: number }) => {
   );
 };
 export default CardCommentList;
-
-const CommentSkeleton = () => {
-  return (
-    <div className="flex flex-col gap-2">
-      <div className="flex gap-2">
-        <div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse"></div>
-        <div className="w-12 h-8 bg-gray-200 rounded-md animate-pulse"></div>
-        <div className="w-12 h-8 bg-gray-200 rounded-md animate-pulse"></div>
-      </div>
-      <div className="w-full h-8 bg-gray-200 rounded-md animate-pulse"></div>
-    </div>
-  );
-};

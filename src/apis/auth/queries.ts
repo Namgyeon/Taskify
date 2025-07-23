@@ -16,6 +16,12 @@ export const useLogout = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries();
+      window.location.reload();
+    },
+    onSettled: () => {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      queryClient.clear();
     },
   });
 };

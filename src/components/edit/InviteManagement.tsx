@@ -11,13 +11,14 @@ import Button from "../ui/Button";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { getErrorMessage } from "@/utils/network/errorMessage";
+import Skeleton from "react-loading-skeleton";
 
 const InviteManagement = ({ dashboardId }: { dashboardId: number }) => {
   const pageSize = 5;
   const [page, setPage] = useState(1);
   const modalRef = useRef<ModalHandle>(null);
 
-  const { data } = useGetDashboardMemberInvitationsQuery({
+  const { data, isLoading } = useGetDashboardMemberInvitationsQuery({
     dashboardId,
     page,
     size: pageSize,
@@ -35,6 +36,24 @@ const InviteManagement = ({ dashboardId }: { dashboardId: number }) => {
       toast.error(errorMessage);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="max-w-[540px] lg:max-w-[620px] flex flex-col gap-6 px-4 md:px-7 py-5 md:py-8 rounded-lg bg-white">
+        <div className="flex items-center justify-between">
+          <Skeleton width={80} height={20} />
+          <Skeleton width={120} height={20} />
+        </div>
+        <div className="flex items-center justify-between">
+          <Skeleton width={100} height={20} />
+          <Skeleton width={40} height={32} />
+        </div>
+        <div className="flex items-center justify-between">
+          <Skeleton width={100} height={20} />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -60,7 +79,7 @@ const InviteManagement = ({ dashboardId }: { dashboardId: number }) => {
             onClick={() => modalRef.current?.open()}
             className="flex items-center gap-2 bg-[#5534DA] px-4 py-2 rounded-md cursor-pointer 
           border-2 border-transparent transition-all duration-200 ease-in-out
-          hover:shadow-xl hover:border-white"
+          hover:shadow-xl hover:bg-[#4A2DB8]"
           >
             <Image
               src={"/dashboard/add-icon2.svg"}

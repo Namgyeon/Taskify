@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Header = () => {
   return (
-    <header className="flex items-center justify-between px-6 py-4 md:px-10 xl:px-[70px] bg-black">
+    <header className="fixed top-0 left-0 right-0 z-50 max-w-full flex items-center justify-between px-6 py-4 md:px-10 xl:px-[70px] bg-black/80 backdrop-blur-sm">
       <Image
         src="/logo/main-mobile-logo.svg"
         alt="메인 페이지 모바일 로고 이미지"
@@ -15,6 +15,7 @@ const Header = () => {
         alt="메인페이지 로고 이미지"
         width={100}
         height={50}
+        style={{ width: "100px", height: "50px" }}
         className="hidden md:block"
       />
       <nav>

@@ -8,6 +8,7 @@ import { useParams, usePathname } from "next/navigation";
 const Header = () => {
   const pathname = usePathname();
   const params = useParams();
+
   const { data: dashboardData } = useGetDashboardQuery(Number(params.id));
 
   const getPageTitle = () => {

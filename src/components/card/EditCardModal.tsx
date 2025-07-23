@@ -13,7 +13,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
 import { useGetMembers } from "@/apis/members/queries";
 import { useUpdateCard } from "@/apis/cards/queries";
-// import { postCardImage } from "@/apis/columns";
 import { formatDateForAPI } from "@/utils/formatDate";
 import toast from "react-hot-toast";
 import StateInput from "../ui/Field/StateInput";
@@ -93,11 +92,6 @@ const EditCardModal = ({
 
   const onSubmit = async (data: UpdateCardForm) => {
     try {
-      // 이미지 업로드하고 URL 받기
-      // const { imageUrl } = data.imageUrl
-      //   ? await postCardImage(cardData.columnId, { image: data.imageUrl })
-      //   : { imageUrl: cardData.imageUrl };
-
       const formattedData = {
         ...data,
         dueDate:
@@ -111,10 +105,7 @@ const EditCardModal = ({
       toast.success("카드가 수정되었습니다.");
       onClose();
     } catch (error) {
-      const errorMessage =
-        error instanceof Error
-          ? error.message
-          : "알 수 없는 오류가 발생했습니다.";
+      const errorMessage = getErrorMessage(error);
       toast.error(errorMessage);
     }
   };
@@ -232,10 +223,7 @@ const EditCardModal = ({
       </ModalBody>
       <ModalFooter>
         <div className="flex justify-end gap-2">
-          <Button
-            onClick={onClose}
-            className="min-w-[144px] min-h-[54px] text-[#787486] bg-white border-[#D9D9D9] hover:bg-[#D9D9D9]"
-          >
+          <Button onClick={onClose} variant="secondary" size="lg">
             취소
           </Button>
 
@@ -243,7 +231,8 @@ const EditCardModal = ({
             type="submit"
             form="card-form"
             disabled={isSubmitting}
-            className="min-w-[144px] min-h-[54px] text-[white] hover:bg-[#4A2DB8]"
+            variant="primary"
+            size="lg"
           >
             {isSubmitting ? "생성 중..." : "생성"}
           </Button>

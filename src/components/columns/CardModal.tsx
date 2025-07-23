@@ -47,12 +47,6 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
     defaultValues: {
       dashboardId,
       columnId,
-      assigneeUserId: 0,
-      title: "",
-      description: "",
-      tags: [],
-      dueDate: undefined,
-      imageUrl: undefined,
     },
   });
 
@@ -68,7 +62,7 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
           columnId,
           cardImageForm: { image: file },
         });
-        setValue("imageUrl", imageUrl as unknown as File);
+        setValue("imageUrl", imageUrl);
       } catch (error) {
         const errorMessage = getErrorMessage(error);
         toast.error(errorMessage);
@@ -80,7 +74,6 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
 
   const onSubmit = async (data: CreateCardForm) => {
     try {
-      // formattedData 정의 필요
       const formattedData = {
         ...data,
         dueDate:
@@ -94,16 +87,13 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
       toast.success("카드가 생성되었습니다.");
       onClose();
     } catch (error) {
-      const errorMessage =
-        error instanceof Error
-          ? error.message
-          : "알 수 없는 오류가 발생했습니다.";
+      const errorMessage = getErrorMessage(error);
       toast.error(errorMessage);
     }
   };
 
   return (
-    <div className="flex flex-col gap-6 md:gap-8">
+    <div className="h-[90vh] max-w-[680px] overflow-y-auto flex flex-col gap-6 md:gap-8">
       <ModalHeader>
         <h2 className="text-xl md:text-2xl font-bold text-[#333236]">
           할 일 생성
@@ -192,10 +182,7 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
       </ModalBody>
       <ModalFooter>
         <div className="flex justify-end gap-2">
-          <Button
-            onClick={onClose}
-            className="min-w-[144px] min-h-[54px] text-[#787486] bg-white border-[#D9D9D9] hover:bg-[#D9D9D9]"
-          >
+          <Button onClick={onClose} variant="secondary" className="flex-1">
             취소
           </Button>
 
@@ -203,7 +190,8 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
             type="submit"
             form="card-form"
             disabled={isSubmitting}
-            className="min-w-[144px] min-h-[54px] text-[white] hover:bg-[#4A2DB8]"
+            variant="primary"
+            className="flex-1"
           >
             {isSubmitting ? "생성 중..." : "생성"}
           </Button>

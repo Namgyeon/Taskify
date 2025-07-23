@@ -12,6 +12,7 @@ import {
   createColumnRequestSchema,
 } from "@/apis/columns/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { getErrorMessage } from "@/utils/network/errorMessage";
 
 const ColumnModal = ({ onClose }: { onClose: () => void }) => {
   const params = useParams();
@@ -33,8 +34,7 @@ const ColumnModal = ({ onClose }: { onClose: () => void }) => {
       toast.success("컬럼이 생성되었습니다.");
       onClose();
     } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "알 수 없는 오류";
+      const errorMessage = getErrorMessage(error);
       toast.error(errorMessage);
     }
   };

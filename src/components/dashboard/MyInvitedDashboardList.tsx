@@ -1,15 +1,30 @@
 "use client";
 
 import {
-  useGetDashboardInvitations,
+  useGetDashboardInvitationsInfinite,
   useRespondToInvitation,
 } from "@/apis/invitations/queries";
 import MyInvitedEmptyCard from "./MyInvitedEmptyCard";
 import Button from "../ui/Button";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
+import Skeleton from "react-loading-skeleton";
 
 const MyInvitedDashboardList = () => {
-  const { data, isLoading } = useGetDashboardInvitations({ size: 10 });
+  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
+    useGetDashboardInvitationsInfinite({ size: 6 });
   const { mutate: respondToInvitation } = useRespondToInvitation();
+  const { ref, inView } = useInView({
+    threshold: 1.0,
+  });
+
+  const allInvitations = data?.pages.flatMap((page) => page.invitations) ?? [];
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, hasNextPage, isFetchingNextPage, inView]);
 
   const handleAccept = (invitationId: number) => {
     respondToInvitation({ invitationId, inviteAccepted: true });
@@ -22,16 +37,42 @@ const MyInvitedDashboardList = () => {
   if (isLoading) {
     return (
       <div className="flex flex-col gap-2 w-full">
+        {/* Header 스켈레톤 (실제와 동일한 구조) */}
+        <header className="flex items-center">
+          <div className="hidden md:block w-1/3">
+            <Skeleton width={40} height={16} />
+          </div>
+          <div className="hidden md:block w-1/3">
+            <Skeleton width={50} height={16} />
+          </div>
+          <div className="hidden md:block w-1/3 text-center">
+            <Skeleton width={60} height={16} />
+          </div>
+        </header>
+
+        {/* 데이터 스켈레톤 */}
         {Array.from({ length: 3 }).map((_, idx) => (
           <div
             key={idx}
-            className="flex items-center gap-4 px-4 py-3 border-b border-gray-200 animate-pulse"
+            className="flex flex-col gap-3 py-3.5 md:py-5 border-b border-[#EEEEEE]"
           >
-            <div className="w-32 h-4 bg-gray-300 rounded" />
-            <div className="w-24 h-4 bg-gray-300 rounded" />
-            <div className="flex gap-2 ml-auto">
-              <div className="w-16 h-8 bg-gray-300 rounded" />
-              <div className="w-16 h-8 bg-gray-300 rounded" />
+            <div className="flex flex-col gap-3 md:flex-row md:items-center">
+              <div className="md:w-1/3 flex items-center gap-6">
+                <div className="md:hidden w-10">
+                  <Skeleton width={30} height={14} />
+                </div>
+                <Skeleton width={120} height={16} />
+              </div>
+              <div className="md:w-1/3 flex items-center gap-6">
+                <div className="md:hidden w-10">
+                  <Skeleton width={30} height={14} />
+                </div>
+                <Skeleton width={80} height={16} />
+              </div>
+              <div className="md:w-1/3 flex gap-3 md:justify-center">
+                <Skeleton width={88} height={32} />
+                <Skeleton width={88} height={32} />
+              </div>
             </div>
           </div>
         ))}
@@ -41,11 +82,11 @@ const MyInvitedDashboardList = () => {
 
   return (
     <div>
-      {data?.invitations.length === 0 ? (
+      {allInvitations.length === 0 ? (
         <MyInvitedEmptyCard />
       ) : (
         <div>
-          {data?.invitations.map((invitation) => {
+          {allInvitations.map((invitation) => {
             return (
               <div
                 key={invitation.id}
@@ -94,6 +135,17 @@ const MyInvitedDashboardList = () => {
               </div>
             );
           })}
+          {/* 무한스크롤 트리커 */}
+          <div ref={ref} className="h-10 flex items-center justify-center">
+            {isFetchingNextPage && (
+              <div className="text-gray-500">더 많은 초대를 불러오는 중...</div>
+            )}
+            {!hasNextPage && allInvitations.length > 0 && (
+              <div className="text-gray-400 text-sm">
+                모든 초대를 불러왔습니다.
+              </div>
+            )}
+          </div>
         </div>
       )}
     </div>

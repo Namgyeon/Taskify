@@ -1,8 +1,6 @@
 import axios from "axios";
 import { cookies } from "next/headers";
 
-console.log("Environment API URL:", process.env.NEXT_PUBLIC_API_URL);
-
 const axiosServerHelper = axios.create({
   baseURL:
     process.env.API_URL ||

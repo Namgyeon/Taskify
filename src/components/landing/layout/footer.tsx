@@ -15,32 +15,47 @@ const Footer = () => {
       <div className="mt-15 md:mt-0">
         <ul className="flex gap-5">
           <li>
-            <a href="#" target="_blank" rel="noopener noreferrer">
+            <a
+              href="mailto:getam101@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Image
                 src={"/landing/message-icon.svg"}
                 alt="메시지아이콘"
                 width={20}
                 height={20}
+                style={{ width: "20px", height: "20px" }}
               />
             </a>
           </li>
           <li>
-            <a href="#" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.facebook.com/?locale=ko_KR#"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Image
                 src={"/landing/facebook-icon.svg"}
                 alt="페이스북아이콘"
                 width={20}
                 height={20}
+                style={{ width: "20px", height: "20px" }}
               />
             </a>
           </li>
           <li>
-            <a href="#" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Image
                 src={"/landing/Instagram-icon.svg"}
                 alt="인스타그램아이콘"
                 width={20}
                 height={20}
+                style={{ width: "20px", height: "20px" }}
               />
             </a>
           </li>

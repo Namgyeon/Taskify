@@ -11,9 +11,16 @@ export const metadata: Metadata = {
     title: "Taskify - 회원가입",
     description:
       "새 계정을 만들고, Taskify 함께 일정을 공유하며 생산적인 하루를 관리해 보세요,",
-    url: "https://taskify-3ypqbp4os-namgyeons-projects.vercel.app/signup",
+    url: "https://taskify-namgyeon.vercel.app/signup",
     type: "website",
-    //이미지 추가
+    images: [
+      {
+        url: "https://taskify-namgyeon.vercel.app/meta.png",
+        width: 1200,
+        height: 630,
+        alt: "Taskify 대시보드 페이지 이미지",
+      },
+    ],
   },
 };
 
