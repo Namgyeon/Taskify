@@ -59,7 +59,11 @@ const Dropdown = ({
         )}
       </Menu.Button>
 
-      <Menu.Items className="absolute right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-[9999]">
+      <Menu.Items
+        static={false}
+        unmount={true}
+        className="absolute right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-[9999]"
+      >
         {options.map((option, idx) => (
           <Menu.Item key={idx}>
             {({ active }) => (
