@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Modal, ModalBody, ModalHandle, ModalHeader } from "../ui/Modal";
-import { useGetCardDetailQuery } from "@/apis/cards/queries";
+import { useDeleteCard, useGetCardDetailQuery } from "@/apis/cards/queries";
 import { useGetColumnsQuery } from "@/apis/columns/queries";
 import Avatar from "../ui/Avatar";
 import { Column } from "@/apis/columns/types";
@@ -10,6 +10,7 @@ import CardCommentList from "./CardCommentList";
 import Dropdown from "../ui/Dropdown";
 import { useRef } from "react";
 import EditCardModal from "./EditCardModal";
+import toast from "react-hot-toast";
 
 interface CardDetailModalProps {
   onClose: () => void;
@@ -24,6 +25,7 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
       enabled: !!cardData?.dashboardId,
     }
   );
+  const { mutateAsync: deleteCard } = useDeleteCard();
   const editModalRef = useRef<ModalHandle>(null);
 
   const cardColumn = columnData?.data?.find(
@@ -53,7 +55,13 @@ const CardDetailModal = ({ onClose, cardId }: CardDetailModalProps) => {
                     label: "수정하기",
                     onClick: () => editModalRef.current?.open(),
                   },
-                  { label: "삭제하기" },
+                  {
+                    label: "삭제하기",
+                    onClick: () => {
+                      deleteCard(cardId);
+                      toast.success("카드가 삭제되었습니다.");
+                    },
+                  },
                 ]}
               />
               <div
