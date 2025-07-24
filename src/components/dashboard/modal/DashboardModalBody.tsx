@@ -4,6 +4,7 @@ import {
   PostDashboardsFormData,
   postDashboardsFormSchema,
 } from "@/apis/dashboards/types";
+import BaseLabel from "@/components/ui/Field/BaseLabel";
 import Input from "@/components/ui/Field/Input";
 import { ModalBody } from "@/components/ui/Modal";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -48,13 +49,17 @@ const DashboardModalBody = ({ onSubmit }: DashboardModalBodyProps) => {
         onSubmit={handleSubmit(handleFormSubmit)}
         className="flex flex-col gap-4"
       >
-        <Input
-          {...register("title")}
-          label="대시보드 이름"
-          placeholder="대시보드 이름을 입력하세요"
-          error={!!errors.title}
-          errorMessage={errors.title?.message}
-        />
+        <div>
+          <BaseLabel id="dashboard-title">대시보드 이름</BaseLabel>
+          <Input
+            {...register("title")}
+            id="dashboard-title"
+            placeholder="대시보드 이름을 입력하세요"
+            error={!!errors.title}
+            errorMessage={errors.title?.message}
+            className="p-1"
+          />
+        </div>
         <div className="flex gap-2">
           {PALETTE.map((color) => (
             <button

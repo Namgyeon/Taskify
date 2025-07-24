@@ -13,6 +13,7 @@ import {
 } from "@/apis/columns/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { getErrorMessage } from "@/utils/network/errorMessage";
+import BaseLabel from "../ui/Field/BaseLabel";
 
 const ColumnModal = ({ onClose }: { onClose: () => void }) => {
   const params = useParams();
@@ -46,21 +47,20 @@ const ColumnModal = ({ onClose }: { onClose: () => void }) => {
       </ModalHeader>
       <ModalBody>
         <form id="column-form" onSubmit={handleSubmit(onSubmit)}>
+          <BaseLabel id="column-title">이름</BaseLabel>
           <Input
             {...register("title")}
-            label="이름"
+            id="column-title"
             placeholder="새 컬럼 이름"
             error={!!errors.title}
             errorMessage={errors.title?.message}
+            className="p-1"
           />
         </form>
       </ModalBody>
       <ModalFooter>
         <div className="flex justify-end gap-2">
-          <Button
-            onClick={onClose}
-            className="min-w-[144px] min-h-[54px] text-[#787486] bg-white border-[#D9D9D9] hover:bg-[#D9D9D9]"
-          >
+          <Button onClick={onClose} variant="secondary" className="flex-1">
             취소
           </Button>
 
@@ -69,7 +69,8 @@ const ColumnModal = ({ onClose }: { onClose: () => void }) => {
             form="dashboard-form"
             disabled={isSubmitting}
             onClick={handleSubmit(onSubmit)}
-            className="min-w-[144px] min-h-[54px] text-[white] hover:bg-[#4A2DB8]"
+            variant="primary"
+            className="flex-1"
           >
             {isSubmitting ? "생성 중..." : "생성"}
           </Button>
