@@ -65,7 +65,7 @@ const AssignInput = ({
             </div>
           }
         />
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 ">
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 z-[100]">
           <Dropdown options={memberOptions} icon="/column/toggle-icon.svg" />
         </div>
       </div>
