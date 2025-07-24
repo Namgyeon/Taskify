@@ -80,7 +80,7 @@ const SidebarBoardList = () => {
           );
         })}
         {/* 페이지네이션 */}
-        <div className="mt-auto mb-10">
+        <div className="fixed bottom-6 left-4">
           <Pagination page={page} totalPage={totalPage} setPage={setPage} />
         </div>
       </div>
