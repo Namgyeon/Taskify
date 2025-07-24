@@ -104,8 +104,33 @@ Framer Motion 적용한 랜딩페이지
 
 ## 📁 폴더 구조
 
-<div align="center">
+📂src
+ ┣ 📜middleware.ts
+ ┣ 📂apis
+ ┃ ┣ 📂auth
+ ┃ ┃ ┣ 📜index.ts
+ ┃ ┃ ┣ 📜queries.ts
+ ┃ ┃ ┗ 📜types.ts
+ ┃ ┗ ...
+ ┣ 📂app
+ ┃ ┣ 📜globals.css
+ ┃ ┣ 📜layout.tsx
+ ┃ ┣ 📂(after-login)
+ ┃ ┃ ┣ 📂mydashboard
+ ┃ ┃ ┗ ...
+ ┃ ┗ 📂(before-login)
+ ┃   ┣ 📂(auth)
+ ┃   ┃ ┗ 📂login
+ ┃   ┗ ...
+ ┣ 📂assets
+ ┣ 📂components
+ ┃ ┣ 📂auth
+ ┃ ┣ 📂ui
+ ┃ ┗ ... 
+ ┣ 📂types
+ ┃ ┗ 📜common.ts
+ ┗ 📂utils
 
-### ��️ 프로젝트 구조
+
 
 </div>
