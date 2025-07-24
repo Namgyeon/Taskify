@@ -13,7 +13,7 @@ import DateInput from "../ui/Field/DateInput";
 import TagInput from "../ui/Field/TagInput";
 import ImageUpload from "../ui/Field/ImageUpload";
 import toast from "react-hot-toast";
-import { formatDateForAPI } from "@/utils/formatDate";
+import { formatDateForCardAPI } from "@/utils/formatDate";
 import { useCreateCard } from "@/apis/cards/queries";
 import { usePostCardImage } from "@/apis/columns/queries";
 import { getErrorMessage } from "@/utils/network/errorMessage";
@@ -78,7 +78,7 @@ const CardModal = ({ onClose, columnId }: CardModalProps) => {
         ...data,
         dueDate:
           data.dueDate instanceof Date
-            ? formatDateForAPI(data.dueDate)
+            ? formatDateForCardAPI(data.dueDate)
             : data.dueDate,
         imageUrl: data.imageUrl as string | undefined,
       };

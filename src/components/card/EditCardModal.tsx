@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
 import { useGetMembers } from "@/apis/members/queries";
 import { useUpdateCard } from "@/apis/cards/queries";
-import { formatDateForAPI } from "@/utils/formatDate";
+import { formatDateForCardAPI } from "@/utils/formatDate";
 import toast from "react-hot-toast";
 import StateInput from "../ui/Field/StateInput";
 import { Column } from "@/apis/columns/types";
@@ -97,7 +97,7 @@ const EditCardModal = ({
         ...data,
         dueDate:
           data.dueDate instanceof Date
-            ? formatDateForAPI(data.dueDate)
+            ? formatDateForCardAPI(data.dueDate)
             : data.dueDate,
         imageUrl: data.imageUrl || undefined,
       };
