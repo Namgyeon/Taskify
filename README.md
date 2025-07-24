@@ -103,7 +103,7 @@ Framer Motion 적용한 랜딩페이지
 ---
 
 ## 📁 폴더 구조
-
+```
 📂src
  ┣ 📜middleware.ts
  ┣ 📂apis
@@ -130,7 +130,7 @@ Framer Motion 적용한 랜딩페이지
  ┣ 📂types
  ┃ ┗ 📜common.ts
  ┗ 📂utils
-
+```
 
 
 </div>
