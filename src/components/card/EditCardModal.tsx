@@ -77,10 +77,11 @@ const EditCardModal = ({
   const handleImageUpload = async (file: File | null | undefined) => {
     if (file) {
       try {
-        await uploadCardImage({
+        const { imageUrl } = await uploadCardImage({
           columnId: cardData.columnId,
           cardImageForm: { image: file },
         });
+        setValue("imageUrl", imageUrl);
       } catch (error) {
         const errorMessage = getErrorMessage(error);
         toast.error(errorMessage);
@@ -234,7 +235,7 @@ const EditCardModal = ({
             variant="primary"
             size="lg"
           >
-            {isSubmitting ? "생성 중..." : "생성"}
+            {isSubmitting ? "수정 중..." : "수정"}
           </Button>
         </div>
       </ModalFooter>

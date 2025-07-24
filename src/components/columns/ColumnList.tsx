@@ -35,7 +35,7 @@ const ColumnList = () => {
           cardId: Number(draggableId),
           assigneeUserId: cardDetail.assignee.id,
           dashboardId: cardDetail.dashboardId,
-          columnId: Number(destination.droppableId), // 새로운 컬럼 ID
+          columnId: Number(destination.droppableId),
           title: cardDetail.title,
           description: cardDetail.description,
           dueDate: cardDetail.dueDate,
