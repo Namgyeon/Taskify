@@ -52,7 +52,7 @@ export const StateInput = ({
             </div>
           }
         />
-        <div className="absolute right-4 top-1/2 -translate-y-1/2">
+        <div className="absolute right-4 top-1/2 -translate-y-1/2 z-[100]">
           <Dropdown
             options={titleOptions}
             icon="/column/toggle-icon.svg"

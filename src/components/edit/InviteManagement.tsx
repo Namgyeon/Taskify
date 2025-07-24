@@ -62,9 +62,9 @@ const InviteManagement = ({ dashboardId }: { dashboardId: number }) => {
           <h2 className="text-xl md:text-2xl font-bold">초대 내역</h2>
           {data && (
             <div className="flex items-center gap-2">
-              <p className="text-xs">{`${Math.ceil(
+              <p className="text-xs">{`${page}/${Math.ceil(
                 data.totalCount / pageSize
-              )} 페이지 중 ${page}`}</p>
+              )}`}</p>
               <Pagination
                 page={page}
                 totalPage={Math.ceil(data.totalCount / pageSize)}

@@ -2,7 +2,6 @@
 
 import clsx from "clsx";
 import { forwardRef, ReactNode, useImperativeHandle, useState } from "react";
-import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
 export interface ModalHandle {
@@ -26,7 +25,7 @@ export const Modal = forwardRef<ModalHandle, ModalProps>(
 
     if (!isOpen) return null;
 
-    return createPortal(
+    return (
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -77,8 +76,7 @@ export const Modal = forwardRef<ModalHandle, ModalProps>(
             </motion.div>
           </motion.div>
         )}
-      </AnimatePresence>,
-      document.body
+      </AnimatePresence>
     );
   }
 );

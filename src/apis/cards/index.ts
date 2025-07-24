@@ -59,3 +59,12 @@ export const putCard = async (cardId: number, formData: UpdateCardRequest) => {
   );
   return safeResponse(response.data, cardSchema);
 };
+
+/**
+ * 카드 삭제
+ * https://sp-taskify-api.vercel.app/docs/#/cards/{cardId}
+ */
+export const deleteCard = async (cardId: number) => {
+  await axiosClientHelper.delete(`/cards/${cardId}`);
+  return {};
+};

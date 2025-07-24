@@ -10,7 +10,7 @@ import {
   CreateCardRequest,
   UpdateCardRequest,
 } from "./types";
-import { getCardDetail, getCards, postCard, putCard } from ".";
+import { deleteCard, getCardDetail, getCards, postCard, putCard } from ".";
 
 export const useGetCardsQuery = (params: CardListRequest) => {
   return useInfiniteQuery({
@@ -63,6 +63,20 @@ export const useUpdateCard = () => {
       });
       queryClient.invalidateQueries({
         queryKey: ["card", card.id],
+      });
+    },
+  });
+};
+
+export const useDeleteCard = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (cardId: number) => {
+      return deleteCard(cardId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["cards"],
       });
     },
   });

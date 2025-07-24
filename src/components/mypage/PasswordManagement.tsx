@@ -7,6 +7,7 @@ import { PutPasswordFormData, PutPasswordRequestData } from "@/apis/auth/types";
 import toast from "react-hot-toast";
 import { getErrorMessage } from "@/utils/network/errorMessage";
 import PasswordInput from "../ui/Field/PasswordInput";
+
 const PasswordManagement = () => {
   const { mutateAsync: putPassword, isPending } = usePutPassword();
 
