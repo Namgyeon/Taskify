@@ -56,9 +56,7 @@ const MemberManagement = ({ dashboardId }: { dashboardId: number }) => {
         <h2 className="text-xl md:text-2xl font-bold">구성원</h2>
         {data && (
           <div className="flex items-center gap-3">
-            <p className="text-xs text-[#333236]">
-              {`${totalPage} 페이지 중 ${page}`}
-            </p>
+            <p className="text-xs text-[#333236]">{`${page}/${totalPage}`}</p>
             <Pagination page={page} totalPage={totalPage} setPage={setPage} />
           </div>
         )}
