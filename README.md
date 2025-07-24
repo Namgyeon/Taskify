@@ -84,6 +84,14 @@ Framer Motion 적용한 랜딩페이지
 
 <div align="center">
 
+## ⚙️ API 흐름
+
+<img width="640" height="298" alt="스크린샷 2025-07-24 오후 3 29 30" src="https://github.com/user-attachments/assets/177aedd1-34ad-466e-ae3a-13cb56c4c326" />
+
+<img width="640" height="298" alt="스크린샷 2025-07-24 오후 3 29 43" src="https://github.com/user-attachments/assets/2a6733f7-d416-4f32-bef0-eba98484a275" />
+
+<img width="493" height="243" alt="스크린샷 2025-07-24 오후 3 30 02" src="https://github.com/user-attachments/assets/1da31949-f227-4462-b14a-adef1ee3c4d6" />
+
 ### 💎 주요 기술 스택
 
 </div>
@@ -101,14 +109,6 @@ Framer Motion 적용한 랜딩페이지
 | ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)                          | Next.js와의 완벽한 통합 및 소규모 웹 애플리케이션에서 무료 플랜을 제공해주기 때문에 선정했습니다.                                       |
 
 ---
-
-## ⚙️ API 흐름
-
-<img width="640" height="298" alt="스크린샷 2025-07-24 오후 3 29 30" src="https://github.com/user-attachments/assets/177aedd1-34ad-466e-ae3a-13cb56c4c326" />
-
-<img width="640" height="298" alt="스크린샷 2025-07-24 오후 3 29 43" src="https://github.com/user-attachments/assets/2a6733f7-d416-4f32-bef0-eba98484a275" />
-
-<img width="493" height="243" alt="스크린샷 2025-07-24 오후 3 30 02" src="https://github.com/user-attachments/assets/1da31949-f227-4462-b14a-adef1ee3c4d6" />
 
 ## 📁 폴더 구조
 ```
