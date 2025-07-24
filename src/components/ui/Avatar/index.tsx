@@ -16,7 +16,7 @@ const Avatar = ({
   className,
   ...props
 }: AvatarProps) => {
-  const userName = email || nickname || "user";
+  const userName = nickname || email || "user";
   const firstChar = userName.charAt(0);
 
   const bgColor = useMemo(() => getRandomColor(userName), [userName]);
