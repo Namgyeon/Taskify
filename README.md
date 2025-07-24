@@ -102,6 +102,14 @@ Framer Motion 적용한 랜딩페이지
 
 ---
 
+## ⚙️ API 흐름
+
+<img width="640" height="298" alt="스크린샷 2025-07-24 오후 3 29 30" src="https://github.com/user-attachments/assets/177aedd1-34ad-466e-ae3a-13cb56c4c326" />
+
+<img width="640" height="298" alt="스크린샷 2025-07-24 오후 3 29 43" src="https://github.com/user-attachments/assets/2a6733f7-d416-4f32-bef0-eba98484a275" />
+
+<img width="493" height="243" alt="스크린샷 2025-07-24 오후 3 30 02" src="https://github.com/user-attachments/assets/1da31949-f227-4462-b14a-adef1ee3c4d6" />
+
 ## 📁 폴더 구조
 ```
 📂src
