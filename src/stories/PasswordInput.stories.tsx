@@ -1,9 +1,9 @@
-import Input from "@/components/ui/Field/Input";
+import PasswordInput from "@/components/ui/Field/PasswordInput";
 import { Meta, StoryObj } from "@storybook/react";
 
-const meta: Meta<typeof Input> = {
-  title: "UI/Input",
-  component: Input,
+const meta: Meta<typeof PasswordInput> = {
+  title: "UI/PasswordInput",
+  component: PasswordInput,
   parameters: {
     layout: "centered",
   },
@@ -16,13 +16,9 @@ const meta: Meta<typeof Input> = {
       control: { type: "text" },
       description: "에러 메시지 텍스트",
     },
-    imageRightUrl: {
+    label: {
       control: { type: "text" },
-      description: "오른쪽 이미지 URL",
-    },
-    imageLeftUrl: {
-      control: { type: "text" },
-      description: "왼쪽 이미지 URL",
+      description: "라벨 텍스트",
     },
   },
 };
@@ -32,25 +28,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    placeholder: "입력하세요",
+    label: "비밀번호",
   },
 };
 
 export const Error: Story = {
   args: {
+    label: "비밀번호",
     error: true,
     errorMessage: "에러 메시지",
-  },
-};
-
-export const ImageRight: Story = {
-  args: {
-    imageRightUrl: "/column/calendar-icon.svg",
-  },
-};
-
-export const ImageLeft: Story = {
-  args: {
-    imageLeftUrl: "/column/toggle-icon.svg",
   },
 };
