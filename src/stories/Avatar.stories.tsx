@@ -57,7 +57,7 @@ export const WithImage: Story = {
 export const ImageLoadError: Story = {
   args: {
     profileImageUrl: "invalid-url",
-    nickname: "홍길동",
     email: "hong@example.com",
+    nickname: "홍길동",
   },
 };
