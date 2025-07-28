@@ -24,9 +24,13 @@ const Avatar = ({
   return (
     <figure
       className={`relative w-[34px] md:w-[38px] aspect-square rounded-full overflow-hidden bg-black border-2 border-white ${className}`}
+      style={{ backgroundColor: bgColor }}
       {...props}
     >
-      {profileImageUrl ? (
+      <span className="flex justify-center items-center w-full h-full font-semibold uppercase text-white">
+        {firstChar}
+      </span>
+      {profileImageUrl && (
         <Image
           src={profileImageUrl}
           alt={userName}
@@ -34,14 +38,8 @@ const Avatar = ({
           priority
           fill
           className="object-cover"
+          onError={(e) => e.currentTarget.remove()}
         />
-      ) : (
-        <span
-          className="flex justify-center items-center w-full h-full font-semibold uppercase text-white"
-          style={{ backgroundColor: bgColor }}
-        >
-          {firstChar}
-        </span>
       )}
     </figure>
   );

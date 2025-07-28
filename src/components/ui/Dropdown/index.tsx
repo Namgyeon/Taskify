@@ -63,7 +63,7 @@ const Dropdown = ({
         <Menu.Items
           static={false}
           unmount={true}
-          className="absolute right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-[100]"
+          className="absolute right-0 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-[9999]"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: -10 }}
