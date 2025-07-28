@@ -3,6 +3,7 @@ import Card from "./Card";
 import Skeleton from "react-loading-skeleton";
 import { useInfiniteScroll } from "@/utils/hook/useInfiniteScroll";
 import { Draggable } from "@hello-pangea/dnd";
+import { useMemo } from "react";
 
 interface CardListProps {
   columnId: number;
@@ -28,7 +29,10 @@ const CardList = ({ columnId }: CardListProps) => {
   });
 
   // 모든 페이지의 카드들을 하나의 배열로 합치기
-  const allCards = data?.pages.flatMap((page) => page.cards) ?? [];
+  const allCards = useMemo(
+    () => data?.pages.flatMap((page) => page.cards) ?? [],
+    [data?.pages]
+  );
 
   if (isLoading) {
     return (
