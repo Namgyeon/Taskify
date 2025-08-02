@@ -24,4 +24,34 @@ test.describe("컬럼 테스트", () => {
 
     await expect(page.getByText("컬럼이 생성되었습니다.")).toBeVisible();
   });
+
+  test("컬럼 이름 변경 테스트", async ({ page }) => {
+    await page.getByAltText("설정 아이콘").first().click();
+
+    await expect(page.getByText("컬럼 관리")).toBeVisible();
+
+    const columnNameInput = page.locator('input[id="title"]');
+    await columnNameInput.clear();
+    await columnNameInput.fill("컬럼 이름 수정");
+
+    await page.getByRole("button", { name: "변경" }).click();
+
+    await expect(page.getByText("컬럼 이름이 변경되었습니다.")).toBeVisible();
+  });
+
+  test("컬럼 삭제 테스트", async ({ page }) => {
+    await page.getByAltText("설정 아이콘").first().click();
+
+    await expect(page.getByText("컬럼 관리")).toBeVisible();
+
+    await page.getByRole("button", { name: "삭제" }).first().click();
+
+    await expect(
+      page.getByText("컬럼의 모든 카드가 삭제됩니다.")
+    ).toBeVisible();
+
+    await page.getByRole("button", { name: "삭제" }).last().click();
+
+    await expect(page.getByText("컬럼이 삭제되었습니다.")).toBeVisible();
+  });
 });
