@@ -23,7 +23,7 @@ const MyDashboardCard = ({ dashboard }: MyDashboardCardProps) => {
           className="w-2 h-2 rounded-full flex-shrink-0"
           style={{ backgroundColor: dashboard.color }}
         />
-        <div>{dashboard.title}</div>
+        <div className="line-clamp-1">{dashboard.title}</div>
         {dashboard.createdByMe && (
           <div>
             <Image
