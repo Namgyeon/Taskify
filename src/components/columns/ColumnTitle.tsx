@@ -7,15 +7,15 @@ const ColumnTitle = (column: Column) => {
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-2">
-        <div className="w-2 h-2 rounded-full bg-[#5534DA]" />
-        <p className="mr-3 md:text-lg font-bold text-[#333236]">
+        <div className="w-2 h-2 flex-shrink-0 rounded-full bg-[#5534DA]" />
+        <p className="mr-3 md:text-lg font-bold text-[#333236] line-clamp-1">
           {column.title}
         </p>
-        <p className="w-5 h-5 flex items-center justify-center text-xs text-[#787486] rounded-md bg-[#EEEEEE]">
+        <p className="w-5 h-5 flex flex-shrink-0 items-center justify-center text-xs text-[#787486] rounded-md bg-[#EEEEEE]">
           {cardList?.pages[0].totalCount}
         </p>
       </div>
-      <div>
+      <div className="flex-shrink-0">
         <ColumnSettingBtn {...column} />
       </div>
     </div>
