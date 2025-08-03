@@ -39,7 +39,7 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
     "@eslint/eslintrc": "^3",
-    "@playwright/test": "^1.54.1",
+    "@playwright/test": "^1.54.2",
     "@storybook/addon-essentials": "^8.6.14",
     "@storybook/addon-onboarding": "^8.6.14",
     "@storybook/blocks": "^8.6.14",
@@ -62,7 +62,6 @@
     "eslint": "^9",
     "eslint-config-next": "15.2.5",
     "eslint-plugin-storybook": "^0.12.0",
-    "playwright": "^1.52.0",
     "postcss": "^8.5.3",
     "storybook": "^8.6.14",
     "tailwindcss": "^4.1.3",
