@@ -43,6 +43,33 @@ test.describe("카드 테스트", () => {
     await expect(page.getByText("카드가 생성되었습니다.")).toBeVisible();
   });
 
+  // 카드 테스트 생성 후 생긴 카드를 수정 해야함.
+  test("카드 수정 테스트", async ({ page }) => {
+    await page.getByText("테스트 카드").click();
+
+    await expect(page.getByText("새로운 일정 관리 Taskify")).toBeVisible();
+
+    await page.getByAltText("드롭다운 아이콘").click();
+
+    await expect(
+      page.getByRole("menuitem", { name: "수정하기" })
+    ).toBeVisible();
+
+    await page.getByRole("menuitem", { name: "수정하기" }).click();
+
+    await expect(page.getByText("할 일 수정")).toBeVisible();
+
+    await page.getByRole("textbox", { name: "제목" }).fill("테스트 카드 수정");
+
+    await page
+      .getByRole("textbox", { name: "설명" })
+      .fill("테스트 카드 내용 수정");
+
+    await page.getByRole("button", { name: "수정" }).click();
+
+    await expect(page.getByText("카드가 수정되었습니다.")).toBeVisible();
+  });
+
   // 카드 테스트 생성 후 생긴 카드를 삭제 해야함.
   test("카드 삭제 테스트", async ({ page }) => {
     await page.getByText("테스트 카드").click();
