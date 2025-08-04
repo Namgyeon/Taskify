@@ -22,6 +22,8 @@ test.describe("회원가입 테스트", () => {
   });
 
   test("유효한 정보로 회원가입할 수 있다.", async ({ page }) => {
+    const timestamp = Date.now();
+    const dynamicEmail = `test${timestamp}@test.com`;
     // Locator - 페이지의 요소를 찾는 객체
     const emailInput = page.getByPlaceholder("이메일을 입력하세요.");
     const nicknameInput = page.getByPlaceholder("닉네임을 입력하세요.");
@@ -29,7 +31,7 @@ test.describe("회원가입 테스트", () => {
     const signupButton = page.getByRole("button", { name: "회원가입" });
 
     // fill(): 입력필드에 값 입력하기
-    await emailInput.fill("test3@test.com"); // 계속 바꿔서 테스트?
+    await emailInput.fill(dynamicEmail);
     await nicknameInput.fill("테스트유저");
 
     // .nth() : 같은 선택자로 찾은 여러 요소 중 n번째 선택
@@ -101,29 +103,30 @@ test.describe("로그인 테스트", () => {
 
   test("로그인 실패 시나리오들", async ({ page }) => {
     const failureCases = [
-      ["비밀번호가 틀린 경우", "test@test.com", "12341234"],
-      ["가입하지 않은 이메일", "wrong@test.com", "12341234"],
+      {
+        description: "비밀번호가 틀린 경우",
+        email: "test@test.com",
+        password: "123412345",
+        errorMessage: "비밀번호가 일치하지 않습니다.",
+      },
+      {
+        description: "가입하지 않은 이메일",
+        email: "wrong@test.com",
+        password: "12341234",
+        errorMessage: "존재하지 않는 유저입니다.",
+      },
     ];
 
-    const errorMessages = [
-      "현재 비밀번호가 틀렸습니다.",
-      "존재하지 않는 유저입니다.",
-    ];
-
-    for (const [description, email, password] of failureCases) {
+    for (const testCase of failureCases) {
       await page.goto("/signin");
 
-      await page.getByPlaceholder("이메일을 입력하세요.").fill(email);
-      await page.getByPlaceholder("비밀번호를 입력하세요.").fill(password);
+      await page.getByPlaceholder("이메일을 입력하세요.").fill(testCase.email);
+      await page
+        .getByPlaceholder("비밀번호를 입력하세요.")
+        .fill(testCase.password);
       await page.getByRole("button", { name: "로그인" }).click();
 
-      await page.waitForTimeout(1000);
-      const pageText = await page.textContent("body");
-
-      const errorMatch = pageText?.match(/(.*?(틀렸|않는).*?)/i);
-      const errorMessage = errorMatch ? errorMatch[0] : false;
-
-      expect(errorMessage).toBeTruthy();
+      await expect(page.getByText(testCase.errorMessage)).toBeVisible();
     }
   });
 });

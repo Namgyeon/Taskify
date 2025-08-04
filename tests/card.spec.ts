@@ -9,7 +9,7 @@ test.describe("카드 테스트", () => {
 
     await expect(page).toHaveURL("/mydashboard");
 
-    await page.getByText("테스트 대시보드").nth(1).click();
+    await page.getByText("테스트 대시보드").nth(0).click();
 
     await expect(page.getByText("새로운 컬럼 추가하기")).toBeVisible();
   });
@@ -72,7 +72,7 @@ test.describe("카드 테스트", () => {
 
   // 카드 테스트 생성 후 생긴 카드를 삭제 해야함.
   test("카드 삭제 테스트", async ({ page }) => {
-    await page.getByText("테스트 카드").click();
+    await page.getByText("테스트 카드 수정").click();
 
     await expect(page.getByText("새로운 일정 관리 Taskify")).toBeVisible();
 
