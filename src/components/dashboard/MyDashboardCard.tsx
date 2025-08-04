@@ -23,9 +23,9 @@ const MyDashboardCard = ({ dashboard }: MyDashboardCardProps) => {
           className="w-2 h-2 rounded-full flex-shrink-0"
           style={{ backgroundColor: dashboard.color }}
         />
-        <div>{dashboard.title}</div>
+        <div className="line-clamp-1">{dashboard.title}</div>
         {dashboard.createdByMe && (
-          <div>
+          <div className="flex-shrink-0">
             <Image
               src="/dashboard/crown-icon.svg"
               alt="왕관아이콘"
@@ -36,7 +36,7 @@ const MyDashboardCard = ({ dashboard }: MyDashboardCardProps) => {
           </div>
         )}
       </div>
-      <div>
+      <div className="flex-shrink-0">
         <Image
           src="/dashboard/arrow-icon.svg"
           alt="화살표아이콘"
