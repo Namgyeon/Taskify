@@ -35,7 +35,7 @@ const Card = ({ card, index }: CardProps) => {
             </div>
           )}
           <div className="md:w-full">
-            <h3 className="font-semibold text-lg md:w-full lg:mb-2">
+            <h3 className="font-semibold text-lg md:w-full lg:mb-2 line-clamp-1">
               {card.title}
             </h3>
 

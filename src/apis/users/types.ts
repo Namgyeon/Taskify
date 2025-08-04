@@ -4,7 +4,7 @@ export const signupFormSchema = z
   .object({
     email: z.string().email(),
     nickname: z.string().trim().min(1, "닉네임을 입력해주세요"),
-    password: z.string().trim().min(6, "비밀번호는 6자 이상입니다."),
+    password: z.string().trim().min(8, "비밀번호는 8자 이상입니다."),
     passwordConfirmation: z
       .string()
       .trim()

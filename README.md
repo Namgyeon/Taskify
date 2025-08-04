@@ -33,7 +33,6 @@ Framer Motion 적용한 랜딩페이지
 
 ![랜딩페이지](https://github.com/user-attachments/assets/b700e44b-5fdc-4571-ac0c-32c626d9f72b)
 
-
 ### 📊 **대시보드 관리**
 
 프로젝트별 대시보드 생성
@@ -87,12 +86,9 @@ Framer Motion 적용한 랜딩페이지
 
 ---
 
-
 ## ⚙️ API 흐름
 
 <div align="center">
-
-
 
 <img width="640" height="298" alt="스크린샷 2025-07-24 오후 3 29 30" src="https://github.com/user-attachments/assets/177aedd1-34ad-466e-ae3a-13cb56c4c326" />
 
@@ -103,7 +99,6 @@ Framer Motion 적용한 랜딩페이지
 ### 💎 주요 기술 스택
 
 </div>
-
 
 ## ⚙️ 기술 스택
 
@@ -121,9 +116,8 @@ Framer Motion 적용한 랜딩페이지
 
 ---
 
-
-
 ## 📁 폴더 구조
+
 ```
 📂src
  ┣ 📜middleware.ts
@@ -147,11 +141,10 @@ Framer Motion 적용한 랜딩페이지
  ┣ 📂components
  ┃ ┣ 📂auth
  ┃ ┣ 📂ui
- ┃ ┗ ... 
+ ┃ ┗ ...
  ┣ 📂types
  ┃ ┗ 📜common.ts
  ┗ 📂utils
 ```
-
 
 </div>
