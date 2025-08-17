@@ -49,7 +49,11 @@ export async function generateMetadata({
 }
 
 const DashboardDetailPage = () => {
-  return <ColumnList />;
+  return (
+    <div className="px-2 md:px-4">
+      <ColumnList />
+    </div>
+  );
 };
 
 export default DashboardDetailPage;
