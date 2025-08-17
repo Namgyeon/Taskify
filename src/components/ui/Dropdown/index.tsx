@@ -41,7 +41,6 @@ const Dropdown = ({
       <Menu.Button
         className={clsx(
           "relative flex items-center w-5 h-5 md:w-7 md:h-7 hover:bg-gray-200 rounded-lg transition-colors cursor-pointer z-[100]",
-          text ? "pr-2 py-1" : "w-5 h-5 md:w-7 md:h-7",
           className
         )}
       >
