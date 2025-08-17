@@ -19,7 +19,7 @@ const Header = () => {
   };
   return (
     <div className="w-full flex items-center justify-between md:justify-end lg:justify-between px-2 md:px-8 lg:px-10 py-4 border-b border-b-gray-200">
-      <div className="text-lg md:hidden lg:block truncate text-[#333236] font-bold">
+      <div className="text-lg hidden md:block truncate text-[#333236] font-bold">
         {getPageTitle()}
       </div>
       <div className="flex items-center md:divide-x divide-gray-300">
