@@ -51,7 +51,7 @@ const Profile = () => {
           },
           { label: "로그아웃", onClick: handleLogout },
         ]}
-        className="hover:bg-transparent"
+        className="md:flex items-center hidden hover:bg-transparent"
         optionClassName="px-8 py-3"
       />
     </div>

@@ -25,7 +25,7 @@ const DashBoardInfo = ({ dashboardId }: { dashboardId: number }) => {
             초대하기
           </HeaderButton>
         </div>
-        <div className="flex-shrink-0">
+        <div className="hidden md:block">
           <AvatarStack dashboardId={dashboardId} />
         </div>
       </div>

@@ -22,13 +22,13 @@ const Header = () => {
       <div className="text-lg md:hidden lg:block truncate text-[#333236] font-bold">
         {getPageTitle()}
       </div>
-      <div className="flex items-center justify-end">
+      <div className="flex items-center md:divide-x divide-gray-300">
         {dashboardData && (
           <div className="flex md:pr-9 items-center">
             <DashBoardInfo dashboardId={dashboardData.id} />
           </div>
         )}
-        <div className="md:flex pr-4 hidden md:pr-9 items-center">
+        <div className="md:flex pl-9 pr-4 md:pr-9 items-center">
           <Profile />
         </div>
       </div>
