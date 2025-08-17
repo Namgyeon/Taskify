@@ -52,11 +52,11 @@ const ColumnList = () => {
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <div className="h-full flex flex-col lg:flex-row overflow-y-auto lg:overflow-x-auto">
+      <div className="h-full flex flex-col lg:flex-row not-last:overflow-y-auto lg:overflow-x-auto">
         {data?.data.map((column) => (
           <Column key={column.id} column={column} />
         ))}
-        <div className="px-3 pt-4 md:pt-6">
+        <div className="pt-4 md:pt-6">
           <CreateColumn />
         </div>
       </div>
