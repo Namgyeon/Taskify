@@ -10,7 +10,7 @@ interface ColumnProps {
 
 const Column = ({ column }: ColumnProps) => {
   return (
-    <div className="flex flex-col gap-6 min-w-0 md:min-w-88 md:px-5 py-4 md:py-6 border-b lg:border-b-0 lg:border-r border-gray-300 lg:overflow-y-auto">
+    <div className="flex flex-col gap-6 md:min-w-88 px-2 md:px-5 py-4 md:py-6 border-b lg:border-b-0 lg:border-r border-gray-300 lg:overflow-y-auto">
       <ColumnTitle {...column} />
       <CreateCard columnId={column.id} />
       <Droppable droppableId={column.id.toString()}>
