@@ -25,7 +25,9 @@ const DashBoardInfo = ({ dashboardId }: { dashboardId: number }) => {
             초대하기
           </HeaderButton>
         </div>
-        <AvatarStack dashboardId={dashboardId} />
+        <div className="flex-shrink-0">
+          <AvatarStack dashboardId={dashboardId} />
+        </div>
       </div>
       <Modal ref={modalRef}>
         <InviteModal
