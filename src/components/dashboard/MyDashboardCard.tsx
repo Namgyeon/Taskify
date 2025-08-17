@@ -15,7 +15,7 @@ const MyDashboardCard = ({ dashboard }: MyDashboardCardProps) => {
 
   return (
     <div
-      className="w-65 md:w-62 lg:w-83 h-15 flex justify-between items-center py-4 px-5 border border-gray-300  rounded-lg cursor-pointer bg-white hover:bg-gray-300"
+      className="w-full md:w-62 lg:w-83 h-15 flex justify-between items-center py-4 px-5 border border-gray-300  rounded-lg cursor-pointer bg-white hover:bg-gray-300"
       onClick={() => handleDashboardClick(dashboard.id)}
     >
       <div className="flex items-center gap-2">

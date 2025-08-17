@@ -10,7 +10,7 @@ const CreateDashboard = () => {
   return (
     <>
       <div
-        className="w-65 md:w-62 lg:w-83 h-15 flex gap-3 items-center justify-center border rounded-lg border-gray-300 bg-white cursor-pointer hover:bg-gray-300"
+        className="w-full md:w-62 lg:w-83 h-15 flex gap-3 items-center justify-center border rounded-lg border-gray-300 bg-white cursor-pointer hover:bg-gray-300"
         onClick={() => modalRef.current?.open()}
       >
         <span>새로운 대시보드</span>
